@@ -6,6 +6,7 @@ namespace Elasticsearch\Tests;
 
 use Elasticsearch;
 use Elasticsearch\ClientBuilder;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Serializers\SerializerInterface;
 use Elasticsearch\Transport;
 use Mockery as m;
@@ -60,7 +61,7 @@ class FooNamespaceBuilder implements Elasticsearch\Namespaces\NamespaceBuilderIn
     }
 }
 
-class FooNamespace
+class FooNamespace 
 {
     public function fooMethod()
     {

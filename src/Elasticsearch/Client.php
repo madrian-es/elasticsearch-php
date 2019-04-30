@@ -114,9 +114,8 @@ class Client
 
     /**
      * @param string[] $params
-     * @return array
      */
-    public function info($params = [])
+    public function info(array $params = []): array
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -128,12 +127,7 @@ class Client
         return $this->performRequest($endpoint);
     }
 
-    /**
-     * @param array $params Associative array of parameters
-     *
-     * @return bool
-     */
-    public function ping($params = [])
+    public function ping(array $params = []): bool
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -156,27 +150,24 @@ class Client
     }
 
     /**
-     * $params['id']              = (string) The document ID (Required)
-     *        ['index']           = (string) The name of the index (Required)
-     *        ['type']            = (string) The type of the document (use `_all` to fetch the first document matching the ID across all types) (Required)
-     *        ['ignore_missing']  = ??
-     *        ['fields']          = (list) A comma-separated list of fields to return in the response
-     *        ['parent']          = (string) The ID of the parent document
-     *        ['preference']      = (string) Specify the node or shard the operation should be performed on (default: random)
-     *        ['realtime']        = (boolean) Specify whether to perform the operation in realtime or search mode
-     *        ['refresh']         = (boolean) Refresh the shard containing the document before performing the operation
-     *        ['routing']         = (string) Specific routing value
-     *        ['_source']         = (list) True or false to return the _source field or not, or a list of fields to return
-     *        ['_source_exclude'] = (list) A list of fields to exclude from the returned _source field (deprecated in ES 6.6.0)
+     * $params['id']               = (string) The document ID (Required)
+     *        ['index']            = (string) The name of the index (Required)
+     *        ['type']             = (string) The type of the document (use `_all` to fetch the first document matching the ID across all types) (Required)
+     *        ['ignore_missing']   = ??
+     *        ['fields']           = (list) A comma-separated list of fields to return in the response
+     *        ['parent']           = (string) The ID of the parent document
+     *        ['preference']       = (string) Specify the node or shard the operation should be performed on (default: random)
+     *        ['realtime']         = (boolean) Specify whether to perform the operation in realtime or search mode
+     *        ['refresh']          = (boolean) Refresh the shard containing the document before performing the operation
+     *        ['routing']          = (string) Specific routing value
+     *        ['_source']          = (list) True or false to return the _source field or not, or a list of fields to return
+     *        ['_source_exclude']  = (list) A list of fields to exclude from the returned _source field (deprecated in ES 6.6.0)
      *        ['_source_excludes'] = (list) A list of fields to exclude from the returned _source field
-     *        ['_source_include'] = (list) A list of fields to extract and return from the _source field (deprecated in ES 6.6.0)
+     *        ['_source_include']  = (list) A list of fields to extract and return from the _source field (deprecated in ES 6.6.0)
      *        ['_source_includes'] = (list) A list of fields to extract and return from the _source field
      *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function get($params)
+    public function get(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -206,11 +197,8 @@ class Client
      *        ['refresh']        = (boolean) Refresh the shard containing the document before performing the operation
      *        ['routing']        = (string) Specific routing value
      *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getSource($params)
+    public function getSource(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -241,12 +229,8 @@ class Client
      *        ['routing']      = (string) Specific routing value
      *        ['timeout']      = (time) Explicit operation timeout
      *        ['version_type'] = (enum) Specific version type
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function delete($params)
+    public function delete(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -305,12 +289,8 @@ class Client
      *        ['version'] = (bool) Specify whether to return document version as part of a hit
      *        ['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      *        ['wait_for_completion'] = (bool) Should the request should block until the delete-by-query is complete.
-     *
-     * @param array $params
-     *
-     * @return array
      */
-    public function deleteByQuery($params = array())
+    public function deleteByQuery(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -342,12 +322,8 @@ class Client
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function count($params = array())
+    public function count(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -381,13 +357,9 @@ class Client
      *        ['version']            = (number) Explicit version number for concurrency control
      *        ['version_type']       = (enum) Specific version type
      *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
-     *
      * @deprecated
      */
-    public function countPercolate($params = array())
+    public function countPercolate(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -414,13 +386,9 @@ class Client
      *        ['prefer_local'] = (boolean) With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)
      *        ['body']         = (array) The document (`doc`) to percolate against registered queries; optionally also a `query` to limit the percolation to specific registered queries
      *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
-     *
      * @deprecated
      */
-    public function percolate($params)
+    public function percolate(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -448,13 +416,9 @@ class Client
      *        ['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
-     *
      * @deprecated
      */
-    public function mpercolate($params = array())
+    public function mpercolate(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -486,12 +450,8 @@ class Client
      *        ['routing']          = (string) Specific routing value. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['parent']           = (string) Parent id of documents. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['realtime']         = (boolean) Specifies if request is real-time as opposed to near-real-time (default: true).
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function termvectors($params = array())
+    public function termvectors(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -526,12 +486,8 @@ class Client
      *        ['routing']          = (string) Specific routing value. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['parent']           = (string) Parent id of documents. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['realtime']         = (boolean) Specifies if request is real-time as opposed to near-real-time (default: true).
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function mtermvectors($params = array())
+    public function mtermvectors(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -560,11 +516,9 @@ class Client
      *        ['refresh']    = (boolean) Refresh the shard containing the document before performing the operation
      *        ['routing']    = (string) Specific routing value
      *
-     * @param array $params Associative array of parameters
-     *
      * @return array | boolean
      */
-    public function exists($params)
+    public function exists(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -601,12 +555,8 @@ class Client
      *        ['_source_include'] = (list) A list of fields to extract and return from the _source field
      *        ['_source_excludes'] = (list) A list of fields to exclude from the returned _source field (deprecated in ES 6.6.0)
      *        ['_source_includes'] = (list) A list of fields to extract and return from the _source field (deprecated in ES 6.6.0)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function mget($params = array())
+    public function mget(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -630,12 +580,8 @@ class Client
      *        ['type']        = (list) A comma-separated list of document types to use as default
      *        ['search_type'] = (enum) Search operation type
      *        ['body']        = (array|string) The request definitions (metadata-search request definition pairs), separated by newlines
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function msearch($params = array())
+    public function msearch(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -660,12 +606,8 @@ class Client
      *        ['search_type'] = (enum) Search operation type
      *        ['body']        = (array|string) The request definitions (metadata-search request definition pairs), separated by newlines
      *        ['max_concurrent_searches'] = (number) Controls the maximum number of concurrent searches the multi search api will execute
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function msearchTemplate($params = array())
+    public function msearchTemplate(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -699,12 +641,8 @@ class Client
      *        ['version']      = (number) Explicit version number for concurrency control
      *        ['version_type'] = (enum) Specific version type
      *        ['body']         = (array) The document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function create($params)
+    public function create(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -733,12 +671,8 @@ class Client
      *        ['replication'] = (enum) Explicitly set the replication type
      *        ['fields']      = (list) Default comma-separated list of fields to return in the response for updates
      *        ['body']        = (array) The document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function bulk($params = array())
+    public function bulk(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -773,12 +707,8 @@ class Client
      *        ['version']      = (number) Explicit version number for concurrency control
      *        ['version_type'] = (enum) Specific version type
      *        ['body']         = (array) The document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function index($params)
+    public function index(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -806,12 +736,8 @@ class Client
      *        ['wait_for_completion'] = (boolean) Should the request should block until the reindex is complete
      *        ['requests_per_second'] = (float) The throttle for this request in sub-requests per second. 0 means set no throttle
      *        ['body']                = (array) The search definition using the Query DSL and the prototype for the index request (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function reindex($params)
+    public function reindex(array $params): array
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -847,12 +773,8 @@ class Client
      *        ['_source_excludes']          = (list) A list of fields to exclude from the returned _source field
      *        ['_source_includes']          = (list) A list of fields to extract and return from the _source field
      *        ['body']                     = (string) The URL-encoded query definition (instead of using the request body)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function explain($params)
+    public function explain(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -916,7 +838,7 @@ class Client
      *
      * @return array
      */
-    public function search($params = array())
+    public function search(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -949,7 +871,7 @@ class Client
      *
      * @return array
      */
-    public function searchShards($params = array())
+    public function searchShards(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -969,12 +891,8 @@ class Client
     /**
      * $params['index']                    = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
      *        ['type']                     = (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function searchTemplate($params = array())
+    public function searchTemplate(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -997,12 +915,8 @@ class Client
      * $params['scroll_id'] = (string) The scroll ID for scrolled search
      *        ['scroll']    = (duration) Specify how long a consistent view of the index should be maintained for scrolled search
      *        ['body']      = (string) The scroll ID for scrolled search
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function scroll($params = array())
+    public function scroll(array $params = []): array
     {
         $scrollID = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -1025,12 +939,8 @@ class Client
      * $params['scroll_id'] = (string) The scroll ID for scrolled search
      *        ['scroll']    = (duration) Specify how long a consistent view of the index should be maintained for scrolled search
      *        ['body']      = (string) The scroll ID for scrolled search
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function clearScroll($params = array())
+    public function clearScroll(array $params = []): array
     {
         $scrollID = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -1065,12 +975,8 @@ class Client
      *        ['ttl']               = (duration) Expiration time for the document
      *        ['version_type']      = (number) Explicit version number for concurrency control
      *        ['body']              = (array) The request definition using either `script` or partial `doc`
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function update($params)
+    public function update(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1159,12 +1065,8 @@ class Client
      *        ['wait_for_completion']      = (boolean) Should the request should block until the reindex is complete.
      * (default: false)
      *        ['body']                     = The search definition using the Query DSL
-     *
-     * @param array $params
-     *
-     * @return array
      */
-    public function updateByQuery($params = array())
+    public function updateByQuery(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1187,12 +1089,8 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getScript($params)
+    public function getScript(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1209,12 +1107,8 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function deleteScript($params)
+    public function deleteScript(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1231,12 +1125,8 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function putScript($params)
+    public function putScript(array $params): array
     {
         $id   = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -1255,12 +1145,8 @@ class Client
 
     /**
      * $params['id']   = (string) The search template ID (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getTemplate($params)
+    public function getTemplate(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1277,12 +1163,8 @@ class Client
 
     /**
      * $params['id']   = (string) The search template ID (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function deleteTemplate($params)
+    public function deleteTemplate(array $params): array
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1304,12 +1186,8 @@ class Client
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function fieldStats($params = array())
+    public function fieldStats(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1331,12 +1209,8 @@ class Client
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function fieldCaps($params = array())
+    public function fieldCaps(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1354,13 +1228,9 @@ class Client
     }
 
     /**
-     * $params['id']                 = (string) ID of the template to render
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
+     * $params['id'] = (string) ID of the template to render
      */
-    public function renderSearchTemplate($params = array())
+    public function renderSearchTemplate(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
         $id   = $this->extractArgument($params, 'id');
@@ -1379,80 +1249,64 @@ class Client
 
     /**
      * Operate on the Indices Namespace of commands
-     *
-     * @return IndicesNamespace
      */
-    public function indices()
+    public function indices(): IndicesNamespace
     {
         return $this->indices;
     }
 
     /**
      * Operate on the Cluster namespace of commands
-     *
-     * @return ClusterNamespace
      */
-    public function cluster()
+    public function cluster(): ClusterNamespace
     {
         return $this->cluster;
     }
 
     /**
      * Operate on the Nodes namespace of commands
-     *
-     * @return NodesNamespace
      */
-    public function nodes()
+    public function nodes(): NodesNamespace
     {
         return $this->nodes;
     }
 
     /**
      * Operate on the Snapshot namespace of commands
-     *
-     * @return SnapshotNamespace
      */
-    public function snapshot()
+    public function snapshot(): SnapshotNamespace
     {
         return $this->snapshot;
     }
 
     /**
      * Operate on the Cat namespace of commands
-     *
-     * @return CatNamespace
      */
-    public function cat()
+    public function cat(): CatNamespace
     {
         return $this->cat;
     }
 
     /**
      * Operate on the Ingest namespace of commands
-     *
-     * @return IngestNamespace
      */
-    public function ingest()
+    public function ingest(): IngestNamespace
     {
         return $this->ingest;
     }
 
     /**
      * Operate on the Tasks namespace of commands
-     *
-     * @return TasksNamespace
      */
-    public function tasks()
+    public function tasks(): TasksNamespace
     {
         return $this->tasks;
     }
 
     /**
      * Operate on the Remote namespace of commands
-     *
-     * @return RemoteNamespace
      */
-    public function remote()
+    public function remote(): RemoteNamespace
     {
         return $this->remote;
     }
@@ -1460,12 +1314,10 @@ class Client
     /**
      * Catchall for registered namespaces
      *
-     * @param string $name
-     * @param array $arguments
-     * @return Object
+     * @return object
      * @throws BadMethodCallException if the namespace cannot be found
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments)
     {
         if (isset($this->registeredNamespaces[$name])) {
             return $this->registeredNamespaces[$name];
@@ -1474,12 +1326,9 @@ class Client
     }
 
     /**
-     * @param array $params
-     * @param string $arg
-     *
      * @return null|mixed
      */
-    public function extractArgument(&$params, $arg)
+    public function extractArgument(array &$params, string $arg)
     {
         if (is_object($params) === true) {
             $params = (array) $params;
@@ -1495,7 +1344,7 @@ class Client
         }
     }
 
-    private function verifyNotNullOrEmpty($name, $var)
+    private function verifyNotNullOrEmpty(string $name, $var)
     {
         if ($var === null) {
             throw new InvalidArgumentException("$name cannot be null.");
@@ -1515,12 +1364,9 @@ class Client
     }
 
     /**
-     * @param AbstractEndpoint $endpoint
-     *
      * @throws \Exception
-     * @return array
      */
-    private function performRequest(AbstractEndpoint $endpoint)
+    private function performRequest(AbstractEndpoint $endpoint): array
     {
         $promise =  $this->transport->performRequest(
             $endpoint->getMethod(),
