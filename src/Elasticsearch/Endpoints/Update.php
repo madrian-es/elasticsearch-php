@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Update
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Update extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,23 +32,22 @@ class Update extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->id) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id is required for Update'
             );
         }
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Update'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Update'
             );
         }
@@ -67,12 +63,9 @@ class Update extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'consistency',
             'fields',
             'lang',
@@ -91,13 +84,10 @@ class Update extends AbstractEndpoint
             'include_type_name',
             'if_primary_term',
             'if_seq_no'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Create
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Create extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,25 +32,25 @@ class Create extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Create'
             );
         }
 
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Create'
             );
         }
 
         if (isset($this->id) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id is required for Create'
             );
         }
@@ -64,12 +61,9 @@ class Create extends AbstractEndpoint
         return "/$index/$type/$id/_create";
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'consistency',
             'op_type',
             'parent',
@@ -83,25 +77,21 @@ class Create extends AbstractEndpoint
             'version',
             'version_type',
             'pipeline'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }
 
     /**
-     * @return array
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      */
-    public function getBody()
+    public function getBody(): array
     {
         if (isset($this->body) !== true) {
-            throw new Exceptions\RuntimeException('Document body must be set for create request');
+            throw new RuntimeException('Document body must be set for create request');
         } else {
             return $this->body;
         }

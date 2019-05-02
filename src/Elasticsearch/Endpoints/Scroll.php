@@ -19,12 +19,9 @@ class Scroll extends AbstractEndpoint
 {
 
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,20 +32,15 @@ class Scroll extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function getBody()
+    public function getBody(): array
     {
         return $this->body;
     }
 
     /**
-     * @param string $scroll
-     *
      * @return $this
      */
-    public function setScroll($scroll)
+    public function setScroll(string $scroll)
     {
         if (isset($scroll) !== true) {
             return $this;
@@ -60,11 +52,9 @@ class Scroll extends AbstractEndpoint
     }
 
     /**
-     * @param string $scroll_id
-     *
      * @return $this
      */
-    public function setScrollId($scroll_id)
+    public function setScrollId(string $scroll_id)
     {
         if (isset($scroll_id) !== true) {
             return $this;
@@ -75,30 +65,21 @@ class Scroll extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $uri   = "/_search/scroll";
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'scroll',
             'rest_total_hits_as_int'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

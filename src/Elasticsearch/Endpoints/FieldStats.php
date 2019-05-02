@@ -19,12 +19,9 @@ class FieldStats extends AbstractEndpoint
 {
 
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,10 +32,7 @@ class FieldStats extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_field_stats";
@@ -50,25 +44,19 @@ class FieldStats extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'fields',
             'level',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'fields'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

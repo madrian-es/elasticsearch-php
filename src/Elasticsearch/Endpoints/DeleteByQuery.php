@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Deletebyquery
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class DeleteByQuery extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,13 +32,12 @@ class DeleteByQuery extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (!$this->index) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Deletebyquery'
             );
         }
@@ -54,12 +50,9 @@ class DeleteByQuery extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             '_source',
             '_source_include',
             '_source_includes',
@@ -95,13 +88,10 @@ class DeleteByQuery extends AbstractEndpoint
             'version',
             'wait_for_active_shards',
             'wait_for_completion',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

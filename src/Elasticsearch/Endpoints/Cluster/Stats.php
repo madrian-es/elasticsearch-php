@@ -26,12 +26,7 @@ class Stats extends AbstractEndpoint
      */
     private $nodeID;
 
-    /**
-     * @param string $node_id
-     *
-     * @return $this
-     */
-    public function setNodeID($node_id)
+    public function setNodeID(string $node_id): Stats
     {
         if (isset($node_id) !== true) {
             return $this;
@@ -42,10 +37,7 @@ class Stats extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $node_id = $this->nodeID;
         $uri   = "/_cluster/stats";
@@ -57,21 +49,15 @@ class Stats extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'flat_settings',
             'human',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

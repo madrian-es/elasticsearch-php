@@ -18,13 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Reroute extends AbstractEndpoint
 {
-    /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): Reroute
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,35 +29,26 @@ class Reroute extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $uri   = "/_cluster/reroute";
 
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'dry_run',
             'filter_metadata',
             'master_timeout',
             'timeout',
             'explain',
             'metric'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

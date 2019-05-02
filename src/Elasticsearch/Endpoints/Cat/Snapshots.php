@@ -21,11 +21,9 @@ class Snapshots extends AbstractEndpoint
     private $repository;
 
     /**
-     * @param string $repository
-     *
      * @return $this
      */
-    public function setRepository($repository)
+    public function setRepository(string $repository)
     {
         if (isset($repository) !== true) {
             return $this;
@@ -36,10 +34,7 @@ class Snapshots extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $repository = $this->repository;
         if (isset($this->repository) === true) {
@@ -49,12 +44,9 @@ class Snapshots extends AbstractEndpoint
         return "/_cat/snapshots/";
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -62,13 +54,10 @@ class Snapshots extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

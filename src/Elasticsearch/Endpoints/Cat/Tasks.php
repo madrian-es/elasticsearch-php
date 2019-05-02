@@ -17,20 +17,14 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Tasks extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         return "/_cat/tasks";
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'format',
             'node_id',
             'actions',
@@ -41,13 +35,10 @@ class Tasks extends AbstractEndpoint
             'help',
             'v',
             's'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

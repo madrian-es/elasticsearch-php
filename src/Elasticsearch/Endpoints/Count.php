@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Count extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -34,10 +31,7 @@ class Count extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $type = $this->type;
@@ -54,12 +48,9 @@ class Count extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
@@ -76,13 +67,10 @@ class Count extends AbstractEndpoint
             'lenient',
             'lowercase_expanded_terms',
             'terminate_after'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

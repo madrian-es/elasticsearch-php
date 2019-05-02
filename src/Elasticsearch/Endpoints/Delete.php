@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Delete
@@ -18,23 +18,22 @@ use Elasticsearch\Common\Exceptions;
 class Delete extends AbstractEndpoint
 {
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->id) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id is required for Delete'
             );
         }
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Delete'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Delete'
             );
         }
@@ -50,12 +49,9 @@ class Delete extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'consistency',
             'parent',
             'refresh',
@@ -67,13 +63,10 @@ class Delete extends AbstractEndpoint
             'include_type_name',
             'if_primary_term',
             'if_seq_no'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'DELETE';
     }

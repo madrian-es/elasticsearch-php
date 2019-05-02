@@ -18,10 +18,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
 
 class Indices extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_cat/indices";
@@ -33,12 +30,9 @@ class Indices extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'bytes',
             'local',
             'master_timeout',
@@ -49,13 +43,10 @@ class Indices extends AbstractEndpoint
             'health',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Count extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_cat/count";
@@ -32,12 +29,9 @@ class Count extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -45,13 +39,10 @@ class Count extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

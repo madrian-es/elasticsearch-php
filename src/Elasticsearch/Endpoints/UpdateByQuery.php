@@ -18,12 +18,10 @@ use Elasticsearch\Common\Exceptions;
 class UpdateByQuery extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
+     * @throws Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -41,10 +39,10 @@ class UpdateByQuery extends AbstractEndpoint
 
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\BadMethodCallException
+     * @throws Exceptions\RuntimeException
      * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (!$this->index) {
             throw new Exceptions\RuntimeException(
@@ -61,10 +59,7 @@ class UpdateByQuery extends AbstractEndpoint
     }
 
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
         return [
             'analyzer',
@@ -113,11 +108,7 @@ class UpdateByQuery extends AbstractEndpoint
         ];
     }
 
-
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

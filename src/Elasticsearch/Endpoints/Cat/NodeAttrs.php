@@ -17,22 +17,16 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class NodeAttrs extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $uri   = "/_cat/nodeattrs";
 
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -40,13 +34,10 @@ class NodeAttrs extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

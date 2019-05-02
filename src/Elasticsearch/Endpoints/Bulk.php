@@ -6,6 +6,7 @@ namespace Elasticsearch\Endpoints;
 
 use Elasticsearch\Common\Exceptions\InvalidArgumentException;
 use Elasticsearch\Serializers\SerializerInterface;
+use Traversable;
 
 /**
  * Class Bulk
@@ -27,7 +28,7 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
     }
 
     /**
-     * @param string|array|\Traversable $body
+     * @param string|array|Traversable $body
      *
      * @return $this
      */
@@ -37,7 +38,7 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
             return $this;
         }
 
-        if (is_array($body) === true || $body instanceof \Traversable) {
+        if (is_array($body) === true || $body instanceof Traversable) {
             foreach ($body as $item) {
                 $this->body .= $this->serializer->serialize($item) . "\n";
             }
@@ -53,20 +54,14 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         return $this->getOptionalURI('_bulk');
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'consistency',
             'refresh',
             'replication',
@@ -80,13 +75,10 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
             '_source_excludes',
             'pipeline',
             'seq_no_primary_term'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

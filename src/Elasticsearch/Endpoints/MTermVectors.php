@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
-
 /**
  * Class MTermVectors
  *
@@ -18,12 +16,9 @@ use Elasticsearch\Common\Exceptions;
 class MTermVectors extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -34,20 +29,14 @@ class MTermVectors extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         return $this->getOptionalURI('_mtermvectors');
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'ids',
             'term_statistics',
             'field_statistics',
@@ -59,13 +48,10 @@ class MTermVectors extends AbstractEndpoint
             'routing',
             'parent',
             'realtime'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

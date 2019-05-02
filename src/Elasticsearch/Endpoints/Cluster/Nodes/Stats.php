@@ -50,12 +50,7 @@ class Stats extends AbstractNodesEndpoint
         return $this;
     }
 
-    /**
-     * @param string $indexMetric
-     *
-     * @return $this
-     */
-    public function setIndexMetric($indexMetric)
+    public function setIndexMetric(string $indexMetric): Stats
     {
         if (isset($indexMetric) !== true) {
             return $this;
@@ -70,10 +65,7 @@ class Stats extends AbstractNodesEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $metric = $this->metric;
         $index_metric = $this->indexMetric;
@@ -95,12 +87,9 @@ class Stats extends AbstractNodesEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'completion_fields',
             'fielddata_fields',
             'fields',
@@ -109,13 +98,10 @@ class Stats extends AbstractNodesEndpoint
             'level',
             'types',
             'include_segment_file_sizes',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

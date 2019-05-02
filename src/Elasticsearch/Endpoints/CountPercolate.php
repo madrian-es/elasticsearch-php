@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class CountPercolate
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class CountPercolate extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,19 +32,18 @@ class CountPercolate extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for CountPercolate'
             );
         }
 
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for CountPercolate'
             );
         }
@@ -64,12 +60,9 @@ class CountPercolate extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'routing',
             'preference',
             'ignore_unavailable',
@@ -79,13 +72,10 @@ class CountPercolate extends AbstractEndpoint
             'percolate_type',
             'version',
             'version_type'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

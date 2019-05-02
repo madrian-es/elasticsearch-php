@@ -5,7 +5,6 @@ declare(strict_types = 1);
 namespace Elasticsearch\Endpoints;
 
 use Elasticsearch\Endpoints\AbstractEndpoint;
-use Elasticsearch\Common\Exceptions;
 
 /**
  * Class Render
@@ -20,12 +19,9 @@ use Elasticsearch\Common\Exceptions;
 class RenderSearchTemplate extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,11 +31,7 @@ class RenderSearchTemplate extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $id = $this->id;
 
@@ -52,27 +44,17 @@ class RenderSearchTemplate extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array();
+        return [];
     }
 
-    /**
-     * @return array
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     */
-    public function getBody()
+    public function getBody(): array
     {
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

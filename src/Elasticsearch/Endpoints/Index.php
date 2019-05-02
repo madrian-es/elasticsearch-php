@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Index
@@ -21,12 +21,9 @@ class Index extends AbstractEndpoint
     private $createIfAbsent = false;
 
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -48,19 +45,18 @@ class Index extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Index'
             );
         }
 
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Index'
             );
         }
@@ -76,12 +72,9 @@ class Index extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'consistency',
             'op_type',
             'parent',
@@ -98,29 +91,21 @@ class Index extends AbstractEndpoint
             'if_primary_term',
             'if_seq_no',
             'include_type_name'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
-        if (isset($this->id) === true) {
-            return 'PUT';
-        } else {
-            return 'POST';
-        }
+        return isset($this->id) ? 'PUT' : 'POST';
     }
 
     /**
-     * @return array
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      */
-    public function getBody()
+    public function getBody(): array
     {
         if (isset($this->body) !== true) {
-            throw new Exceptions\RuntimeException('Document body must be set for index request');
+            throw newRuntimeException('Document body must be set for index request');
         } else {
             return $this->body;
         }

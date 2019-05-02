@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class TermVectors
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class TermVectors extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,23 +32,22 @@ class TermVectors extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for TermVectors'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for TermVectors'
             );
         }
         if (isset($this->id) !== true && isset($this->body['doc']) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id or doc is required for TermVectors'
             );
         }
@@ -68,12 +64,9 @@ class TermVectors extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'term_statistics',
             'field_statistics',
             'fields',
@@ -84,13 +77,10 @@ class TermVectors extends AbstractEndpoint
             'routing',
             'parent',
             'realtime'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

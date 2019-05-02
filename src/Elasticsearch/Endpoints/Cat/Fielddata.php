@@ -20,11 +20,9 @@ class Fielddata extends AbstractEndpoint
     private $fields;
 
     /**
-     * @param string $fields
-     *
      * @return $this
      */
-    public function setFields($fields)
+    public function setFields(string $fields)
     {
         if (isset($fields) !== true) {
             return $this;
@@ -35,10 +33,7 @@ class Fielddata extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $fields = $this->fields;
         $uri   = "/_cat/fielddata";
@@ -50,12 +45,9 @@ class Fielddata extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -63,13 +55,10 @@ class Fielddata extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

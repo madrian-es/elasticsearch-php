@@ -18,22 +18,16 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
 
 class ThreadPool extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $uri   = "/_cat/thread_pool";
 
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -44,13 +38,10 @@ class ThreadPool extends AbstractEndpoint
             'thread_pool_patterns',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

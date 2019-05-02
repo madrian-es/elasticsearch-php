@@ -42,10 +42,7 @@ class Info extends AbstractNodesEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $node_id = $this->nodeID;
         $metric = $this->metric;
@@ -62,21 +59,15 @@ class Info extends AbstractNodesEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'flat_settings',
             'human',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

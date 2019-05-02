@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Exists
@@ -18,23 +18,22 @@ use Elasticsearch\Common\Exceptions;
 class Exists extends AbstractEndpoint
 {
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
+     * @throws RuntimeException
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->id) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id is required for Exists'
             );
         }
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Exists'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Exists'
             );
         }
@@ -50,12 +49,9 @@ class Exists extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'parent',
             'preference',
             'realtime',
@@ -63,13 +59,10 @@ class Exists extends AbstractEndpoint
             'routing',
             'version',
             'stored_fields'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'HEAD';
     }

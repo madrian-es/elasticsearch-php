@@ -25,11 +25,9 @@ class Aliases extends AbstractEndpoint
     private $name;
 
     /**
-     * @param string $name
-     *
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         if (isset($name) !== true) {
             return $this;
@@ -40,10 +38,7 @@ class Aliases extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $name = $this->name;
         $uri   = "/_cat/aliases";
@@ -55,12 +50,9 @@ class Aliases extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'h',
@@ -69,13 +61,10 @@ class Aliases extends AbstractEndpoint
             'format',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

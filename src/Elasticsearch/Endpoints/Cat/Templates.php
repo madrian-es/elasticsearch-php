@@ -19,20 +19,13 @@ class Templates extends AbstractEndpoint
 {
     private $name;
 
-    /**
-     * @param string $name
-     * @return Templates
-     */
-    public function setName($name)
+    public function setName(string $name): Templates
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->name)) {
             return "/_cat/templates/{$this->name}";
@@ -44,9 +37,9 @@ class Templates extends AbstractEndpoint
     /**
      * @return string[]
      */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'format',
             'node_id',
             'actions',
@@ -59,13 +52,10 @@ class Templates extends AbstractEndpoint
             's',
             'local',
             'master_timeout',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

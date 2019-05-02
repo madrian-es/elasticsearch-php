@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Shards extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_cat/shards";
@@ -32,12 +29,9 @@ class Shards extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'bytes',
             'local',
             'master_timeout',
@@ -46,13 +40,10 @@ class Shards extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

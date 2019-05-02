@@ -26,10 +26,8 @@ class State extends AbstractEndpoint
 
     /**
      * @param string|string[] $metric
-     *
-     * @return $this
      */
-    public function setMetric($metric)
+    public function setMetric($metric): State
     {
         if (isset($metric) !== true) {
             return $this;
@@ -44,10 +42,7 @@ class State extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $metric = $this->metric;
@@ -62,12 +57,9 @@ class State extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'local',
             'master_timeout',
             'flat_settings',
@@ -75,13 +67,10 @@ class State extends AbstractEndpoint
             'expand_wildcards',
             'ignore_unavailable',
             'allow_no_indices'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

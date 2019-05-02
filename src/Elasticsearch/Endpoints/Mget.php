@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Mget extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -34,10 +31,7 @@ class Mget extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $type = $this->type;
@@ -54,12 +48,9 @@ class Mget extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'fields',
             'preference',
             'realtime',
@@ -71,26 +62,22 @@ class Mget extends AbstractEndpoint
             '_source_excludes',
             'routing',
             'stored_fields'
-        );
+        ];
     }
 
     /**
-     * @return array
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      */
-    public function getBody()
+    public function getBody(): array
     {
         if (isset($this->body) !== true) {
-            throw new Exceptions\RuntimeException('Body is required for MGet');
+            throw new RuntimeException('Body is required for MGet');
         }
 
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

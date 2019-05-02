@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Explain
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Explain extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,23 +32,23 @@ class Explain extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->id) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'id is required for Explain'
             );
         }
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Explain'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Explain'
             );
         }
@@ -67,12 +64,9 @@ class Explain extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'analyze_wildcard',
             'analyzer',
             'default_operator',
@@ -91,13 +85,10 @@ class Explain extends AbstractEndpoint
             '_source_exclude',
             '_source_excludes',
             'stored_fields'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

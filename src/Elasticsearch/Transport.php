@@ -50,9 +50,7 @@ class Transport
      * @param ConnectionPool\AbstractConnectionPool $connectionPool
      * @param \Psr\Log\LoggerInterface $log    Monolog logger object
      */
-	// @codingStandardsIgnoreStart
-	// "Arguments with default values must be at the end of the argument list" - cannot change the interface
-    public function __construct($retries, $sniffOnStart = false, AbstractConnectionPool $connectionPool, LoggerInterface $log)
+    public function __construct(int $retries, AbstractConnectionPool $connectionPool, LoggerInterface $log, bool $sniffOnStart = false)
     {
 	    // @codingStandardsIgnoreEnd
 
@@ -69,11 +67,8 @@ class Transport
     /**
      * Returns a single connection from the connection pool
      * Potentially performs a sniffing step before returning
-     *
-     * @return ConnectionInterface Connection
      */
-
-    public function getConnection()
+    public function getConnection(): ConnectionInterface
     {
         return $this->connectionPool->nextConnection();
     }
@@ -83,14 +78,13 @@ class Transport
      *
      * @param string $method     HTTP method to use
      * @param string $uri        HTTP URI to send request to
-     * @param null $params     Optional query parameters
+     * @param array $params     Optional query parameters
      * @param null $body       Optional query body
      * @param array $options
      *
      * @throws Common\Exceptions\NoNodesAvailableException|\Exception
-     * @return FutureArrayInterface
      */
-    public function performRequest($method, $uri, $params = null, $body = null, $options = [])
+    public function performRequest(string $method, string $uri, array $params = null, $body = null, array $options = []): FutureArrayInterface
     {
         try {
             $connection  = $this->getConnection();
@@ -99,7 +93,7 @@ class Transport
             throw $exception;
         }
 
-        $response             = array();
+        $response             = [];
         $caughtException      = null;
         $this->lastConnection = $connection;
 
@@ -137,7 +131,7 @@ class Transport
      *
      * @return callable|array
      */
-    public function resultOrFuture($result, $options = [])
+    public function resultOrFuture(FutureArrayInterface $result, array $options = [])
     {
         $response = null;
         $async = isset($options['client']['future']) ? $options['client']['future'] : null;
@@ -152,12 +146,7 @@ class Transport
         }
     }
 
-    /**
-     * @param array $request
-     *
-     * @return bool
-     */
-    public function shouldRetry($request)
+    public function shouldRetry(array $request): bool
     {
         if ($this->retryAttempts < $this->retries) {
             $this->retryAttempts += 1;
@@ -171,10 +160,8 @@ class Transport
     /**
      * Returns the last used connection so that it may be inspected.  Mainly
      * for debugging/testing purposes.
-     *
-     * @return Connection
      */
-    public function getLastConnection()
+    public function getLastConnection(): ConnectionInterface
     {
         return $this->lastConnection;
     }

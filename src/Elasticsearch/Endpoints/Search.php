@@ -19,12 +19,9 @@ use Elasticsearch\Common\Exceptions;
 class Search extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,10 +32,7 @@ class Search extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $type = $this->type;
@@ -55,12 +49,9 @@ class Search extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'analyzer',
             'analyze_wildcard',
             'default_operator',
@@ -106,13 +97,10 @@ class Search extends AbstractEndpoint
             'pre_filter_shard_size',
             'rest_total_hits_as_int',
             'seq_no_primary_term'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

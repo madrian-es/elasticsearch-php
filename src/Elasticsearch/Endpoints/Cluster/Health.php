@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Health extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_cluster/health";
@@ -32,12 +29,9 @@ class Health extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'level',
             'local',
             'master_timeout',
@@ -49,13 +43,10 @@ class Health extends AbstractEndpoint
             'wait_for_events',
             'wait_for_no_relocating_shards',
             'wait_for_no_initializing_shards',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

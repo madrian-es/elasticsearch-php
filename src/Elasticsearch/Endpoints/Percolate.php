@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Percolate
@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
 class Percolate extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body)
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,18 +32,18 @@ class Percolate extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     * @throws RuntimeException
      * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'index is required for Percolate'
             );
         }
         if (isset($this->type) !== true) {
-            throw new Exceptions\RuntimeException(
+            throw new RuntimeException(
                 'type is required for Percolate'
             );
         }
@@ -62,12 +59,9 @@ class Percolate extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'routing',
             'preference',
             'ignore_unavailable',
@@ -78,22 +72,15 @@ class Percolate extends AbstractEndpoint
             'version',
             'version_type',
             'percolate_format'
-        );
+        ];
     }
 
-    /**
-     * @return array
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     */
-    public function getBody()
+    public function getBody(): array
     {
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

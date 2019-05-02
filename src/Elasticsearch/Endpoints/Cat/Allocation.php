@@ -25,11 +25,9 @@ class Allocation extends AbstractEndpoint
     private $node_id;
 
     /**
-     * @param string $node_id
-     *
      * @return $this
      */
-    public function setNodeId($node_id)
+    public function setNodeId(string $node_id)
     {
         if (isset($node_id) !== true) {
             return $this;
@@ -40,10 +38,7 @@ class Allocation extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $node_id = $this->node_id;
         $uri   = "/_cat/allocation";
@@ -55,12 +50,9 @@ class Allocation extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'bytes',
             'local',
             'master_timeout',
@@ -69,13 +61,10 @@ class Allocation extends AbstractEndpoint
             'v',
             's',
             'format',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }
