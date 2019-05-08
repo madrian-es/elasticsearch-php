@@ -25,12 +25,8 @@ class ClusterNamespace extends AbstractNamespace
      *        ['wait_for_nodes']             = (number) Wait until the specified number of nodes is available
      *        ['wait_for_relocating_shards'] = (number) Wait until the specified number of relocating shards is finished
      *        ['wait_for_status']            = (enum) Wait until cluster is in a specific state
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function health($params = array())
+    public function health(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -50,12 +46,8 @@ class ClusterNamespace extends AbstractNamespace
      *        ['filter_metadata'] = (boolean) Don't return cluster state metadata (default: false)
      *        ['body']            = (boolean) Don't return cluster state metadata (default: false)
      *        ['explain']         = (boolean) Return an explanation of why the commands can or cannot be executed
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function reroute($params = array())
+    public function reroute(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -79,12 +71,8 @@ class ClusterNamespace extends AbstractNamespace
      *        ['filter_routing_table']   = (boolean) Do not return information about shard allocation (`routing_table` and `routing_nodes`)
      *        ['local']                  = (boolean) Return local information, do not retrieve the state from master node (default: false)
      *        ['master_timeout']         = (time) Specify timeout for connection to master
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function state($params = array())
+    public function state(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $metric = $this->extractArgument($params, 'metric');
@@ -104,12 +92,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['flat_settings']          = (boolean) Return settings in flat format (default: false)
      *        ['human'] = (boolean) Whether to return time and byte values in human-readable format.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function stats($params = array())
+    public function stats(array $params = []): array
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 
@@ -126,12 +110,8 @@ class ClusterNamespace extends AbstractNamespace
 
     /**
      * $params['body'] = ()
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function putSettings($params = array())
+    public function putSettings(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -146,12 +126,7 @@ class ClusterNamespace extends AbstractNamespace
         return $this->performRequest($endpoint);
     }
 
-    /**
-     * @param array $params
-     *
-     * @return array
-     */
-    public function getSettings($params = array())
+    public function getSettings(array $params = []): array
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -166,12 +141,8 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
      *        ['master_timeout']  = (time) Specify timeout for connection to master
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function pendingTasks($params = array())
+    public function pendingTasks(array $params = []): array
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -185,12 +156,8 @@ class ClusterNamespace extends AbstractNamespace
 
     /**
      * $params['include_yes_decisions'] = (bool) Return 'YES' decisions in explanation (default: false)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function allocationExplain($params = array())
+    public function allocationExplain(array $params = []): array
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -207,12 +174,8 @@ class ClusterNamespace extends AbstractNamespace
 
     /**
      * $params[]
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function remoteInfo($params = array())
+    public function remoteInfo(array $params = []): array
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;

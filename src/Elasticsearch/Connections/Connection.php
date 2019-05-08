@@ -92,18 +92,10 @@ class Connection implements ConnectionInterface
 
     private $lastRequest = array();
 
-    /**
-     * @param callable $handler
-     * @param array $hostDetails
-     * @param array $connectionParams Array of connection-specific parameters
-     * @param \Elasticsearch\Serializers\SerializerInterface $serializer
-     * @param \Psr\Log\LoggerInterface $log              Logger object
-     * @param \Psr\Log\LoggerInterface $trace
-     */
     public function __construct(
-        $handler,
-        $hostDetails,
-        $connectionParams,
+        callable $handler,
+        array $hostDetails,
+        array $connectionParams,
         SerializerInterface $serializer,
         LoggerInterface $log,
         LoggerInterface $trace
@@ -151,9 +143,9 @@ class Connection implements ConnectionInterface
      * @param Transport $transport
      * @return mixed
      */
-    public function performRequest($method, $uri, $params = null, $body = null, $options = [], Transport $transport = null)
+    public function performRequest(string $method, string $uri, ?array $params = [], $body = null, array $options = [], Transport $transport = null)
     {
-        if (isset($body) === true) {
+        if ($body !== null) {
             $body = $this->serializer->serialize($body);
         }
 
@@ -319,7 +311,7 @@ class Connection implements ConnectionInterface
             $uri = $this->path . $uri;
         }
 
-        return $uri;
+        return $uri ?? '';
     }
 
     /**
@@ -329,13 +321,13 @@ class Connection implements ConnectionInterface
      * @param string $fullURI
      * @param string $body
      * @param array  $headers
-     * @param string $statusCode
-     * @param string $response
-     * @param string $duration
+     * @param int $statusCode
+     * @param array $response
+     * @param float $duration
      *
      * @return void
      */
-    public function logRequestSuccess(string $method, string $fullURI, string $body, array $headers, string $statusCode, string $response, string $duration): void
+    public function logRequestSuccess(string $method, string $fullURI, ?string $body, array $headers, int $statusCode, array $response, float $duration): void
     {
         $this->log->debug('Request Body', array($body));
         $this->log->info(

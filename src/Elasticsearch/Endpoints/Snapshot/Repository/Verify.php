@@ -25,12 +25,7 @@ class Verify extends AbstractEndpoint
      */
     private $repository;
 
-    /**
-     * @param string $repository
-     *
-     * @return $this
-     */
-    public function setRepository($repository)
+    public function setRepository(string $repository): Verify
     {
         if (isset($repository) !== true) {
             return $this;
@@ -43,9 +38,8 @@ class Verify extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         $repository = $this->repository;
         if (isset($this->repository) !== true) {
@@ -59,21 +53,15 @@ class Verify extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
             'local',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Status extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_status";
@@ -32,12 +29,9 @@ class Status extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
@@ -45,13 +39,10 @@ class Status extends AbstractEndpoint
             'operation_threading',
             'recovery',
             'snapshot',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

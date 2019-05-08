@@ -17,11 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Scroll extends AbstractEndpoint
 {
-
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): Scroll
     {
         if (isset($body) !== true) {
             return $this;
@@ -40,7 +36,7 @@ class Scroll extends AbstractEndpoint
     /**
      * @return $this
      */
-    public function setScroll(string $scroll)
+    public function setScroll(string $scroll): Scroll
     {
         if (isset($scroll) !== true) {
             return $this;
@@ -54,7 +50,7 @@ class Scroll extends AbstractEndpoint
     /**
      * @return $this
      */
-    public function setScrollId(string $scroll_id)
+    public function setScrollId(string $scroll_id): Scroll
     {
         if (isset($scroll_id) !== true) {
             return $this;

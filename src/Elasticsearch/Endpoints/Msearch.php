@@ -28,9 +28,8 @@ class Msearch extends AbstractEndpoint
 
     /**
      * @param array|string $body
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody($body): Msearch
     {
         if (isset($body) !== true) {
             return $this;

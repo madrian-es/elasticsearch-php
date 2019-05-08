@@ -26,12 +26,7 @@ class Delete extends AbstractEndpoint
      */
     private $name;
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(string $name): Delete
     {
         if (isset($name) !== true) {
             return $this;
@@ -44,9 +39,8 @@ class Delete extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->name) !== true) {
             throw new Exceptions\RuntimeException(
@@ -66,18 +60,15 @@ class Delete extends AbstractEndpoint
     /**
      * @return string[]
      */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'timeout',
             'master_timeout',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'DELETE';
     }

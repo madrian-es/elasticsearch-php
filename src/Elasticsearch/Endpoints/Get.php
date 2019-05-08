@@ -23,20 +23,14 @@ class Get extends AbstractEndpoint
     /** @var bool  */
     private $checkOnlyExistance = false;
 
-    /**
-     * @return $this
-     */
-    public function returnOnlySource()
+    public function returnOnlySource(): Get
     {
         $this->returnOnlySource = true;
 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function checkOnlyExistance()
+    public function checkOnlyExistance(): Get
     {
         $this->checkOnlyExistance = true;
 
@@ -59,7 +53,7 @@ class Get extends AbstractEndpoint
             );
         }
         if (isset($this->type) !== true) {
-            throw newRuntimeException(
+            throw new RuntimeException(
                 'type is required for Get'
             );
         }

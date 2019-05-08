@@ -25,12 +25,7 @@ class Get extends AbstractEndpoint
      */
     private $field;
 
-    /**
-     * @param string $field
-     *
-     * @return $this
-     */
-    public function setField($field)
+    public function setField(string $field): Get
     {
         if (isset($field) !== true) {
             return $this;
@@ -43,9 +38,8 @@ class Get extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->field) !== true) {
             throw new Exceptions\RuntimeException(
@@ -70,24 +64,18 @@ class Get extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'include_defaults',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'local'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

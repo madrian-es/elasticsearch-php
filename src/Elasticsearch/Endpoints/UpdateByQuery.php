@@ -19,9 +19,8 @@ class UpdateByQuery extends AbstractEndpoint
 {
     /**
      * @throws Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody(array $body)
+    public function setBody(array $body): UpdateByQuery
     {
         if (isset($body) !== true) {
             return $this;

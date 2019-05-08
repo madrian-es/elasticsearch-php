@@ -330,7 +330,7 @@ class ClientBuilder
     /**
      * @param string $cert The name of a file containing a PEM formatted certificate.
      */
-    public function setSSLCert(stirng $cert, string $password = null): ClientBuilder
+    public function setSSLCert(string $cert, string $password = null): ClientBuilder
     {
         $this->sslCert = [$cert, $password];
 

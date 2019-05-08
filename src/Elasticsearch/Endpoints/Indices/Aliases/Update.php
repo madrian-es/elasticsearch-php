@@ -19,12 +19,9 @@ use Elasticsearch\Common\Exceptions;
 class Update extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body): Update
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,32 +32,25 @@ class Update extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $uri   = "/_aliases";
 
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'timeout',
             'master_timeout',
-        );
+        ];
     }
 
     /**
-     * @return array
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
-    public function getBody()
+    public function getBody(): array
     {
         if (isset($this->body) !== true) {
             throw new Exceptions\RuntimeException('Body is required for Update Aliases');
@@ -69,10 +59,7 @@ class Update extends AbstractEndpoint
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

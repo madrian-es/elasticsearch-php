@@ -33,12 +33,9 @@ class Create extends AbstractEndpoint
     private $snapshot;
 
     /**
-     * @param array $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body): Create
     {
         if (isset($body) !== true) {
             return $this;
@@ -49,12 +46,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $repository
-     *
-     * @return $this
-     */
-    public function setRepository($repository)
+    public function setRepository(string $repository): Create
     {
         if (isset($repository) !== true) {
             return $this;
@@ -65,12 +57,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $snapshot
-     *
-     * @return $this
-     */
-    public function setSnapshot($snapshot)
+    public function setSnapshot(string $snapshot): Create
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -83,9 +70,8 @@ class Create extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->repository) !== true) {
             throw new Exceptions\RuntimeException(
@@ -108,21 +94,15 @@ class Create extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
             'wait_for_completion',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }

@@ -18,12 +18,9 @@ use Elasticsearch\Common\Exceptions;
  */
 class Search extends AbstractEndpoint
 {
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody($body): Search
     {
-        if (isset($body) !== true) {
+        if ($body === null) {
             return $this;
         }
 

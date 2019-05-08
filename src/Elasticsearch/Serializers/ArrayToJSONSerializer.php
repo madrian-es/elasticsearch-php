@@ -21,10 +21,8 @@ class ArrayToJSONSerializer implements SerializerInterface
      * Serialize assoc array into JSON string
      *
      * @param string|array $data Assoc array to encode into JSON
-     *
-     * @return string
      */
-    public function serialize($data)
+    public function serialize($data): string
     {
         if (is_string($data) === true) {
             return $data;
@@ -46,10 +44,8 @@ class ArrayToJSONSerializer implements SerializerInterface
      *
      * @param string $data JSON encoded string
      * @param array  $headers Response Headers
-     *
-     * @return array
      */
-    public function deserialize($data, $headers)
+    public function deserialize(string $data, array $headers): array
     {
         return json_decode($data, true);
     }

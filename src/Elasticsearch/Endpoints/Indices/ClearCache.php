@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class ClearCache extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_cache/clear";
@@ -32,12 +29,9 @@ class ClearCache extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'field_data',
             'fielddata',
             'fields',
@@ -51,13 +45,10 @@ class ClearCache extends AbstractEndpoint
             'expand_wildcards',
             'index',
             'recycler',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

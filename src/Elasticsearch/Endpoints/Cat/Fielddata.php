@@ -19,10 +19,7 @@ class Fielddata extends AbstractEndpoint
 {
     private $fields;
 
-    /**
-     * @return $this
-     */
-    public function setFields(string $fields)
+    public function setFields(string $fields): Fielddata
     {
         if (isset($fields) !== true) {
             return $this;

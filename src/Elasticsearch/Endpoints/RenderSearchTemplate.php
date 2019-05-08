@@ -21,7 +21,7 @@ class RenderSearchTemplate extends AbstractEndpoint
     /**
      * @return $this
      */
-    public function setBody(array $body)
+    public function setBody(array $body): RenderSearchTemplate
     {
         if (isset($body) !== true) {
             return $this;

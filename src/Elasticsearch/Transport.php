@@ -52,8 +52,6 @@ class Transport
      */
     public function __construct(int $retries, AbstractConnectionPool $connectionPool, LoggerInterface $log, bool $sniffOnStart = false)
     {
-	    // @codingStandardsIgnoreEnd
-
         $this->log            = $log;
         $this->connectionPool = $connectionPool;
         $this->retries        = $retries;

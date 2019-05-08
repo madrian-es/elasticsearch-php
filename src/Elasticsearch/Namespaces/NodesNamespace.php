@@ -31,12 +31,8 @@ class NodesNamespace extends AbstractNamespace
      *        ['process']       = (boolean) Return information about the Elasticsearch process
      *        ['thread_pool']   = (boolean) Return information about the thread pool
      *        ['transport']     = (boolean) Return information about transport
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function stats($params = array())
+    public function stats(array $params = []): array
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 
@@ -62,13 +58,8 @@ class NodesNamespace extends AbstractNamespace
      *        ['metric']        = (list) A comma-separated list of metrics you wish returned. Leave empty to return all.
      *        ['flat_settings'] = (boolean) Return settings in flat format (default: false)
      *        ['human']         = (boolean) Whether to return time and byte values in human-readable format.
-
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function info($params = array())
+    public function info(array $params = []): array
     {
         $nodeID = $this->extractArgument($params, 'node_id');
         $metric = $this->extractArgument($params, 'metric');
@@ -90,12 +81,8 @@ class NodesNamespace extends AbstractNamespace
      *        ['snapshots'] = (number) Number of samples of thread stacktrace (default: 10)
      *        ['threads']   = (number) Specify the number of threads to provide information for (default: 3)
      *        ['type']      = (enum) The type to sample (default: cpu)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function hotThreads($params = array())
+    public function hotThreads(array $params = []): array
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 
@@ -112,12 +99,8 @@ class NodesNamespace extends AbstractNamespace
 
     /**
      * $params['node_id']   = (list) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function reloadSecureSettings($params = array())
+    public function reloadSecureSettings(array $params = []): array
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 

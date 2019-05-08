@@ -32,12 +32,7 @@ class Restore extends AbstractEndpoint
      */
     private $snapshot;
 
-    /**
-     * @param array $body
-     *
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): Restore
     {
         if (isset($body) !== true) {
             return $this;
@@ -48,12 +43,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $repository
-     *
-     * @return $this
-     */
-    public function setRepository($repository)
+    public function setRepository(string $repository): Restore
     {
         if (isset($repository) !== true) {
             return $this;
@@ -64,12 +54,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $snapshot
-     *
-     * @return $this
-     */
-    public function setSnapshot($snapshot)
+    public function setSnapshot(string $snapshot): Restore
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -82,9 +67,8 @@ class Restore extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->repository) !== true) {
             throw new Exceptions\RuntimeException(
@@ -107,21 +91,15 @@ class Restore extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
             'wait_for_completion',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

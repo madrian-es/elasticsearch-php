@@ -24,10 +24,7 @@ class Aliases extends AbstractEndpoint
      */
     private $name;
 
-    /**
-     * @return $this
-     */
-    public function setName(string $name)
+    public function setName(string $name): Aliases
     {
         if (isset($name) !== true) {
             return $this;

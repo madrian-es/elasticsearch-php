@@ -29,10 +29,8 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
 
     /**
      * @param string|array|Traversable $body
-     *
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody($body): BulkEndpointInterface
     {
         if (empty($body)) {
             return $this;

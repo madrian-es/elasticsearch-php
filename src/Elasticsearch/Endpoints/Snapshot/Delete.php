@@ -32,12 +32,7 @@ class Delete extends AbstractEndpoint
      */
     private $snapshot;
 
-    /**
-     * @param string $repository
-     *
-     * @return $this
-     */
-    public function setRepository($repository)
+    public function setRepository(string $repository): Delete
     {
         if (isset($repository) !== true) {
             return $this;
@@ -48,12 +43,7 @@ class Delete extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $snapshot
-     *
-     * @return $this
-     */
-    public function setSnapshot($snapshot)
+    public function setSnapshot(string $snapshot): Delete
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -66,9 +56,8 @@ class Delete extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->repository) !== true) {
             throw new Exceptions\RuntimeException(
@@ -91,20 +80,14 @@ class Delete extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'DELETE';
     }

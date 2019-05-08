@@ -24,10 +24,7 @@ class Allocation extends AbstractEndpoint
      */
     private $node_id;
 
-    /**
-     * @return $this
-     */
-    public function setNodeId(string $node_id)
+    public function setNodeId(string $node_id): Allocation
     {
         if (isset($node_id) !== true) {
             return $this;

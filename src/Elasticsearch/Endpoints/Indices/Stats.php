@@ -26,10 +26,8 @@ class Stats extends AbstractEndpoint
 
     /**
      * @param string|string[] $metric
-     *
-     * @return $this
      */
-    public function setMetric($metric)
+    public function setMetric($metric): Stats
     {
         if (isset($metric) !== true) {
             return $this;
@@ -44,10 +42,7 @@ class Stats extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $metric = $this->metric;
@@ -64,12 +59,9 @@ class Stats extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'completion_fields',
             'fielddata_fields',
             'fields',
@@ -79,13 +71,10 @@ class Stats extends AbstractEndpoint
             'types',
             'metric',
             'include_segment_file_sizes'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

@@ -17,10 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Explain extends AbstractEndpoint
 {
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): Explain
     {
         if (isset($body) !== true) {
             return $this;
@@ -33,7 +30,6 @@ class Explain extends AbstractEndpoint
 
     /**
      * @throws RuntimeException
-     * @return string
      */
     public function getURI(): string
     {

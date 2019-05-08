@@ -32,10 +32,8 @@ class Stats extends AbstractNodesEndpoint
 
     /**
      * @param string|string[] $metric
-     *
-     * @return $this
      */
-    public function setMetric($metric)
+    public function setMetric($metric): Stats
     {
         if (isset($metric) !== true) {
             return $this;

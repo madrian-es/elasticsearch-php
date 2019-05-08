@@ -20,13 +20,7 @@ class Get extends AbstractEndpoint
 {
     private $taskId;
 
-    /**
-     * @param string $taskId
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
-     */
-    public function setTaskId($taskId)
+    public function setTaskId(string $taskId): Get
     {
         if (isset($taskId) !== true) {
             return $this;
@@ -37,11 +31,7 @@ class Get extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->taskId) === true) {
             return "/_tasks/{$this->taskId}";
@@ -50,20 +40,14 @@ class Get extends AbstractEndpoint
         return "/_tasks";
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'wait_for_completion'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

@@ -17,12 +17,8 @@ class IndicesNamespace extends AbstractNamespace
 {
     /**
      * $params['index'] = (list) A comma-separated list of indices to check (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return boolean
      */
-    public function exists($params)
+    public function exists(array $params): bool
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -47,12 +43,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      *        ['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function get($params)
+    public function get(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
         $feature = $this->extractArgument($params, 'feature');
@@ -75,12 +67,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function segments($params = array())
+    public function segments(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -98,12 +86,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']    = (string) The name of the template (Required)
      *        ['timeout'] = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function deleteTemplate($params)
+    public function deleteTemplate(array $params): array
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -121,12 +105,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (list) A comma-separated list of indices to delete; use `_all` or empty string to delete all indices
      *        ['timeout'] = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function delete($params = array())
+    public function delete(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -162,12 +142,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['refresh']        = (boolean) Return information about refresh operations
      *        ['search']         = (boolean) Return information about search operations; use the `groups` parameter to include information for specific search groups
      *        ['store']          = (boolean) Return information about the size of the index
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function stats($params = array())
+    public function stats(array $params = []): array
     {
         $metric = $this->extractArgument($params, 'metric');
 
@@ -188,12 +164,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
      *        ['body']  = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function putSettings($params = array())
+    public function putSettings(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -216,12 +188,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function snapshotIndex($params = array())
+    public function snapshotIndex(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -241,12 +209,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['target']         = (string) The name of the target index to shrink into
      *        ['timeout']        = (time) Explicit operation timeout
      *        ['master_timeout'] = (time) Specify timeout for connection to master
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function shrink($params = array())
+    public function shrink(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $target = $this->extractArgument($params, 'target');
@@ -267,12 +231,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string for all indices
      *        ['type']  = (list) A comma-separated list of document types
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getMapping($params = array())
+    public function getMapping(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -295,12 +255,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['type']             = (list) A comma-separated list of document types
      *        ['field']            = (list) A comma-separated list of document fields
      *        ['include_defaults'] = (bool) specifies default mapping values should be returned
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getFieldMapping($params = array())
+    public function getFieldMapping(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -338,7 +294,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @return array
      */
-    public function flush($params = array())
+    public function flush(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -361,12 +317,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function flushSynced($params = array())
+    public function flushSynced(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -389,12 +341,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function refresh($params = array())
+    public function refresh(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -414,12 +362,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['detailed']    = (bool) Whether to display detailed information about shard recovery
      *        ['active_only'] = (bool) Display only those recoveries that are currently on-going
      *        ['human']       = (bool) Whether to return time and byte values in human-readable format.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function recovery($params = array())
+    public function recovery(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -440,12 +384,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return boolean
      */
-    public function existsType($params)
+    public function existsType(array $params): bool
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -476,7 +416,7 @@ class IndicesNamespace extends AbstractNamespace
      *
      * @return array
      */
-    public function putAlias($params = array())
+    public function putAlias(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -503,12 +443,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['timeout'] = (time) Explicit operation timeout
      *        ['body']    = (time) Explicit operation timeout
      *        ['create']  = (bool) Whether the index template should only be added if new or can also replace an existing one
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function putTemplate($params)
+    public function putTemplate(array $params): array
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -534,12 +470,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['operation_threading'] = () TODO: ?
      *        ['source']              = (string) The URL-encoded query definition (instead of using the request body)
      *        ['body']                = (string) The URL-encoded query definition (instead of using the request body)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function validateQuery($params = array())
+    public function validateQuery(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -565,12 +497,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['index']          = (list) A comma-separated list of index names to filter aliases
      *        ['ignore_indices'] = (enum) When performed on multiple indices, allows to ignore `missing` ones
      *        ['name']           = (list) A comma-separated list of alias names to return
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getAlias($params)
+    public function getAlias(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -594,12 +522,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_conflicts'] = (boolean) Specify whether to ignore conflicts while updating the mapping (default: false)
      *        ['timeout']          = (time) Explicit operation timeout
      *        ['body']             = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function putMapping($params)
+    public function putMapping(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -623,12 +547,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` for all indices (Required)
      *        ['type']  = (string) The name of the document type to delete (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function deleteMapping($params)
+    public function deleteMapping(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -648,12 +568,8 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['name'] = (string) The name of the template (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getTemplate($params)
+    public function getTemplate(array $params): array
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -670,12 +586,8 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['name'] = (string) The name of the template (Required)
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return boolean
      */
-    public function existsTemplate($params)
+    public function existsTemplate(array $params): bool
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -697,12 +609,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
      *        ['body']    = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function create($params)
+    public function create(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -731,12 +639,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable']   = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']     = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']     = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function forceMerge($params = array())
+    public function forceMerge(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -755,12 +659,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (string) The name of the index with an alias (Required)
      *        ['name']    = (string) The name of the alias to be deleted (Required)
      *        ['timeout'] = (time) Explicit timestamp for the document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function deleteAlias($params)
+    public function deleteAlias(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -781,12 +681,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function open($params)
+    public function open(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -815,12 +711,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['explain']      = (bool) With `true`, outputs more advanced details. (default: false)
      *        ['attributes']   = (list) A comma-separated list of token attributes to output, this parameter works only with `explain=true`
      *        ['format']       = (enum) Format of the output (["detailed", "text"])
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function analyze($params = array())
+    public function analyze(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -852,12 +744,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function clearCache($params = array())
+    public function clearCache(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -876,12 +764,8 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (list) A comma-separated list of index names to filter aliases
      *        ['timeout'] = (time) Explicit timestamp for the document
      *        ['body']    = (time) Explicit timestamp for the document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function updateAliases($params = array())
+    public function updateAliases(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -902,12 +786,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
      *        ['timeout'] = (time) Explicit timestamp for the document
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getAliases($params = array())
+    public function getAliases(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -931,12 +811,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return boolean
      */
-    public function existsAlias($params)
+    public function existsAlias(array $params): bool
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -963,12 +839,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['operation_threading'] = () TODO: ?
      *        ['recovery']            = (boolean) Return information about shard recovery
      *        ['snapshot']            = (boolean) TODO: ?
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function status($params = array())
+    public function status(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -985,12 +857,8 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getSettings($params = array())
+    public function getSettings(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1011,12 +879,8 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function close($params)
+    public function close(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1033,12 +897,8 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['index']   = (string) The name of the index
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function seal($params)
+    public function seal(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1061,12 +921,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function upgrade($params = array())
+    public function upgrade(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1089,12 +945,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function getUpgrade($params = array())
+    public function getUpgrade(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1116,12 +968,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['allow_no_indices'] = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards'] = (boolean) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      *        ['operation_threading']
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function shardStores($params)
+    public function shardStores(array $params): array
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -1141,12 +989,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['alias']          = (string) The name of the alias to rollover
      *        ['timeout']        = (time) Explicit operation timeout
      *        ['master_timeout'] = (time) Specify timeout for connection to master
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
      */
-    public function rollover($params)
+    public function rollover(array $params): array
     {
         $newIndex = $this->extractArgument($params, 'newIndex');
         $alias = $this->extractArgument($params, 'alias');
@@ -1172,13 +1016,8 @@ class IndicesNamespace extends AbstractNamespace
      *        ['timeout']  = (time) Explicit operation timeout
      *        ['master_timeout']  = (time) Specify timeout for connection to master
      *        ['wait_for_active_shards']  = (string) Set the number of active shards to wait for on the shrunken index before the operation returns.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
-     * @throws \Exception
      */
-    public function split($params = array())
+    public function split(array $params = []): array
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');

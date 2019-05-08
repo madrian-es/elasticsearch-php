@@ -19,12 +19,9 @@ use Elasticsearch\Common\Exceptions;
 class Query extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body): Query
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,20 +32,14 @@ class Query extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         return $this->getOptionalURI('_validate/query');
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'explain',
             'ignore_indices',
             'operation_threading',
@@ -60,13 +51,10 @@ class Query extends AbstractEndpoint
             'analyze_wildcard',
             'lenient',
             'lowercase_expanded_terms'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

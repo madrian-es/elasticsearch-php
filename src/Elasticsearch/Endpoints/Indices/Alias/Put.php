@@ -26,12 +26,9 @@ class Put extends AbstractEndpoint
     private $name;
 
     /**
-     * @param array $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body): Put
     {
         if (isset($body) !== true) {
             return $this;
@@ -42,12 +39,7 @@ class Put extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(string $name): Put
     {
         if (isset($name) !== true) {
             return $this;
@@ -60,9 +52,8 @@ class Put extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->name) !== true) {
             throw new Exceptions\RuntimeException(
@@ -82,21 +73,15 @@ class Put extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'timeout',
             'master_timeout',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }

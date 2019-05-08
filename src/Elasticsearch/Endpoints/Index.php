@@ -20,10 +20,7 @@ class Index extends AbstractEndpoint
     /** @var bool  */
     private $createIfAbsent = false;
 
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): Index
     {
         if (isset($body) !== true) {
             return $this;
@@ -34,10 +31,7 @@ class Index extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function createIfAbsent()
+    public function createIfAbsent(): Index
     {
         $this->createIfAbsent = true;
 
@@ -105,7 +99,7 @@ class Index extends AbstractEndpoint
     public function getBody(): array
     {
         if (isset($this->body) !== true) {
-            throw newRuntimeException('Document body must be set for index request');
+            throw new RuntimeException('Document body must be set for index request');
         } else {
             return $this->body;
         }

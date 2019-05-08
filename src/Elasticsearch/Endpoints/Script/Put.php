@@ -18,12 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Put extends AbstractEndpoint
 {
-    /**
-     * @param array $body
-     *
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): Put
     {
         if (isset($body) !== true) {
             return $this;
@@ -36,9 +31,8 @@ class Put extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->id) !== true) {
             throw new Exceptions\RuntimeException(
@@ -51,22 +45,16 @@ class Put extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'version_type',
             'version',
             'op_type'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }

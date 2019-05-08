@@ -24,10 +24,8 @@ class Info extends AbstractNodesEndpoint
 
     /**
      * @param string|string[] $metric
-     *
-     * @return $this
      */
-    public function setMetric($metric)
+    public function setMetric($metric): Info
     {
         if (isset($metric) !== true) {
             return $this;

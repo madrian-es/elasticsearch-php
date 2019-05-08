@@ -50,7 +50,7 @@ class RegisteredNamespaceTest extends \PHPUnit\Framework\TestCase
 // @codingStandardsIgnoreStart "Each class must be in a file by itself" - not worth the extra work here
 class FooNamespaceBuilder implements Elasticsearch\Namespaces\NamespaceBuilderInterface
 {
-    public function getName()
+    public function getName(): string
     {
         return "foo";
     }
@@ -61,7 +61,7 @@ class FooNamespaceBuilder implements Elasticsearch\Namespaces\NamespaceBuilderIn
     }
 }
 
-class FooNamespace 
+class FooNamespace
 {
     public function fooMethod()
     {

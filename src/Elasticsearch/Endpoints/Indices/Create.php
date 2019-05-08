@@ -20,11 +20,9 @@ class Create extends AbstractEndpoint
 {
     /**
      * @param array|object $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody($body): Create
     {
         if (isset($body) !== true) {
             return $this;
@@ -37,9 +35,8 @@ class Create extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
             throw new Exceptions\RuntimeException(
@@ -56,24 +53,18 @@ class Create extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'timeout',
             'master_timeout',
             'update_all_types',
             'wait_for_active_shards',
             'include_type_name'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }

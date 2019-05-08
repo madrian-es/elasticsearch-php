@@ -17,11 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class FieldStats extends AbstractEndpoint
 {
-
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): FieldStats
     {
         if (isset($body) !== true) {
             return $this;

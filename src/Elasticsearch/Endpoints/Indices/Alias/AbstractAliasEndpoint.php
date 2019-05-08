@@ -22,13 +22,11 @@ abstract class AbstractAliasEndpoint extends AbstractEndpoint
     protected $name = null;
 
     /**
-     * @param string $name
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      *
      * @return $this
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         if (is_string($name) !== true) {
             throw new InvalidArgumentException('Name must be a string');

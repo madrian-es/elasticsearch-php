@@ -18,10 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class FieldCaps extends AbstractEndpoint
 {
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): FieldCaps
     {
         if (isset($body) !== true) {
             return $this;
@@ -42,7 +39,7 @@ class FieldCaps extends AbstractEndpoint
         }
     }
 
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
         return [
             'fields',

@@ -24,7 +24,7 @@ class EverythingToJSONSerializer implements SerializerInterface
      *
      * @return string
      */
-    public function serialize($data)
+    public function serialize($data): string
     {
         $data = json_encode($data, JSON_PRESERVE_ZERO_FRACTION);
         if ($data === false) {
@@ -42,10 +42,8 @@ class EverythingToJSONSerializer implements SerializerInterface
      *
      * @param string $data JSON encoded string
      * @param array  $headers Response headers
-     *
-     * @return array
      */
-    public function deserialize($data, $headers)
+    public function deserialize(string $data, array $headers): array
     {
         return json_decode($data, true);
     }

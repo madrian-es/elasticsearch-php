@@ -19,15 +19,12 @@ class Flush extends AbstractEndpoint
 {
     protected $synced = false;
 
-    public function setSynced($synced)
+    public function setSynced($synced): void
     {
         $this->synced = $synced;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_flush";
@@ -43,25 +40,19 @@ class Flush extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'force',
             'full',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'wait_if_ongoing'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

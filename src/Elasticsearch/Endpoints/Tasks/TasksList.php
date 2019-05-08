@@ -21,19 +21,15 @@ class TasksList extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         return "/_tasks";
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'node_id',
             'actions',
             'detailed',
@@ -42,13 +38,10 @@ class TasksList extends AbstractEndpoint
             'wait_for_completion',
             'group_by',
             'task_id'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

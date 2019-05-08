@@ -25,12 +25,7 @@ class Get extends AbstractEndpoint
      */
     private $name;
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(string $name): Get
     {
         if (isset($name) !== true) {
             return $this;
@@ -43,9 +38,8 @@ class Get extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         $name = $this->name;
         $uri   = "/_template";
@@ -60,20 +54,17 @@ class Get extends AbstractEndpoint
     /**
      * @return string[]
      */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'flat_settings',
             'local',
             'master_timeout',
             'include_type_name'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

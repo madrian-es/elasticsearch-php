@@ -19,12 +19,9 @@ use Elasticsearch\Common\Exceptions;
 class Put extends AbstractEndpoint
 {
     /**
-     * @param array $body
-     *
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody(array $body): Put
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,10 +32,7 @@ class Put extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_settings";
@@ -50,26 +44,22 @@ class Put extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
             'flat_settings',
             'preserve_existing'
-        );
+        ];
     }
 
     /**
-     * @return array
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
-    public function getBody()
+    public function getBody(): array
     {
         if (isset($this->body) !== true) {
             throw new Exceptions\RuntimeException('Body is required for Put Settings');
@@ -78,10 +68,7 @@ class Put extends AbstractEndpoint
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'PUT';
     }

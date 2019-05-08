@@ -69,10 +69,6 @@ abstract class AbstractEndpoint
      */
     public function setParams(array $params)
     {
-        if (is_object($params) === true) {
-            $params = (array) $params;
-        }
-
         $this->checkUserParams($params);
         $params = $this->convertCustom($params);
         $this->extractOptions($params);
@@ -99,7 +95,7 @@ abstract class AbstractEndpoint
     /**
      * @return $this
      */
-    public function setIndex(string $index)
+    public function setIndex(?string $index)
     {
         if ($index === null) {
             return $this;
@@ -123,7 +119,7 @@ abstract class AbstractEndpoint
     /**
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(?string $type)
     {
         if ($type === null) {
             return $this;
@@ -162,7 +158,7 @@ abstract class AbstractEndpoint
     /**
      * @return array
      */
-    public function getBody(): array
+    public function getBody()
     {
         return $this->body;
     }

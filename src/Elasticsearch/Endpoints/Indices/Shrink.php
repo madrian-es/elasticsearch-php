@@ -26,14 +26,7 @@ class Shrink extends AbstractEndpoint
      */
     private $target;
 
-    /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     *
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): Shrink
     {
         if (isset($body) !== true) {
             return $this;
@@ -44,12 +37,7 @@ class Shrink extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $target
-     *
-     * @return $this
-     */
-    public function setTarget($target)
+    public function setTarget(string $target): Shrink
     {
         if (isset($target) !== true) {
             return $this;
@@ -61,10 +49,8 @@ class Shrink extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\BadMethodCallException
-     *
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->index) !== true) {
             throw new Exceptions\RuntimeException(
@@ -86,23 +72,16 @@ class Shrink extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'timeout',
             'master_timeout',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
-        //TODO Fix Me!
         return 'PUT';
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints;
 
-use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Common\Exceptions\RuntimeException;
 
 /**
  * Class Mget
@@ -17,10 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Mget extends AbstractEndpoint
 {
-    /**
-     * @return $this
-     */
-    public function setBody(array $body)
+    public function setBody(array $body): Mget
     {
         if (isset($body) !== true) {
             return $this;

@@ -17,10 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class ForceMerge extends AbstractEndpoint
 {
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_forcemerge";
@@ -32,12 +29,9 @@ class ForceMerge extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'flush',
             'ignore_unavailable',
             'allow_no_indices',
@@ -46,13 +40,10 @@ class ForceMerge extends AbstractEndpoint
             'only_expunge_deletes',
             'operation_threading',
             'wait_for_merge',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'POST';
     }

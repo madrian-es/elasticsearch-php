@@ -24,25 +24,16 @@ abstract class AbstractNamespace
     /** @var callable */
     protected $endpoints;
 
-    /**
-     * Abstract constructor
-     *
-     * @param Transport $transport Transport object
-     * @param callable $endpoints
-     */
-    public function __construct($transport, $endpoints)
+    public function __construct(Transport $transport, callable $endpoints)
     {
         $this->transport = $transport;
         $this->endpoints = $endpoints;
     }
 
     /**
-     * @param array $params
-     * @param string $arg
-     *
      * @return null|mixed
      */
-    public function extractArgument(&$params, $arg)
+    public function extractArgument(array &$params, string $arg)
     {
         if (is_object($params) === true) {
             $params = (array) $params;
@@ -58,13 +49,7 @@ abstract class AbstractNamespace
         }
     }
 
-    /**
-     * @param AbstractEndpoint $endpoint
-     *
-     * @throws \Exception
-     * @return array
-     */
-    protected function performRequest(AbstractEndpoint $endpoint)
+    protected function performRequest(AbstractEndpoint $endpoint): array
     {
         $response = $this->transport->performRequest(
             $endpoint->getMethod(),

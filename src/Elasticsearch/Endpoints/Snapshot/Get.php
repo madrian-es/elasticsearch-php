@@ -32,12 +32,7 @@ class Get extends AbstractEndpoint
      */
     private $snapshot;
 
-    /**
-     * @param string $repository
-     *
-     * @return $this
-     */
-    public function setRepository($repository)
+    public function setRepository(string $repository): Get
     {
         if (isset($repository) !== true) {
             return $this;
@@ -48,12 +43,7 @@ class Get extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @param string $snapshot
-     *
-     * @return $this
-     */
-    public function setSnapshot($snapshot)
+    public function setSnapshot(string $snapshot): Get
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -66,9 +56,8 @@ class Get extends AbstractEndpoint
 
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
-     * @return string
      */
-    public function getURI()
+    public function getURI(): string
     {
         if (isset($this->repository) !== true) {
             throw new Exceptions\RuntimeException(
@@ -91,22 +80,16 @@ class Get extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'master_timeout',
             'ignore_unavailable',
             'verbose'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

@@ -28,10 +28,8 @@ class MPercolate extends AbstractEndpoint implements BulkEndpointInterface
 
     /**
      * @param string|array $body
-     *
-     * @return $this
      */
-    public function setBody($body)
+    public function setBody($body): MPercolate
     {
         if (isset($body) !== true) {
             return $this;

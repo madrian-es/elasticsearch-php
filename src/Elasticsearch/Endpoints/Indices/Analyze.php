@@ -18,13 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Analyze extends AbstractEndpoint
 {
-    /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): Analyze
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,10 +29,7 @@ class Analyze extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $uri   = "/_analyze";
@@ -50,12 +41,9 @@ class Analyze extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'analyzer',
             'field',
             'filter',
@@ -68,13 +56,10 @@ class Analyze extends AbstractEndpoint
             'explain',
             'attributes',
             'format'
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }

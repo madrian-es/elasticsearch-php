@@ -22,10 +22,8 @@ class SmartSerializer implements SerializerInterface
      * Serialize assoc array into JSON string
      *
      * @param string|array $data Assoc array to encode into JSON
-     *
-     * @return string
      */
-    public function serialize($data)
+    public function serialize($data): string
     {
         if (is_string($data) === true) {
             return $data;
@@ -52,7 +50,7 @@ class SmartSerializer implements SerializerInterface
      * @throws JsonErrorException
      * @return array
      */
-    public function deserialize($data, $headers)
+    public function deserialize(string $data, array $headers): array
     {
         if (isset($headers['content_type']) === true) {
             if (strpos($headers['content_type'], 'json') !== false) {

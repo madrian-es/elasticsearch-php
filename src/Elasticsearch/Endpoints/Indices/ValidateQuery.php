@@ -18,13 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class ValidateQuery extends AbstractEndpoint
 {
-    /**
-     * @param array $body
-     *
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     * @return $this
-     */
-    public function setBody($body)
+    public function setBody(array $body): ValidateQuery
     {
         if (isset($body) !== true) {
             return $this;
@@ -35,10 +29,7 @@ class ValidateQuery extends AbstractEndpoint
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getURI()
+    public function getURI(): string
     {
         $index = $this->index;
         $type = $this->type;
@@ -53,12 +44,9 @@ class ValidateQuery extends AbstractEndpoint
         return $uri;
     }
 
-    /**
-     * @return string[]
-     */
-    public function getParamWhitelist()
+    public function getParamWhitelist(): array
     {
-        return array(
+        return [
             'explain',
             'ignore_unavailable',
             'allow_no_indices',
@@ -66,13 +54,10 @@ class ValidateQuery extends AbstractEndpoint
             'operation_threading',
             'source',
             'q',
-        );
+        ];
     }
 
-    /**
-     * @return string
-     */
-    public function getMethod()
+    public function getMethod(): string
     {
         return 'GET';
     }
