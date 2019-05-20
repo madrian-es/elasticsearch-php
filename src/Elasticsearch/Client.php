@@ -1330,15 +1330,11 @@ class Client
      */
     public function extractArgument(array &$params, string $arg)
     {
-        if (is_object($params) === true) {
-            $params = (array) $params;
-        }
-
         if (array_key_exists($arg, $params) === true) {
-            $val = $params[$arg];
+            $value = $params[$arg];
+            $value = is_object($value) ? (array) $value : $value;
             unset($params[$arg]);
-
-            return $val;
+            return $value;
         } else {
             return null;
         }

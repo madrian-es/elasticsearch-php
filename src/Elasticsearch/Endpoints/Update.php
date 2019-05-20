@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Update extends AbstractEndpoint
 {
-    public function setBody(array $body): Update
+    public function setBody(?array $body): Update
     {
         if (isset($body) !== true) {
             return $this;

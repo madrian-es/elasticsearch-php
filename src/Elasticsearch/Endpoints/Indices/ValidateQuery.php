@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class ValidateQuery extends AbstractEndpoint
 {
-    public function setBody(array $body): ValidateQuery
+    public function setBody(?array $body): ValidateQuery
     {
         if (isset($body) !== true) {
             return $this;

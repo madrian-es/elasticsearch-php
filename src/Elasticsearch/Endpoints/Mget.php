@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Mget extends AbstractEndpoint
 {
-    public function setBody(array $body): Mget
+    public function setBody(?array $body): Mget
     {
         if (isset($body) !== true) {
             return $this;

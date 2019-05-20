@@ -23,7 +23,7 @@ class Cancel extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setTaskId(string $taskId): Cancel
+    public function setTaskId(?string $taskId): Cancel
     {
         if (isset($taskId) !== true) {
             return $this;

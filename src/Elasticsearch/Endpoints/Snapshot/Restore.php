@@ -32,7 +32,7 @@ class Restore extends AbstractEndpoint
      */
     private $snapshot;
 
-    public function setBody(array $body): Restore
+    public function setBody(?array $body): Restore
     {
         if (isset($body) !== true) {
             return $this;

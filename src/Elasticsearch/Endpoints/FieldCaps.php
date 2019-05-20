@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class FieldCaps extends AbstractEndpoint
 {
-    public function setBody(array $body): FieldCaps
+    public function setBody(?array $body): FieldCaps
     {
         if (isset($body) !== true) {
             return $this;

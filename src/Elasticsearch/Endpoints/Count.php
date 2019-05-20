@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Count extends AbstractEndpoint
 {
-    public function setBody(array $body): Count
+    public function setBody(?array $body): Count
     {
         if (isset($body) !== true) {
             return $this;

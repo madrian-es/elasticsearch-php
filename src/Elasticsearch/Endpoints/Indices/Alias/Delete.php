@@ -25,7 +25,7 @@ class Delete extends AbstractEndpoint
      */
     private $name;
 
-    public function setName(string $name): Delete
+    public function setName(?string $name): Delete
     {
         if (isset($name) !== true) {
             return $this;

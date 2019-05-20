@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Analyze extends AbstractEndpoint
 {
-    public function setBody(array $body): Analyze
+    public function setBody(?array $body): Analyze
     {
         if (isset($body) !== true) {
             return $this;

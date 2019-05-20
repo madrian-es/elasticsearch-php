@@ -20,7 +20,7 @@ class Get extends AbstractEndpoint
 {
     private $taskId;
 
-    public function setTaskId(string $taskId): Get
+    public function setTaskId(?string $taskId): Get
     {
         if (isset($taskId) !== true) {
             return $this;

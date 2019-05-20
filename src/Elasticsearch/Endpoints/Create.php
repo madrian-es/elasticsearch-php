@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Create extends AbstractEndpoint
 {
-    public function setBody(array $body): Create
+    public function setBody(?array $body): Create
     {
         if (isset($body) !== true) {
             return $this;

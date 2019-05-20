@@ -28,7 +28,7 @@ class Put extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setBody(array $body): Put
+    public function setBody(?array $body): Put
     {
         if (isset($body) !== true) {
             return $this;
@@ -39,7 +39,7 @@ class Put extends AbstractEndpoint
         return $this;
     }
 
-    public function setName(string $name): Put
+    public function setName(?string $name): Put
     {
         if (isset($name) !== true) {
             return $this;

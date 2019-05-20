@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Reroute extends AbstractEndpoint
 {
-    public function setBody(array $body): Reroute
+    public function setBody(?array $body): Reroute
     {
         if (isset($body) !== true) {
             return $this;

@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class TermVectors extends AbstractEndpoint
 {
-    public function setBody(array $body): TermVectors
+    public function setBody(?array $body): TermVectors
     {
         if (isset($body) !== true) {
             return $this;

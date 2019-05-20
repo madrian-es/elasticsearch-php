@@ -80,10 +80,10 @@ class Msearch extends AbstractEndpoint
     }
 
     /**
-     * @return array
+     * @return array|string
      * @throws RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new RuntimeException('Body is required for MSearch');

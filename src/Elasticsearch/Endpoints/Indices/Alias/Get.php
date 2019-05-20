@@ -24,7 +24,7 @@ class Get extends AbstractEndpoint
      */
     private $name;
 
-    public function setName(string $name): Get
+    public function setName(?string $name): Get
     {
         if (isset($name) !== true) {
             return $this;

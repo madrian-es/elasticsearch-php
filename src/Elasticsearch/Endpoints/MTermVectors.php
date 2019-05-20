@@ -15,7 +15,7 @@ namespace Elasticsearch\Endpoints;
  */
 class MTermVectors extends AbstractEndpoint
 {
-    public function setBody(array $body): MTermVectors
+    public function setBody(?array $body): MTermVectors
     {
         if (isset($body) !== true) {
             return $this;

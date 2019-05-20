@@ -19,7 +19,7 @@ class Templates extends AbstractEndpoint
 {
     private $name;
 
-    public function setName(string $name): Templates
+    public function setName(?string $name): Templates
     {
         $this->name = $name;
         return $this;

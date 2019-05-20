@@ -18,7 +18,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class Simulate extends AbstractEndpoint
 {
-    public function setBody(array $body): Simulate
+    public function setBody(?array $body): Simulate
     {
         if (isset($body) !== true) {
             return $this;

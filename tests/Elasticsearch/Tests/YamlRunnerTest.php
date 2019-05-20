@@ -119,7 +119,6 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         'search/190_index_prefix_search.yml' => 'bad yaml array syntax',
         'search.aggregation/230_composite.yml' => 'bad yaml array syntax',
         'search/30_limits.yml' => 'bad regex'
-
     ];
 
     /**
@@ -149,7 +148,9 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
 
         $response = curl_exec($ch);
         curl_close($ch);
-
+        if (false === $response) {
+            throw new \Exception('I cannot connect to ES');
+        }
         $response = json_decode($response, true);
         static::$esVersion = $response['version']['number'];
         echo "ES Version: ".static::$esVersion."\n";
@@ -346,6 +347,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
  * @var \stdClass $endpointParams
 */
         $endpointParams = $this->replaceWithContext(current($operation), $context);
+
         $caller = $this->client;
         $namespace = null;
         $method = null;
@@ -402,6 +404,8 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         if (strpos($method, "exist") !== false && $async === true) {
             return $this->executeAsyncExistRequest($caller, $method, $endpointParams, $expectedError, $expectedWarnings, $testName);
         }
+        // Convert object to array
+        $endpointParams = json_decode(json_encode($endpointParams), true);
 
         return $this->executeRequest($caller, $method, $endpointParams, $expectedError, $expectedWarnings, $testName);
     }
@@ -411,7 +415,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
      *
      * @param object      $caller
      * @param string      $method
-     * @param object      $endpointParams
+     * @param array       $endpointParams
      * @param string|null $expectedError
      * @param null        $expectedWarnings
      * @param string      $testName
@@ -420,7 +424,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
      *
      * @return array|mixed
      */
-    public function executeRequest($caller, string $method, $endpointParams, $expectedError, $expectedWarnings, string $testName)
+    public function executeRequest($caller, string $method, array $endpointParams, $expectedError, $expectedWarnings, string $testName)
     {
         try {
             $response = $caller->$method($endpointParams);
@@ -561,10 +565,10 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
             ."$operation was [".print_r($value, true)."]"
             .var_export($lastOperationResult, true);
         $this->assertNotEquals(0, $value, $msg);
+
         $this->assertNotFalse($value, $msg);
         $this->assertNotNull($value, $msg);
         $this->assertNotEquals('', $msg);
-
         return $lastOperationResult;
     }
 
@@ -872,7 +876,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
             }
         }
 
-        if (!is_array($data) && !$data instanceof \stdClass) {
+        if (!is_array($data) && !($data instanceof \stdClass)) {
             return $data;
         }
 
@@ -1076,7 +1080,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
 
         $response = curl_exec($ch);
         curl_close($ch);
-        if ($response != "{}") {
+        if (false !== $response && $response !== "{}") {
             $response = json_decode($response, true);
             foreach ($response as $repo => $settings) {
                 if ($settings['type'] == 'fs') {
@@ -1146,10 +1150,13 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 
-        $response = json_decode(curl_exec($ch), true);
+        $response = curl_exec($ch);
+        if (false !== $response) {
+            $response = json_decode($response, true);
+        }
 
         $counter = 0;
-        while ($response['status'] === 'red') {
+        while (false !== $response && $response['status'] === 'red') {
             sleep(0.5);
             $response = json_decode(curl_exec($ch), true);
             ++$counter;

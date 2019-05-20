@@ -20,12 +20,8 @@ class Index extends AbstractEndpoint
     /** @var bool  */
     private $createIfAbsent = false;
 
-    public function setBody(array $body): Index
+    public function setBody(?array $body): Index
     {
-        if (isset($body) !== true) {
-            return $this;
-        }
-
         $this->body = $body;
 
         return $this;

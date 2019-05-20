@@ -95,7 +95,7 @@ abstract class AbstractEndpoint
     /**
      * @return $this
      */
-    public function setIndex(?string $index)
+    public function setIndex($index)
     {
         if ($index === null) {
             return $this;
@@ -156,7 +156,7 @@ abstract class AbstractEndpoint
     }
 
     /**
-     * @return array
+     * @return array|string
      */
     public function getBody()
     {

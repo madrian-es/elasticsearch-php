@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Explain extends AbstractEndpoint
 {
-    public function setBody(array $body): Explain
+    public function setBody(?array $body): Explain
     {
         if (isset($body) !== true) {
             return $this;

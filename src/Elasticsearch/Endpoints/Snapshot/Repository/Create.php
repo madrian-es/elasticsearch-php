@@ -25,7 +25,7 @@ class Create extends AbstractEndpoint
      */
     private $repository;
 
-    public function setBody(array $body): Create
+    public function setBody(?array $body): Create
     {
         if (isset($body) !== true) {
             return $this;

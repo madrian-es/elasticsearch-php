@@ -35,21 +35,16 @@ abstract class AbstractNamespace
      */
     public function extractArgument(array &$params, string $arg)
     {
-        if (is_object($params) === true) {
-            $params = (array) $params;
-        }
-
         if (array_key_exists($arg, $params) === true) {
             $val = $params[$arg];
             unset($params[$arg]);
-
             return $val;
         } else {
             return null;
         }
     }
 
-    protected function performRequest(AbstractEndpoint $endpoint): array
+    protected function performRequest(AbstractEndpoint $endpoint)
     {
         $response = $this->transport->performRequest(
             $endpoint->getMethod(),

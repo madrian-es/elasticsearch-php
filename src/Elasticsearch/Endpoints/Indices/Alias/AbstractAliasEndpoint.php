@@ -26,7 +26,7 @@ abstract class AbstractAliasEndpoint extends AbstractEndpoint
      *
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(?string $name)
     {
         if (is_string($name) !== true) {
             throw new InvalidArgumentException('Name must be a string');

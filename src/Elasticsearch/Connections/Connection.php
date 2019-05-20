@@ -205,9 +205,9 @@ class Connection implements ConnectionInterface
                             $response['effective_url'],
                             $request['body'],
                             $request['headers'],
-                            $response['status'],
+                            (int) $response['status'],
                             $response['body'],
-                            (string) $response['transfer_stats']['total_time'],
+                            (float) $response['transfer_stats']['total_time'],
                             $exception
                         );
 
@@ -250,9 +250,9 @@ class Connection implements ConnectionInterface
                             $response['effective_url'],
                             $request['body'],
                             $request['headers'],
-                            $response['status'],
+                            (int) $response['status'],
                             $response['body'],
-                            $response['transfer_stats']['total_time'],
+                            (float) $response['transfer_stats']['total_time'],
                             $exception
                         );
                         throw $exception;
@@ -281,9 +281,9 @@ class Connection implements ConnectionInterface
                     $response['effective_url'],
                     $request['body'],
                     $request['headers'],
-                    $response['status'],
-                    $response['body'],
-                    $response['transfer_stats']['total_time']
+                    (int) $response['status'],
+                    (array) $response['body'],
+                    (float) $response['transfer_stats']['total_time']
                 );
 
                 return isset($request['client']['verbose']) && $request['client']['verbose'] === true ? $response : $response['body'];
@@ -327,7 +327,7 @@ class Connection implements ConnectionInterface
      *
      * @return void
      */
-    public function logRequestSuccess(string $method, string $fullURI, ?string $body, array $headers, int $statusCode, array $response, float $duration): void
+    public function logRequestSuccess(string $method, string $fullURI, ?string $body, array $headers, ?int $statusCode, array $response, float $duration): void
     {
         $this->log->debug('Request Body', array($body));
         $this->log->info(
@@ -364,14 +364,14 @@ class Connection implements ConnectionInterface
      * @param string $fullURI
      * @param string $body
      * @param array $headers
-     * @param null|string $statusCode
+     * @param null|int $statusCode
      * @param null|string $response
-     * @param string $duration
+     * @param float $duration
      * @param \Exception $exception
      *
      * @return void
      */
-    public function logRequestFail(string $method, string $fullURI, ?string $body, array $headers, ?string $statusCode, ?string $response, string $duration, \Exception $exception): void
+    public function logRequestFail(string $method, string $fullURI, ?string $body, array $headers, ?int $statusCode, ?string $response, float $duration, \Exception $exception): void
     {
         $this->log->debug('Request Body', array($body));
         $this->log->warning(
@@ -566,9 +566,9 @@ class Connection implements ConnectionInterface
             $response['effective_url'],
             $request['body'],
             $request['headers'],
-            $response['status'],
+            (int) $response['status'],
             $response['body'],
-            $response['transfer_stats']['total_time'],
+            (float) $response['transfer_stats']['total_time'],
             $exception
         );
 
@@ -606,9 +606,9 @@ class Connection implements ConnectionInterface
             $response['effective_url'],
             $request['body'],
             $request['headers'],
-            $response['status'],
+            (int) $response['status'],
             $response['body'],
-            $response['transfer_stats']['total_time'],
+            (float) $response['transfer_stats']['total_time'],
             $exception
         );
 

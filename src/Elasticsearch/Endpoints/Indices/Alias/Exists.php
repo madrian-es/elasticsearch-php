@@ -24,7 +24,7 @@ class Exists extends AbstractEndpoint
      */
     private $name;
 
-    public function setName(string $name): Exists
+    public function setName(?string $name): Exists
     {
         if (isset($name) !== true) {
             return $this;

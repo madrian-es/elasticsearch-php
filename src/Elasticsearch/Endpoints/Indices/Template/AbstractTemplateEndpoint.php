@@ -23,7 +23,7 @@ abstract class AbstractTemplateEndpoint extends AbstractEndpoint
     /**
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(?string $name)
     {
         $this->name = $name;
 

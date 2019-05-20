@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class SearchTemplate extends AbstractEndpoint
 {
-    public function setBody(array $body): SearchTemplate
+    public function setBody(?array $body): SearchTemplate
     {
         if (isset($body) !== true) {
             return $this;

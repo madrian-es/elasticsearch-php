@@ -48,7 +48,7 @@ class Stats extends AbstractNodesEndpoint
         return $this;
     }
 
-    public function setIndexMetric(string $indexMetric): Stats
+    public function setIndexMetric($indexMetric): Stats
     {
         if (isset($indexMetric) !== true) {
             return $this;

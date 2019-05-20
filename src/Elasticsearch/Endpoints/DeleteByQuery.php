@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class DeleteByQuery extends AbstractEndpoint
 {
-    public function setBody(array $body): DeleteByQuery
+    public function setBody(?array $body): DeleteByQuery
     {
         if (isset($body) !== true) {
             return $this;

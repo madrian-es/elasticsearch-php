@@ -21,7 +21,7 @@ class Put extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setBody(array $body): Put
+    public function setBody(?array $body): Put
     {
         if (isset($body) !== true) {
             return $this;

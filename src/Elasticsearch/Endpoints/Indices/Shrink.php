@@ -26,7 +26,7 @@ class Shrink extends AbstractEndpoint
      */
     private $target;
 
-    public function setBody(array $body): Shrink
+    public function setBody(?array $body): Shrink
     {
         if (isset($body) !== true) {
             return $this;
