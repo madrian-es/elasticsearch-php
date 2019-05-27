@@ -525,7 +525,11 @@ class Client
         $type = $this->extractArgument($params, 'type');
 
         //manually make this verbose so we can check status code
-        $params['client']['verbose'] = true;
+        $clientOptions = [
+            'client' => [
+                'verbose' => true
+            ]
+        ];
 
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -534,7 +538,9 @@ class Client
         $endpoint = $endpointBuilder('Exists');
         $endpoint->setID($id)
                  ->setIndex($index)
-                 ->setType($type);
+                 ->setType($type)
+                 ->setOptions($clientOptions);
+
         $endpoint->setParams($params);
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);

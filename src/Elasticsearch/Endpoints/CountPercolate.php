@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class CountPercolate extends AbstractEndpoint
 {
-    public function setBody(?array $body): CountPercolate
+    public function setBody($body): CountPercolate
     {
         if (isset($body) !== true) {
             return $this;

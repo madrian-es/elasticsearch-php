@@ -41,7 +41,7 @@ class Rollover extends AbstractEndpoint
         return $this;
     }
 
-    public function setBody(?array $body): Rollover
+    public function setBody($body): Rollover
     {
         if (isset($body) !== true) {
             return $this;

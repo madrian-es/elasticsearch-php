@@ -21,8 +21,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function aliases(array $params = []): array
+    public function aliases(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
 
@@ -44,8 +45,9 @@ class CatNamespace extends AbstractNamespace
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
+     * @return callable|array
      */
-    public function allocation(array $params = []): array
+    public function allocation(array $params = [])
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 
@@ -66,8 +68,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function count(array $params = []): array
+    public function count(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -89,8 +92,9 @@ class CatNamespace extends AbstractNamespace
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['ts']             = (bool) Set to false to disable timestamping
+     * @return callable|array
      */
-    public function health(array $params = []): array
+    public function health(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -104,8 +108,9 @@ class CatNamespace extends AbstractNamespace
 
     /**
      * $params['help'] = (bool) Return help information
+     * @return callable|array
      */
-    public function help(array $params = []): array
+    public function help(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -125,8 +130,9 @@ class CatNamespace extends AbstractNamespace
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
      *        ['pri']            = (bool) Set to true to return stats only for primary shards
+     * @return callable|array
      */
-    public function indices(array $params = []): array
+    public function indices(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -147,8 +153,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function master(array $params = []): array
+    public function master(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -166,8 +173,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function nodes(array $params = []): array
+    public function nodes(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -185,8 +193,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function nodeAttrs(array $params = []): array
+    public function nodeAttrs(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -204,8 +213,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function pendingTasks(array $params = []): array
+    public function pendingTasks(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -224,8 +234,9 @@ class CatNamespace extends AbstractNamespace
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
+     * @return callable|array
      */
-    public function recovery(array $params = []): array
+    public function recovery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -246,8 +257,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function repositories(array $params = []): array
+    public function repositories(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -266,8 +278,9 @@ class CatNamespace extends AbstractNamespace
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
+     * @return callable|array
      */
-    public function shards(array $params = []): array
+    public function shards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -290,8 +303,9 @@ class CatNamespace extends AbstractNamespace
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
      *        ['repository']     = (string) Name of repository from which to fetch the snapshot information
+     * @return callable|array
      */
-    public function snapshots(array $params = []): array
+    public function snapshots(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -314,8 +328,9 @@ class CatNamespace extends AbstractNamespace
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['full_id']        = (bool) Enables displaying the complete node ids
      *        ['size']           = (enum) The multiplier in which to display values ([ "", "k", "m", "g", "t", "p" ])
+     * @return callable|array
      */
-    public function threadPool(array $params = []): array
+    public function threadPool(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -338,8 +353,9 @@ class CatNamespace extends AbstractNamespace
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
      *        ['fields']         = (list) A comma-separated list of fields to return the fielddata size
+     * @return callable|array
      */
-    public function fielddata(array $params = []): array
+    public function fielddata(array $params = [])
     {
         $fields = $this->extractArgument($params, 'fields');
 
@@ -360,8 +376,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function plugins(array $params = []): array
+    public function plugins(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -377,8 +394,9 @@ class CatNamespace extends AbstractNamespace
      * $params['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function segments(array $params = []): array
+    public function segments(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -404,8 +422,9 @@ class CatNamespace extends AbstractNamespace
      *        ['h']              = (list) Comma-separated list of column names to display
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
+     * @return callable|array
      */
-    public function tasks(array $params = []): array
+    public function tasks(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -424,8 +443,9 @@ class CatNamespace extends AbstractNamespace
      *        ['help']           = (bool) Return help information
      *        ['v']              = (bool) Verbose mode. Display column headers
      *        ['bytes']          = (enum) The unit in which to display byte values
+     * @return callable|array
      */
-    public function templates(array $params = []): array
+    public function templates(array $params = [])
     {
         $name = $this->extractArgument($params, 'name');
 

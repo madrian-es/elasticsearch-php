@@ -21,7 +21,7 @@ class Put extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setBody(?array $body): Put
+    public function setBody($body): Put
     {
         if (isset($body) !== true) {
             return $this;
@@ -74,7 +74,7 @@ class Put extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new Exceptions\RuntimeException('Body is required for Put Mapping');

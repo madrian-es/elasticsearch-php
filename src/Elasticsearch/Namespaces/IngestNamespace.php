@@ -24,8 +24,9 @@ class IngestNamespace extends AbstractNamespace
     /**
      * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
      *        ['timeout']                    = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function deletePipeline(array $params = []): array
+    public function deletePipeline(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -41,9 +42,10 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
+     * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * @return callable|array
      */
-    public function getPipeline(array $params = []): array
+    public function getPipeline(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -61,8 +63,9 @@ class IngestNamespace extends AbstractNamespace
     /**
      * $params['master_timeout']             = (time) Explicit operation timeout for connection to master node
      *        ['timeout']                    = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function putPipeline(array $params = []): array
+    public function putPipeline(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
         $id = $this->extractArgument($params, 'id');
@@ -81,8 +84,9 @@ class IngestNamespace extends AbstractNamespace
 
     /**
      * $params['verbose'] = (bool) Verbose mode. Display data output for each processor in executed pipeline
+     * @return callable|array
      */
-    public function simulate(array $params = []): array
+    public function simulate(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
         $id = $this->extractArgument($params, 'id');
@@ -100,9 +104,9 @@ class IngestNamespace extends AbstractNamespace
     }
 
     /**
-     * $params[]
+     * @return callable|array
      */
-    public function processorGrok(array $params = []): array
+    public function processorGrok(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;

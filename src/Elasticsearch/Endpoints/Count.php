@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Count extends AbstractEndpoint
 {
-    public function setBody(?array $body): Count
+    public function setBody($body): Count
     {
         if (isset($body) !== true) {
             return $this;
@@ -36,8 +36,6 @@ class Count extends AbstractEndpoint
 
         if (isset($index) === true && isset($type) === true) {
             $uri = "/$index/$type/_count";
-        } elseif (isset($type) === true) {
-            $uri = "/_all/$type/_count";
         } elseif (isset($index) === true) {
             $uri = "/$index/_count";
         }
@@ -49,20 +47,18 @@ class Count extends AbstractEndpoint
     {
         return [
             'ignore_unavailable',
+            'ignore_throttled',
             'allow_no_indices',
             'expand_wildcards',
             'min_score',
             'preference',
             'routing',
-            'source',
             'q',
             'df',
             'default_operator',
             'analyzer',
-            'lowercase_expanded_terms',
             'analyze_wildcard',
             'lenient',
-            'lowercase_expanded_terms',
             'terminate_after'
         ];
     }

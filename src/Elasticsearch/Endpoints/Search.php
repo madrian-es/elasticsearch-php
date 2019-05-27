@@ -73,9 +73,7 @@ class Search extends AbstractEndpoint
             'sort',
             'source',
             '_source',
-            '_source_include',
             '_source_includes',
-            '_source_exclude',
             '_source_excludes',
             'stats',
             'suggest_field',
@@ -93,7 +91,8 @@ class Search extends AbstractEndpoint
             'typed_keys',
             'pre_filter_shard_size',
             'rest_total_hits_as_int',
-            'seq_no_primary_term'
+            'seq_no_primary_term',
+            'track_total_hits'
         ];
     }
 

@@ -20,8 +20,9 @@ class TasksNamespace extends AbstractNamespace
 {
     /**
      * $params['wait_for_completion'] = (bool) Wait for the matching tasks to complete (default: false)
+     * @return callable|array
      */
-    public function get(array $params = []): array
+    public function get(array $params = [])
     {
         $id = $this->extractArgument($params, 'task_id');
 
@@ -44,8 +45,9 @@ class TasksNamespace extends AbstractNamespace
      *        ['detailed'] = (bool) Return detailed task information (default: false)
      *        ['wait_for_completion'] = (bool) Wait for the matching tasks to complete (default: false)
      *        ['group_by'] = (enum) Group tasks by nodes or parent/child relationships
+     * @return callable|array
      */
-    public function tasksList(array $params = []): array
+    public function tasksList(array $params = [])
     {
 
         /** @var callable $endpointBuilder */
@@ -63,8 +65,9 @@ class TasksNamespace extends AbstractNamespace
      *        ['actions'] = (list) A comma-separated list of actions that should be cancelled. Leave empty to cancel all.
      *        ['parent_node'] = (string) Cancel tasks with specified parent node
      *        ['parent_task'] = (string) Cancel tasks with specified parent task id (node_id:task_number). Set to -1 to cancel all.
+     * @return callable|array
      */
-    public function cancel(array $params = []): array
+    public function cancel(array $params = [])
     {
         $id = $this->extractArgument($params, 'id');
 

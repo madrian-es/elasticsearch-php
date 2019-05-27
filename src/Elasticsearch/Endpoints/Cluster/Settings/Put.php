@@ -18,7 +18,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Put extends AbstractEndpoint
 {
-    public function setBody(?array $body): Put
+    public function setBody($body): Put
     {
         if (isset($body) !== true) {
             return $this;

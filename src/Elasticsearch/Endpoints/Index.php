@@ -20,7 +20,7 @@ class Index extends AbstractEndpoint
     /** @var bool  */
     private $createIfAbsent = false;
 
-    public function setBody(?array $body): Index
+    public function setBody($body): Index
     {
         $this->body = $body;
 
@@ -45,15 +45,9 @@ class Index extends AbstractEndpoint
             );
         }
 
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Index'
-            );
-        }
-
         $id    = $this->id;
         $index = $this->index;
-        $type  = $this->type;
+        $type  = $this->type ?? '_doc';
         $uri   = "/$index/$type";
 
         if (isset($id) === true) {
@@ -65,21 +59,16 @@ class Index extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'consistency',
+            'wait_for_active_shards',
             'op_type',
             'parent',
-            'percolate',
             'refresh',
-            'replication',
             'routing',
             'timeout',
-            'timestamp',
-            'ttl',
             'version',
-            'version_type',
-            'pipeline',
-            'if_primary_term',
             'if_seq_no',
+            'if_primary_term',
+            'pipeline',
             'include_type_name'
         ];
     }
@@ -92,7 +81,7 @@ class Index extends AbstractEndpoint
     /**
      * @throws RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new RuntimeException('Document body must be set for index request');

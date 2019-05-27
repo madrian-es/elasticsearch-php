@@ -17,7 +17,7 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
  */
 class AllocationExplain extends AbstractEndpoint
 {
-    public function setBody(?array $body): AllocationExplain
+    public function setBody($body): AllocationExplain
     {
         if (isset($body) !== true) {
             return $this;

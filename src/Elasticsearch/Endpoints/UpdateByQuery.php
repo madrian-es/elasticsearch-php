@@ -20,7 +20,7 @@ class UpdateByQuery extends AbstractEndpoint
     /**
      * @throws Exceptions\InvalidArgumentException
      */
-    public function setBody(?array $body): UpdateByQuery
+    public function setBody($body): UpdateByQuery
     {
         if (isset($body) !== true) {
             return $this;
@@ -84,9 +84,7 @@ class UpdateByQuery extends AbstractEndpoint
             'size',
             'sort',
             '_source',
-            '_source_include',
             '_source_includes',
-            '_source_exclude',
             '_source_excludes',
             'terminate_after',
             'stats',

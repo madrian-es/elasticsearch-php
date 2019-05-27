@@ -21,7 +21,7 @@ class Update extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setBody(?array $body): Update
+    public function setBody($body): Update
     {
         if (isset($body) !== true) {
             return $this;
@@ -50,7 +50,7 @@ class Update extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new Exceptions\RuntimeException('Body is required for Update Aliases');

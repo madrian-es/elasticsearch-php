@@ -64,12 +64,9 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
             'refresh',
             'replication',
             'type',
-            'fields',
             'pipeline',
             '_source',
-            '_source_include',
             '_source_includes',
-            '_source_exclude',
             '_source_excludes',
             'pipeline',
             'seq_no_primary_term'

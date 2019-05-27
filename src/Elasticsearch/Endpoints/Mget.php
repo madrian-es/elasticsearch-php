@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Mget extends AbstractEndpoint
 {
-    public function setBody(?array $body): Mget
+    public function setBody($body): Mget
     {
         if (isset($body) !== true) {
             return $this;
@@ -53,9 +53,7 @@ class Mget extends AbstractEndpoint
             'realtime',
             'refresh',
             '_source',
-            '_source_include',
             '_source_includes',
-            '_source_exclude',
             '_source_excludes',
             'routing',
             'stored_fields'
@@ -65,7 +63,7 @@ class Mget extends AbstractEndpoint
     /**
      * @throws RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new RuntimeException('Body is required for MGet');

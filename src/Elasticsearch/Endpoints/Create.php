@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Create extends AbstractEndpoint
 {
-    public function setBody(?array $body): Create
+    public function setBody($body): Create
     {
         if (isset($body) !== true) {
             return $this;
@@ -85,7 +85,7 @@ class Create extends AbstractEndpoint
     /**
      * @throws RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new RuntimeException('Document body must be set for create request');

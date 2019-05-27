@@ -25,7 +25,7 @@ class Create extends AbstractEndpoint
      */
     private $repository;
 
-    public function setBody(?array $body): Create
+    public function setBody($body): Create
     {
         if (isset($body) !== true) {
             return $this;
@@ -79,7 +79,7 @@ class Create extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body) !== true) {
             throw new Exceptions\RuntimeException('Body is required for Create Repository');

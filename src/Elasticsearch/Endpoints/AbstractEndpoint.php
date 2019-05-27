@@ -71,7 +71,6 @@ abstract class AbstractEndpoint
     {
         $this->checkUserParams($params);
         $params = $this->convertCustom($params);
-        $this->extractOptions($params);
         $this->params = $this->convertArraysToStrings($params);
 
         return $this;
@@ -85,6 +84,23 @@ abstract class AbstractEndpoint
     public function getOptions(): array
     {
         return $this->options;
+    }
+
+    public function setOptions(array $options)
+    {
+        $this->options = $options;
+
+        $ignore = isset($this->options['client']['ignore']) ? $this->options['client']['ignore'] : null;
+        if (isset($ignore) === true) {
+            if (is_string($ignore)) {
+                $this->options['client']['ignore'] = explode(",", $ignore);
+            } elseif (is_array($ignore)) {
+                $this->options['client']['ignore'] = $ignore;
+            } else {
+                $this->options['client']['ignore'] = [$ignore];
+            }
+        }
+        return $this;
     }
 
     public function getIndex(): ?string
@@ -111,12 +127,16 @@ abstract class AbstractEndpoint
         return $this;
     }
 
+    /**
+     * @deprecated
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
+     * @deprecated
      * @return $this
      */
     public function setType(?string $type)
@@ -165,7 +185,7 @@ abstract class AbstractEndpoint
 
     protected function getOptionalURI(string $endpoint): string
     {
-        $uri = array();
+        $uri = [];
         $uri[] = $this->getOptionalIndex();
         $uri[] = $this->getOptionalType();
         $uri[] = $endpoint;
@@ -203,7 +223,10 @@ abstract class AbstractEndpoint
             return; //no params, just return.
         }
 
-        $whitelist = array_merge($this->getParamWhitelist(), array('client', 'custom', 'filter_path', 'human'));
+        $whitelist = array_merge(
+            $this->getParamWhitelist(),
+            [ 'pretty', 'human', 'error_trace', 'source', 'filter_path' ]
+        );
 
         $invalid = array_diff(array_keys($params), $whitelist);
         if (count($invalid) > 0) {
@@ -214,29 +237,6 @@ abstract class AbstractEndpoint
                 implode('", "', $invalid),
                 implode('", "', $whitelist)
             ));
-        }
-    }
-
-    /**
-     * @param array $params  Note: this is passed by-reference!
-     */
-    private function extractOptions(array &$params): void
-    {
-        // Extract out client options, then start transforming
-        if (isset($params['client']) === true) {
-            $this->options['client'] = $params['client'];
-            unset($params['client']);
-        }
-
-        $ignore = isset($this->options['client']['ignore']) ? $this->options['client']['ignore'] : null;
-        if (isset($ignore) === true) {
-            if (is_string($ignore)) {
-                $this->options['client']['ignore'] = explode(",", $ignore);
-            } elseif (is_array($ignore)) {
-                $this->options['client']['ignore'] = $ignore;
-            } else {
-                $this->options['client']['ignore'] = [$ignore];
-            }
         }
     }
 

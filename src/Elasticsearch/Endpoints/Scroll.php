@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions;
  */
 class Scroll extends AbstractEndpoint
 {
-    public function setBody(?array $body): Scroll
+    public function setBody($body): Scroll
     {
         if (isset($body) !== true) {
             return $this;
@@ -28,7 +28,7 @@ class Scroll extends AbstractEndpoint
         return $this;
     }
 
-    public function getBody(): array
+    public function getBody()
     {
         return $this->body;
     }

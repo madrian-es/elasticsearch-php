@@ -17,7 +17,7 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Percolate extends AbstractEndpoint
 {
-    public function setBody(?array $body): Percolate
+    public function setBody($body): Percolate
     {
         if (isset($body) !== true) {
             return $this;
@@ -72,7 +72,7 @@ class Percolate extends AbstractEndpoint
         ];
     }
 
-    public function getBody(): array
+    public function getBody()
     {
         return $this->body;
     }

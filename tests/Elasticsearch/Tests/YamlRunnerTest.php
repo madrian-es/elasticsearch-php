@@ -405,9 +405,9 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
             return $this->executeAsyncExistRequest($caller, $method, $endpointParams, $expectedError, $expectedWarnings, $testName);
         }
         // Convert object to array
-        $endpointParams = json_decode(json_encode($endpointParams), true);
+        //$endpointParams = json_decode(json_encode($endpointParams), true);
 
-        return $this->executeRequest($caller, $method, $endpointParams, $expectedError, $expectedWarnings, $testName);
+        return $this->executeRequest($caller, $method, (array) $endpointParams, $expectedError, $expectedWarnings, $testName);
     }
 
     /**
@@ -442,8 +442,9 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
             }
 
             $msg = $exception->getMessage()
-                ."\nException in ".get_class($caller)." with [$method].\n Context:\n"
-                .var_export($endpointParams, true);
+                . "\nException in " . get_class($caller) . " with [$method].\n Context:\n"
+                . var_export($endpointParams, true)
+                . "\nTest name: $testName\n";
             throw new \Exception($msg, 0, $exception);
         }
     }
@@ -1001,7 +1002,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
             $documentString = str_replace(" teardown:", "teardown:", $documentString);
             try {
                 if (!$setupSkip) {
-                    $documentParsed = $this->yaml->parse($documentString, false, false, true);
+                    $documentParsed = $this->yaml->parse($documentString, Yaml::PARSE_OBJECT_FOR_MAP);
                     $skip = false;
                 }
             } catch (ParseException $exception) {

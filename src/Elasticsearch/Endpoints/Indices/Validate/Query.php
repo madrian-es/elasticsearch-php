@@ -21,7 +21,7 @@ class Query extends AbstractEndpoint
     /**
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
-    public function setBody(?array $body): Query
+    public function setBody($body): Query
     {
         if (isset($body) !== true) {
             return $this;

@@ -21,7 +21,7 @@ class RenderSearchTemplate extends AbstractEndpoint
     /**
      * @return $this
      */
-    public function setBody(?array $body): RenderSearchTemplate
+    public function setBody($body): RenderSearchTemplate
     {
         if (isset($body) !== true) {
             return $this;
@@ -49,7 +49,7 @@ class RenderSearchTemplate extends AbstractEndpoint
         return [];
     }
 
-    public function getBody(): array
+    public function getBody()
     {
         return $this->body;
     }

@@ -40,7 +40,7 @@ class ClearScroll extends AbstractEndpoint
         return "/_search/scroll/";
     }
 
-    public function setBody(?array $body): ClearScroll
+    public function setBody($body): ClearScroll
     {
         if (isset($body) !== true) {
             return $this;
@@ -51,7 +51,7 @@ class ClearScroll extends AbstractEndpoint
         return $this;
     }
 
-    public function getBody(): array
+    public function getBody()
     {
         if (isset($this->body)) {
             return $this->body;

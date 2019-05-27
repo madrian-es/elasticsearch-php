@@ -18,8 +18,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['wait_for_completion'] = (bool) Should this request wait until the operation has completed before returning
+     * @return callable|array
      */
-    public function create(array $params = []): array
+    public function create(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -41,8 +42,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['timeout'] = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function createRepository(array $params = []): array
+    public function createRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $body = $this->extractArgument($params, 'body');
@@ -61,8 +63,9 @@ class SnapshotNamespace extends AbstractNamespace
 
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * @return callable|array
      */
-    public function delete(array $params = []): array
+    public function delete(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -82,8 +85,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['timeout'] = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function deleteRepository(array $params = []): array
+    public function deleteRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -100,8 +104,9 @@ class SnapshotNamespace extends AbstractNamespace
 
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * @return callable|array
      */
-    public function get(array $params = []): array
+    public function get(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -121,8 +126,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['timeout'] = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function getRepository(array $params = []): array
+    public function getRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
 
@@ -140,8 +146,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['wait_for_completion'] = (bool) Should this request wait until the operation has completed before returning
+     * @return callable|array
      */
-    public function restore(array $params = []): array
+    public function restore(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -162,8 +169,9 @@ class SnapshotNamespace extends AbstractNamespace
 
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
+     * @return callable|array
      */
-    public function status(array $params = []): array
+    public function status(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
         $snapshot = $this->extractArgument($params, 'snapshot');
@@ -183,8 +191,9 @@ class SnapshotNamespace extends AbstractNamespace
     /**
      * $params['master_timeout'] = (time) Explicit operation timeout for connection to master node
      *        ['timeout'] = (time) Explicit operation timeout
+     * @return callable|array
      */
-    public function verifyRepository(array $params = []): array
+    public function verifyRepository(array $params = [])
     {
         $repository = $this->extractArgument($params, 'repository');
 
