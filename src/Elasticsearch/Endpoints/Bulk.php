@@ -54,22 +54,29 @@ class Bulk extends AbstractEndpoint implements BulkEndpointInterface
 
     public function getURI(): string
     {
-        return $this->getOptionalURI('_bulk');
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
+        if (isset($index) && isset($type)) {
+            return "/$index/$type/_bulk";
+        }
+        if (isset($index)) {
+            return "/$index/_bulk";
+        }
+        return "/_bulk";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'consistency',
+            'wait_for_active_shards',
             'refresh',
-            'replication',
+            'routing',
+            'timeout',
             'type',
-            'pipeline',
             '_source',
             '_source_includes',
             '_source_excludes',
-            'pipeline',
-            'seq_no_primary_term'
+            'pipeline'
         ];
     }
 

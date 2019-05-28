@@ -32,37 +32,25 @@ class Delete extends AbstractEndpoint
                 'index is required for Delete'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Delete'
-            );
-        }
         $id = $this->id;
         $index = $this->index;
-        $type = $this->type;
-        $uri   = "/$index/$type/$id";
+        $type = $this->type ?? '_doc';
 
-        if (isset($index) === true && isset($type) === true && isset($id) === true) {
-            $uri = "/$index/$type/$id";
-        }
-
-        return $uri;
+        return "/$index/$type/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'consistency',
+            'wait_for_active_shards',
             'parent',
             'refresh',
-            'replication',
             'routing',
             'timeout',
-            'version',
-            'version_type',
-            'include_type_name',
+            'if_seq_no',
             'if_primary_term',
-            'if_seq_no'
+            'version',
+            'version_type'
         ];
     }
 

@@ -50,19 +50,16 @@ class MsearchTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $type = $this->type;
-        $uri   = "/_msearch/template";
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
 
-        if (isset($index) === true && isset($type) === true) {
-            $uri = "/$index/$type/_msearch/template";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_msearch/template";
-        } elseif (isset($type) === true) {
-            $uri = "/_all/$type/_msearch/template";
+        if (isset($index) && isset($type)) {
+            return "/$index/$type/_msearch/template";
         }
-
-        return $uri;
+        if (isset($index)) {
+            return "/$index/_msearch/template";
+        }
+        return "/_msearch/template";
     }
 
     public function getParamWhitelist(): array
@@ -70,7 +67,9 @@ class MsearchTemplate extends AbstractEndpoint
         return [
             'search_type',
             'typed_keys',
-            'max_concurrent_searches'
+            'max_concurrent_searches',
+            'rest_total_hits_as_int',
+            'ccs_minimize_roundtrips'
         ];
     }
 

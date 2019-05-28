@@ -39,13 +39,6 @@ class Create extends AbstractEndpoint
                 'index is required for Create'
             );
         }
-
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Create'
-            );
-        }
-
         if (isset($this->id) !== true) {
             throw new RuntimeException(
                 'id is required for Create'
@@ -54,23 +47,22 @@ class Create extends AbstractEndpoint
 
         $id    = $this->id;
         $index = $this->index;
-        $type  = $this->type;
-        return "/$index/$type/$id/_create";
+        $type  = $this->type ?? null;
+
+        if (isset($type)) {
+            return "/$index/$type/$id/_create";
+        }
+        return "/$index/_create/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'consistency',
-            'op_type',
+            'wait_for_active_shards',
             'parent',
-            'percolate',
             'refresh',
-            'replication',
             'routing',
             'timeout',
-            'timestamp',
-            'ttl',
             'version',
             'version_type',
             'pipeline'

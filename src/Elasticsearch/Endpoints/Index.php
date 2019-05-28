@@ -17,20 +17,9 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Index extends AbstractEndpoint
 {
-    /** @var bool  */
-    private $createIfAbsent = false;
-
     public function setBody($body): Index
     {
         $this->body = $body;
-
-        return $this;
-    }
-
-    public function createIfAbsent(): Index
-    {
-        $this->createIfAbsent = true;
-
         return $this;
     }
 
@@ -45,15 +34,14 @@ class Index extends AbstractEndpoint
             );
         }
 
-        $id    = $this->id;
+        $id    = $this->id ?? null;
         $index = $this->index;
         $type  = $this->type ?? '_doc';
-        $uri   = "/$index/$type";
 
-        if (isset($id) === true) {
-            $uri = "/$index/$type/$id";
+        if (isset($id)) {
+            return "/$index/$type/$id";
         }
-        return $uri;
+        return "/$index/$type";
     }
 
     public function getParamWhitelist(): array
@@ -66,16 +54,16 @@ class Index extends AbstractEndpoint
             'routing',
             'timeout',
             'version',
+            'version_type',
             'if_seq_no',
             'if_primary_term',
-            'pipeline',
-            'include_type_name'
+            'pipeline'
         ];
     }
 
     public function getMethod(): string
     {
-        return isset($this->id) ? 'PUT' : 'POST';
+        return 'POST';
     }
 
     /**

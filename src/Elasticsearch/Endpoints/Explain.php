@@ -43,19 +43,13 @@ class Explain extends AbstractEndpoint
                 'index is required for Explain'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Explain'
-            );
-        }
         $id = $this->id;
         $index = $this->index;
-        $type = $this->type;
-        $uri   = "/$index/$type/$id/_explain";
+        $type = $this->type ?? null;
 
-        if (isset($index) === true && isset($type) === true && isset($id) === true) {
-            $uri = "/$index/$type/$id/_explain";
-        }
+        $uri = isset($type)
+            ? "/$index/$type/$id/_explain"
+            : "/$index/_explain/$id";
 
         return $uri;
     }
@@ -67,18 +61,15 @@ class Explain extends AbstractEndpoint
             'analyzer',
             'default_operator',
             'df',
-            'fields',
+            'stored_fields',
             'lenient',
-            'lowercase_expanded_terms',
             'parent',
             'preference',
             'q',
             'routing',
-            'source',
             '_source',
-            '_source_includes',
             '_source_excludes',
-            'stored_fields'
+            '_source_includes'
         ];
     }
 

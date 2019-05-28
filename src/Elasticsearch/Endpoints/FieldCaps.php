@@ -18,25 +18,15 @@ use Elasticsearch\Common\Exceptions;
  */
 class FieldCaps extends AbstractEndpoint
 {
-    public function setBody($body): FieldCaps
-    {
-        if (isset($body) !== true) {
-            return $this;
-        }
-
-        $this->body = $body;
-        return $this;
-    }
 
     public function getURI(): string
     {
-        $index = $this->index;
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
+        if (isset($index)) {
             return "/$index/_field_caps";
-        } else {
-            return "/_field_caps";
         }
+        return "/_field_caps";
     }
 
     public function getParamWhitelist(): array

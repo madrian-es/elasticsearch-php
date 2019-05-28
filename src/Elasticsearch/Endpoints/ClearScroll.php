@@ -37,6 +37,10 @@ class ClearScroll extends AbstractEndpoint
 
     public function getURI(): string
     {
+        $scrollId = $this->scrollId ?? null;
+        if (isset($scrollId)) {
+            return "/_search/scroll/$scrollId";
+        }
         return "/_search/scroll/";
     }
 

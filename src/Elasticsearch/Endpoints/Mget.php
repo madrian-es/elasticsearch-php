@@ -30,33 +30,29 @@ class Mget extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $type = $this->type;
-        $uri   = "/_mget";
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
 
-        if (isset($index) === true && isset($type) === true) {
-            $uri = "/$index/$type/_mget";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_mget";
-        } elseif (isset($type) === true) {
-            $uri = "/_all/$type/_mget";
+        if (isset($index) && isset($type)) {
+            return "/$index/$type/_mget";
         }
-
-        return $uri;
+        if (isset($index)) {
+            return "/$index/_mget";
+        }
+        return '/_mget';
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'fields',
+            'stored_fields',
             'preference',
             'realtime',
             'refresh',
-            '_source',
-            '_source_includes',
-            '_source_excludes',
             'routing',
-            'stored_fields'
+            '_source',
+            '_source_excludes',
+            '_source_includes'
         ];
     }
 
@@ -74,6 +70,6 @@ class Mget extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'POST';
+        return 'GET';
     }
 }

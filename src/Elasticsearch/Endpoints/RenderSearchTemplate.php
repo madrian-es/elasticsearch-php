@@ -33,15 +33,12 @@ class RenderSearchTemplate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $id = $this->id;
+        $id = $this->id ?? null;
 
-        $uri   = "/_render/template";
-
-        if (isset($id) === true) {
-            $uri = "/_render/template/$id";
+        if (isset($id)) {
+            return "/_render/template/$id";
         }
-
-        return $uri;
+        return "/_render/template";
     }
 
     public function getParamWhitelist(): array

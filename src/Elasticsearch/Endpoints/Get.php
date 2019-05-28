@@ -17,26 +17,6 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class Get extends AbstractEndpoint
 {
-    /** @var bool  */
-    private $returnOnlySource = false;
-
-    /** @var bool  */
-    private $checkOnlyExistance = false;
-
-    public function returnOnlySource(): Get
-    {
-        $this->returnOnlySource = true;
-
-        return $this;
-    }
-
-    public function checkOnlyExistance(): Get
-    {
-        $this->checkOnlyExistance = true;
-
-        return $this;
-    }
-
     /**
      * @throws RuntimeException
      */
@@ -52,48 +32,34 @@ class Get extends AbstractEndpoint
                 'index is required for Get'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Get'
-            );
-        }
         $id = $this->id;
         $index = $this->index;
-        $type = $this->type;
-        $uri   = "/$index/$type/$id";
+        $type = $this->type ?? '_doc';
 
-        if (isset($index) === true && isset($type) === true && isset($id) === true) {
-            $uri = "/$index/$type/$id";
-        }
-
-        if ($this->returnOnlySource === true) {
-            $uri .= '/_source';
-        }
-
-        return $uri;
+        return "/$index/$type/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'fields',
+            'stored_fields',
             'parent',
             'preference',
             'realtime',
             'refresh',
             'routing',
             '_source',
-            '_source_includes',
             '_source_excludes',
+            '_source_exclude',
+            '_source_includes',
+            '_source_include',
             'version',
-            'version_type',
-            'stored_fields',
-            'include_type_name'
+            'version_type'
         ];
     }
 
     public function getMethod(): string
     {
-        return $this->checkOnlyExistance ? 'HEAD' : 'GET';
+        return 'GET';
     }
 }

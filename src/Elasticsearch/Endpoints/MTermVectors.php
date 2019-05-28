@@ -28,7 +28,16 @@ class MTermVectors extends AbstractEndpoint
 
     public function getURI(): string
     {
-        return $this->getOptionalURI('_mtermvectors');
+        $type = $this->type ?? null;
+        $index = $this->index ?? null;
+
+        if (isset($type) && isset($index)) {
+            return "/$index/$type/_mtermvectors";
+        }
+        if (isset($index)) {
+            return "/$index/_mtermvectors";
+        }
+        return "/_mtermvectors";
     }
 
     public function getParamWhitelist(): array
@@ -44,7 +53,9 @@ class MTermVectors extends AbstractEndpoint
             'preference',
             'routing',
             'parent',
-            'realtime'
+            'realtime',
+            'version',
+            'version_type'
         ];
     }
 

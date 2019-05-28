@@ -17,19 +17,12 @@ class SearchShards extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $type = $this->type;
-        $uri   = "/_search_shards";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true && isset($type) === true) {
-            $uri = "/$index/$type/_search_shards";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_search_shards";
-        } elseif (isset($type) === true) {
-            $uri = "/_all/$type/_search_shards";
+        if (isset($index)) {
+            return "/$index/_search_shards";
         }
-
-        return $uri;
+        return "/_search_shards";
     }
 
     public function getParamWhitelist(): array

@@ -17,54 +17,25 @@ use Elasticsearch\Common\Exceptions;
  */
 class Scroll extends AbstractEndpoint
 {
-    public function setBody($body): Scroll
-    {
-        if (isset($body) !== true) {
-            return $this;
-        }
-
-        $this->body = $body;
-
-        return $this;
-    }
-
-    public function getBody()
-    {
-        return $this->body;
-    }
-
     /**
      * @return $this
      */
-    public function setScroll(string $scroll): Scroll
+    public function setScrollId(string $scrollId): Scroll
     {
-        if (isset($scroll) !== true) {
-            return $this;
-        }
-
-        $this->body['scroll'] = $scroll;
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function setScrollId(string $scroll_id): Scroll
-    {
-        if (isset($scroll_id) !== true) {
-            return $this;
-        }
-
-        $this->body['scroll_id'] = $scroll_id;
+        $this->scrollId = $scrollId;
 
         return $this;
     }
 
     public function getURI(): string
     {
-        $uri   = "/_search/scroll";
-        return $uri;
+        $scrollId = $this->scrollId ?? null;
+
+        if (isset($scrollId)) {
+            return "/_search/scroll/$scrollId";
+        }
+
+        return "/_search/scroll";
     }
 
     public function getParamWhitelist(): array

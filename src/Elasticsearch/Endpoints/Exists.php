@@ -32,33 +32,27 @@ class Exists extends AbstractEndpoint
                 'index is required for Exists'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Exists'
-            );
-        }
         $id = $this->id;
         $index = $this->index;
-        $type = $this->type;
-        $uri   = "/$index/$type/$id";
+        $type = $this->type ?? '_doc';
 
-        if (isset($index) === true && isset($type) === true && isset($id) === true) {
-            $uri = "/$index/$type/$id";
-        }
-
-        return $uri;
+        return "/$index/$type/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'stored_fields',
             'parent',
             'preference',
             'realtime',
             'refresh',
             'routing',
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'version',
-            'stored_fields'
+            'version_type'
         ];
     }
 

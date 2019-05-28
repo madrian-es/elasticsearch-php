@@ -38,51 +38,50 @@ class DeleteByQuery extends AbstractEndpoint
                 'index is required for Deletebyquery'
             );
         }
+        $type = $this->type ?? null;
 
-        $uri = "/{$this->index}/_delete_by_query";
-        if ($this->type) {
-            $uri = "/{$this->index}/{$this->type}/_delete_by_query";
+        if (isset($type)) {
+            return "/$index/$type/_delete_by_query";
         }
-
-        return $uri;
+        return "/$index/_delete_by_query";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            '_source',
-            '_source_includes',
-            '_source_excludes',
-            'allow_no_indices',
-            'analyze_wildcard',
+
             'analyzer',
-            'conflicts',
+            'analyze_wildcard',
             'default_operator',
             'df',
-            'expand_wildcards',
             'from',
             'ignore_unavailable',
+            'allow_no_indices',
+            'conflicts',
+            'expand_wildcards',
             'lenient',
             'preference',
-            'query',
             'q',
-            'refresh',
-            'request_cache',
-            'requests_per_second',
             'routing',
             'scroll',
-            'scroll_size',
-            'search_timeout',
             'search_type',
+            'search_timeout',
             'size',
-            'slices',
             'sort',
-            'stats',
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'terminate_after',
-            'timeout',
+            'stats',
             'version',
+            'request_cache',
+            'refresh',
+            'timeout',
             'wait_for_active_shards',
+            'scroll_size',
             'wait_for_completion',
+            'requests_per_second',
+            'slices'
         ];
     }
 

@@ -114,8 +114,9 @@ class Client
 
     /**
      * @param string[] $params
+     * @return callable|array
      */
-    public function info(array $params = []): array
+    public function info(array $params = [])
     {
         /** @var callable $endpointBuilder */
         $endpointBuilder = $this->endpoints;
@@ -165,9 +166,9 @@ class Client
      *        ['_source_excludes'] = (list) A list of fields to exclude from the returned _source field
      *        ['_source_include']  = (list) A list of fields to extract and return from the _source field (deprecated in ES 6.6.0)
      *        ['_source_includes'] = (list) A list of fields to extract and return from the _source field
-     *
+     * @return callable|array
      */
-    public function get(array $params): array
+    public function get(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -196,9 +197,9 @@ class Client
      *        ['realtime']       = (boolean) Specify whether to perform the operation in realtime or search mode
      *        ['refresh']        = (boolean) Refresh the shard containing the document before performing the operation
      *        ['routing']        = (string) Specific routing value
-     *
+     * @return callable|array
      */
-    public function getSource(array $params): array
+    public function getSource(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -229,8 +230,9 @@ class Client
      *        ['routing']      = (string) Specific routing value
      *        ['timeout']      = (time) Explicit operation timeout
      *        ['version_type'] = (enum) Specific version type
+     * @return callable|array
      */
-    public function delete(array $params): array
+    public function delete(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -289,8 +291,9 @@ class Client
      *        ['version'] = (bool) Specify whether to return document version as part of a hit
      *        ['wait_for_active_shards'] = (string) Sets the number of shard copies that must be active before proceeding with the delete by query operation. Defaults to 1, meaning the primary shard only. Set to `all` for all shard copies, otherwise set to any non-negative value less than or equal to the total number of copies for the shard (number of replicas + 1)
      *        ['wait_for_completion'] = (bool) Should the request should block until the delete-by-query is complete.
+     * @return callable|array
      */
-    public function deleteByQuery(array $params = []): array
+    public function deleteByQuery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
@@ -322,8 +325,9 @@ class Client
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * @return callable|array
      */
-    public function count(array $params = []): array
+    public function count(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -334,101 +338,6 @@ class Client
 
         /** @var \Elasticsearch\Endpoints\Count $endpoint */
         $endpoint = $endpointBuilder('Count');
-        $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setBody($body);
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
-     * $params['index']              = (list) A comma-separated list of indices to restrict the results
-     *        ['type']               = (list) A comma-separated list of types to restrict the results
-     *        ['id']                 = (string) ID of document
-     *        ['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     *        ['preference']         = (string) Specify the node or shard the operation should be performed on (default: random)
-     *        ['routing']            = (string) Specific routing value
-     *        ['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-     *        ['body']               = (array) A query to restrict the results (optional)
-     *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     *        ['percolate_index']    = (string) The index to count percolate the document into. Defaults to index.
-     *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *        ['version']            = (number) Explicit version number for concurrency control
-     *        ['version_type']       = (enum) Specific version type
-     *
-     * @deprecated
-     */
-    public function countPercolate(array $params = []): array
-    {
-        $index = $this->extractArgument($params, 'index');
-        $type  = $this->extractArgument($params, 'type');
-        $id    = $this->extractArgument($params, 'id');
-        $body  = $this->extractArgument($params, 'body');
-
-        /** @var callable $endpointBuilder */
-        $endpointBuilder = $this->endpoints;
-
-        /** @var \Elasticsearch\Endpoints\CountPercolate $endpoint */
-        $endpoint = $endpointBuilder('CountPercolate');
-        $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setID($id)
-                 ->setBody($body);
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
-     * $params['index']        = (string) The name of the index with a registered percolator query (Required)
-     *        ['type']         = (string) The document type (Required)
-     *        ['prefer_local'] = (boolean) With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)
-     *        ['body']         = (array) The document (`doc`) to percolate against registered queries; optionally also a `query` to limit the percolation to specific registered queries
-     *
-     * @deprecated
-     */
-    public function percolate(array $params): array
-    {
-        $index = $this->extractArgument($params, 'index');
-        $type  = $this->extractArgument($params, 'type');
-        $id    = $this->extractArgument($params, 'id');
-        $body  = $this->extractArgument($params, 'body');
-
-        /** @var callable $endpointBuilder */
-        $endpointBuilder = $this->endpoints;
-
-        /** @var \Elasticsearch\Endpoints\Percolate $endpoint */
-        $endpoint = $endpointBuilder('Percolate');
-        $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setID($id)
-                 ->setBody($body);
-        $endpoint->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
-     * $params['index']              = (string) Default index for items which don't provide one
-     *        ['type']               = (string) Default document type for items which don't provide one
-     *        ['ignore_unavailable'] = (boolean) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     *        ['allow_no_indices']   = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-     *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @deprecated
-     */
-    public function mpercolate(array $params = []): array
-    {
-        $index = $this->extractArgument($params, 'index');
-        $type = $this->extractArgument($params, 'type');
-        $body = $this->extractArgument($params, 'body');
-
-        /** @var callable $endpointBuilder */
-        $endpointBuilder = $this->endpoints;
-
-        /** @var \Elasticsearch\Endpoints\MPercolate $endpoint */
-        $endpoint = $endpointBuilder('MPercolate');
         $endpoint->setIndex($index)
                  ->setType($type)
                  ->setBody($body);
@@ -450,8 +359,9 @@ class Client
      *        ['routing']          = (string) Specific routing value. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['parent']           = (string) Parent id of documents. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['realtime']         = (boolean) Specifies if request is real-time as opposed to near-real-time (default: true).
+     * @return callable|array
      */
-    public function termvectors(array $params = []): array
+    public function termvectors(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -486,8 +396,9 @@ class Client
      *        ['routing']          = (string) Specific routing value. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['parent']           = (string) Parent id of documents. Applies to all returned documents unless otherwise specified in body \"params\" or \"docs\".
      *        ['realtime']         = (boolean) Specifies if request is real-time as opposed to near-real-time (default: true).
+     * @return callable|array
      */
-    public function mtermvectors(array $params = []): array
+    public function mtermvectors(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type  = $this->extractArgument($params, 'type');
@@ -515,10 +426,8 @@ class Client
      *        ['realtime']   = (boolean) Specify whether to perform the operation in realtime or search mode
      *        ['refresh']    = (boolean) Refresh the shard containing the document before performing the operation
      *        ['routing']    = (string) Specific routing value
-     *
-     * @return array | boolean
      */
-    public function exists(array $params)
+    public function exists(array $params): bool
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -561,8 +470,9 @@ class Client
      *        ['_source_include'] = (list) A list of fields to extract and return from the _source field
      *        ['_source_excludes'] = (list) A list of fields to exclude from the returned _source field (deprecated in ES 6.6.0)
      *        ['_source_includes'] = (list) A list of fields to extract and return from the _source field (deprecated in ES 6.6.0)
+     * @return callable|array
      */
-    public function mget(array $params = []): array
+    public function mget(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -586,8 +496,9 @@ class Client
      *        ['type']        = (list) A comma-separated list of document types to use as default
      *        ['search_type'] = (enum) Search operation type
      *        ['body']        = (array|string) The request definitions (metadata-search request definition pairs), separated by newlines
+     * @return callable|array
      */
-    public function msearch(array $params = []): array
+    public function msearch(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -612,8 +523,9 @@ class Client
      *        ['search_type'] = (enum) Search operation type
      *        ['body']        = (array|string) The request definitions (metadata-search request definition pairs), separated by newlines
      *        ['max_concurrent_searches'] = (number) Controls the maximum number of concurrent searches the multi search api will execute
+     * @return callable|array
      */
-    public function msearchTemplate(array $params = []): array
+    public function msearchTemplate(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -647,8 +559,9 @@ class Client
      *        ['version']      = (number) Explicit version number for concurrency control
      *        ['version_type'] = (enum) Specific version type
      *        ['body']         = (array) The document
+     * @return callable|array
      */
-    public function create(array $params): array
+    public function create(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -677,8 +590,9 @@ class Client
      *        ['replication'] = (enum) Explicitly set the replication type
      *        ['fields']      = (list) Default comma-separated list of fields to return in the response for updates
      *        ['body']        = (array) The document
+     * @return callable|array
      */
-    public function bulk(array $params = []): array
+    public function bulk(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -713,8 +627,9 @@ class Client
      *        ['version']      = (number) Explicit version number for concurrency control
      *        ['version_type'] = (enum) Specific version type
      *        ['body']         = (array) The document
+     * @return callable|array
      */
-    public function index(array $params): array
+    public function index(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -742,8 +657,9 @@ class Client
      *        ['wait_for_completion'] = (boolean) Should the request should block until the reindex is complete
      *        ['requests_per_second'] = (float) The throttle for this request in sub-requests per second. 0 means set no throttle
      *        ['body']                = (array) The search definition using the Query DSL and the prototype for the index request (Required)
+     * @return callable|array
      */
-    public function reindex(array $params): array
+    public function reindex(array $params)
     {
         $body = $this->extractArgument($params, 'body');
 
@@ -779,8 +695,9 @@ class Client
      *        ['_source_excludes']          = (list) A list of fields to exclude from the returned _source field
      *        ['_source_includes']          = (list) A list of fields to extract and return from the _source field
      *        ['body']                     = (string) The URL-encoded query definition (instead of using the request body)
+     * @return callable|array
      */
-    public function explain(array $params): array
+    public function explain(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -839,12 +756,9 @@ class Client
      *        ['terminate_after']          = (number) The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early.
      *        ['version']                  = (boolean) Specify whether to return document version as part of a hit
      *        ['body']                     = (array|string) The search definition using the Query DSL
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
+     * @return callable|array
      */
-    public function search(array $params = []): array
+    public function search(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -872,12 +786,9 @@ class Client
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     *
-     * @param array $params Associative array of parameters
-     *
-     * @return array
+     * @return callable|array
      */
-    public function searchShards(array $params = []): array
+    public function searchShards(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -897,8 +808,9 @@ class Client
     /**
      * $params['index']                    = (list) A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices
      *        ['type']                     = (list) A comma-separated list of document types to search; leave empty to perform the operation on all types
+     * @return callable|array
      */
-    public function searchTemplate(array $params = []): array
+    public function searchTemplate(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
@@ -921,8 +833,9 @@ class Client
      * $params['scroll_id'] = (string) The scroll ID for scrolled search
      *        ['scroll']    = (duration) Specify how long a consistent view of the index should be maintained for scrolled search
      *        ['body']      = (string) The scroll ID for scrolled search
+     * @return callable|array
      */
-    public function scroll(array $params = []): array
+    public function scroll(array $params = [])
     {
         $scrollID = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -945,8 +858,9 @@ class Client
      * $params['scroll_id'] = (string) The scroll ID for scrolled search
      *        ['scroll']    = (duration) Specify how long a consistent view of the index should be maintained for scrolled search
      *        ['body']      = (string) The scroll ID for scrolled search
+     * @return callable|array
      */
-    public function clearScroll(array $params = []): array
+    public function clearScroll(array $params = [])
     {
         $scrollID = $this->extractArgument($params, 'scroll_id');
         $body = $this->extractArgument($params, 'body');
@@ -981,8 +895,9 @@ class Client
      *        ['ttl']               = (duration) Expiration time for the document
      *        ['version_type']      = (number) Explicit version number for concurrency control
      *        ['body']              = (array) The request definition using either `script` or partial `doc`
+     * @return callable|array
      */
-    public function update(array $params): array
+    public function update(array $params)
     {
         $id = $this->extractArgument($params, 'id');
         $index = $this->extractArgument($params, 'index');
@@ -1071,13 +986,12 @@ class Client
      *        ['wait_for_completion']      = (boolean) Should the request should block until the reindex is complete.
      * (default: false)
      *        ['body']                     = The search definition using the Query DSL
+     * @return callable|array
      */
-    public function updateByQuery(array $params = []): array
+    public function updateByQuery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
-
         $body = $this->extractArgument($params, 'body');
-
         $type = $this->extractArgument($params, 'type');
 
         /** @var callable $endpointBuilder */
@@ -1095,8 +1009,9 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
+     * @return callable|array
      */
-    public function getScript(array $params): array
+    public function getScript(array $params)
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1113,8 +1028,9 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
+     * @return callable|array
      */
-    public function deleteScript(array $params): array
+    public function deleteScript(array $params)
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1131,8 +1047,9 @@ class Client
 
     /**
      * $params['id']   = (string) The script ID (Required)
+     * @return callable|array
      */
-    public function putScript(array $params): array
+    public function putScript(array $params)
     {
         $id   = $this->extractArgument($params, 'id');
         $body = $this->extractArgument($params, 'body');
@@ -1151,8 +1068,9 @@ class Client
 
     /**
      * $params['id']   = (string) The search template ID (Required)
+     * @return callable|array
      */
-    public function getTemplate(array $params): array
+    public function getTemplate(array $params)
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1169,8 +1087,9 @@ class Client
 
     /**
      * $params['id']   = (string) The search template ID (Required)
+     * @return callable|array
      */
-    public function deleteTemplate(array $params): array
+    public function deleteTemplate(array $params)
     {
         $id = $this->extractArgument($params, 'id');
 
@@ -1187,36 +1106,12 @@ class Client
 
     /**
      * $params['index']              = (list) A comma-separated list of indices to restrict the results
-     *        ['fields']             = (list) A comma-separated list of fields for to get field statistics for (min value, max value, and more)
-     *        ['level']              = (enum) Defines if field stats should be returned on a per index level or on a cluster wide level
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     * @return callable|array
      */
-    public function fieldStats(array $params = []): array
-    {
-        $index = $this->extractArgument($params, 'index');
-        $body = $this->extractArgument($params, 'body');
-
-        /** @var callable $endpointBuilder */
-        $endpointBuilder = $this->endpoints;
-
-        /** @var \Elasticsearch\Endpoints\FieldStats $endpoint */
-        $endpoint = $endpointBuilder('FieldStats');
-        $endpoint->setIndex($index)
-            ->setBody($body)
-            ->setParams($params);
-
-        return $this->performRequest($endpoint);
-    }
-
-    /**
-     * $params['index']              = (list) A comma-separated list of indices to restrict the results
-     *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
-     *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
-     *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
-     */
-    public function fieldCaps(array $params = []): array
+    public function fieldCaps(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
@@ -1235,8 +1130,9 @@ class Client
 
     /**
      * $params['id'] = (string) ID of the template to render
+     * @return callable|array
      */
-    public function renderSearchTemplate(array $params = []): array
+    public function renderSearchTemplate(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
         $id   = $this->extractArgument($params, 'id');

@@ -19,12 +19,13 @@ class Reindex extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'slices',
             'refresh',
             'timeout',
-            'consistency',
+            'wait_for_active_shards',
             'wait_for_completion',
             'requests_per_second',
+            'scroll',
+            'slices'
         ];
     }
 

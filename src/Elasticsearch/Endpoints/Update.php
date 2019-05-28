@@ -43,44 +43,32 @@ class Update extends AbstractEndpoint
                 'index is required for Update'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for Update'
-            );
-        }
+
         $id = $this->id;
         $index = $this->index;
-        $type = $this->type;
-        $uri   = "/$index/$type/$id/_update";
+        $type = $this->type ?? null;
 
-        if (isset($index) === true && isset($type) === true && isset($id) === true) {
+        if (isset($type)) {
             $uri = "/$index/$type/$id/_update";
         }
-
-        return $uri;
+        return "/$index/_update/$id";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'consistency',
-            'fields',
+            'wait_for_active_shards',
+            '_source',
+            '_source_excludes',
+            '_source_includes',
             'lang',
             'parent',
             'refresh',
-            'replication',
             'retry_on_conflict',
             'routing',
-            'script',
             'timeout',
-            'timestamp',
-            'ttl',
-            'version',
-            'version_type',
-            '_source',
-            'include_type_name',
-            'if_primary_term',
-            'if_seq_no'
+            'if_seq_no',
+            'if_primary_term'
         ];
     }
 

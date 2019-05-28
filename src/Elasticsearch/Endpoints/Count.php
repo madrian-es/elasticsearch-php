@@ -30,17 +30,16 @@ class Count extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $type = $this->type;
-        $uri   = "/_count";
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
 
-        if (isset($index) === true && isset($type) === true) {
-            $uri = "/$index/$type/_count";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_count";
+        if (isset($index) && isset($type)) {
+            return "/$index/$type/_count";
         }
-
-        return $uri;
+        if (isset($index)) {
+            return "/$index/_count";
+        }
+        return "/_count";
     }
 
     public function getParamWhitelist(): array
@@ -54,10 +53,10 @@ class Count extends AbstractEndpoint
             'preference',
             'routing',
             'q',
-            'df',
-            'default_operator',
             'analyzer',
             'analyze_wildcard',
+            'default_operator',
+            'df',
             'lenient',
             'terminate_after'
         ];

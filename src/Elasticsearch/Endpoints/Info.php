@@ -17,9 +17,7 @@ class Info extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/";
-
-        return $uri;
+        return "/";
     }
 
     public function getParamWhitelist(): array

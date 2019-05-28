@@ -38,27 +38,21 @@ class TermVectors extends AbstractEndpoint
                 'index is required for TermVectors'
             );
         }
-        if (isset($this->type) !== true) {
-            throw new RuntimeException(
-                'type is required for TermVectors'
-            );
-        }
-        if (isset($this->id) !== true && isset($this->body['doc']) !== true) {
-            throw new RuntimeException(
-                'id or doc is required for TermVectors'
-            );
-        }
 
         $index = $this->index;
-        $type  = $this->type;
-        $id    = $this->id;
-        $uri   = "/$index/$type/_termvectors";
+        $type  = $this->type ?? null;
+        $id    = $this->id ?? null;
 
-        if ($id !== null) {
-            $uri = "/$index/$type/$id/_termvectors";
+        if (isset($type) && isset($id)) {
+            return "/$index/$type/$id/_termvectors";
         }
-
-        return $uri;
+        if (isset($type)) {
+            return "/$index/$type/_termvectors";
+        }
+        if (isset($id)) {
+            return "/$index/_termvectors/$id";
+        }
+        return "/$index/_termvectors";
     }
 
     public function getParamWhitelist(): array
@@ -73,7 +67,9 @@ class TermVectors extends AbstractEndpoint
             'preference',
             'routing',
             'parent',
-            'realtime'
+            'realtime',
+            'version',
+            'version_type'
         ];
     }
 
