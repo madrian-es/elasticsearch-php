@@ -34,7 +34,9 @@ class StickyRoundRobinSelector implements SelectorInterface
      */
     public function select(array $connections): ConnectionInterface
     {
-        /** @var ConnectionInterface[] $connections */
+        /**
+ * @var ConnectionInterface[] $connections
+*/
         if ($connections[$this->current]->isAlive()) {
             return $connections[$this->current];
         }

@@ -19,7 +19,7 @@ use Elasticsearch\Common\Exceptions;
 class Create extends AbstractEndpoint
 {
     /**
-     * @param array|object $body
+     * @param  array|object $body
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
     public function setBody($body): Create

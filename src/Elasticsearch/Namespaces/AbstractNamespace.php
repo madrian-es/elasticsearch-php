@@ -18,10 +18,14 @@ use Elasticsearch\Transport;
  */
 abstract class AbstractNamespace
 {
-    /** @var \Elasticsearch\Transport  */
+    /**
+     * @var \Elasticsearch\Transport
+     */
     protected $transport;
 
-    /** @var callable */
+    /**
+     * @var callable
+     */
     protected $endpoints;
 
     public function __construct(Transport $transport, callable $endpoints)

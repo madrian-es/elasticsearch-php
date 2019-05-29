@@ -25,7 +25,7 @@ class RoundRobinSelector implements SelectorInterface
     /**
      * Select the next connection in the sequence
      *
-     * @param  ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
+     * @param ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
      */
     public function select(array $connections): ConnectionInterface
     {

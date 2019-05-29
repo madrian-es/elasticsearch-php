@@ -34,62 +34,96 @@ use Monolog\Processor\IntrospectionProcessor;
  * @author   Zachary Tong <zach@elastic.co>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co
-  */
+ */
 class ClientBuilder
 {
-    /** @var Transport */
+    /**
+     * @var Transport
+     */
     private $transport;
 
-    /** @var callable */
+    /**
+     * @var callable
+     */
     private $endpoint;
 
-    /** @var NamespaceBuilderInterface[] */
+    /**
+     * @var NamespaceBuilderInterface[]
+     */
     private $registeredNamespacesBuilders = [];
 
-    /** @var  ConnectionFactoryInterface */
+    /**
+     * @var ConnectionFactoryInterface
+     */
     private $connectionFactory;
 
     private $handler;
 
-    /** @var  LoggerInterface */
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
 
-    /** @var  LoggerInterface */
+    /**
+     * @var LoggerInterface
+     */
     private $tracer;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $connectionPool = StaticNoPingConnectionPool::class;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $serializer = SmartSerializer::class;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $selector = RoundRobinSelector::class;
 
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $connectionPoolArgs = [
         'randomizeHosts' => true
     ];
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $hosts;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $connectionParams;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $retries;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     private $sniffOnStart = false;
 
-    /** @var null|array  */
+    /**
+     * @var null|array
+     */
     private $sslCert = null;
 
-    /** @var null|array  */
+    /**
+     * @var null|array
+     */
     private $sslKey = null;
 
-    /** @var null|bool|string */
+    /**
+     * @var null|bool|string
+     */
     private $sslVerification = null;
 
     public static function create(): ClientBuilder
@@ -115,8 +149,8 @@ class ClientBuilder
 
     /**
      * Can supply third parm to Client::__construct() when invoking manually or with dependency injection
-     * @return NamespaceBuilderInterface[]
      *
+     * @return NamespaceBuilderInterface[]
      */
     public function getRegisteredNamespacesBuilders(): array
     {
@@ -133,8 +167,8 @@ class ClientBuilder
      * Unknown keys will throw an exception by default, but this can be silenced
      * by setting `quiet` to true
      *
-     * @param bool $quiet False if unknown settings throw exception, true to silently
-     *                    ignore unknown settings
+     * @param  bool $quiet False if unknown settings throw exception, true to silently
+     *                     ignore unknown settings
      * @throws Common\Exceptions\RuntimeException
      */
     public static function fromConfig(array $config, bool $quiet = false): Client
@@ -208,7 +242,7 @@ class ClientBuilder
     }
 
     /**
-     * @param AbstractConnectionPool|string $connectionPool
+     * @param  AbstractConnectionPool|string $connectionPool
      * @throws \InvalidArgumentException
      */
     public function setConnectionPool($connectionPool, array $args = []): ClientBuilder
@@ -247,7 +281,7 @@ class ClientBuilder
     }
 
     /**
-     * @param mixed $handler
+     * @param  mixed $handler
      * @return $this
      */
     public function setHandler($handler): ClientBuilder
@@ -445,7 +479,9 @@ class ClientBuilder
 
         $registeredNamespaces = [];
         foreach ($this->registeredNamespacesBuilders as $builder) {
-            /** @var NamespaceBuilderInterface $builder */
+            /**
+ * @var NamespaceBuilderInterface $builder
+*/
             $registeredNamespaces[$builder->getName()] = $builder->getObject($this->transport, $this->serializer);
         }
 

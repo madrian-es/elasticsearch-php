@@ -54,7 +54,7 @@ class SearchResponseIterator implements Iterator
      * Constructor
      *
      * @param Client $client
-     * @param array  $search_params  Associative array of parameters
+     * @param array  $search_params Associative array of parameters
      * @see   Client::search()
      */
     public function __construct(Client $client, array $search_params)
@@ -110,7 +110,6 @@ class SearchResponseIterator implements Iterator
     /**
      * Rewinds the iterator by performing the initial search.
      *
-     *
      * @return void
      * @see    Iterator::rewind()
      */
@@ -130,10 +129,12 @@ class SearchResponseIterator implements Iterator
      */
     public function next(): void
     {
-        $this->current_scrolled_response = $this->client->scroll([
+        $this->current_scrolled_response = $this->client->scroll(
+            [
             'scroll_id' => $this->scroll_id,
             'scroll'    => $this->scroll_ttl
-        ]);
+            ]
+        );
         $this->scroll_id = $this->current_scrolled_response['_scroll_id'];
         $this->current_key++;
     }

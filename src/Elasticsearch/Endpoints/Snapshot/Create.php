@@ -33,7 +33,7 @@ class Create extends AbstractEndpoint
     private $snapshot;
 
     /**
-     * @param null|string|array $body
+     * @param  null|string|array $body
      * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
      */
     public function setBody($body): Create

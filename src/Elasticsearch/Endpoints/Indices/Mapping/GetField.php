@@ -18,7 +18,9 @@ use Elasticsearch\Common\Exceptions;
  */
 class GetField extends AbstractEndpoint
 {
-    /** @var  string */
+    /**
+     * @var string
+     */
     private $fields;
 
     /**

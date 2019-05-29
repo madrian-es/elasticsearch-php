@@ -17,6 +17,8 @@ use Elasticsearch\Common\Exceptions;
  */
 class Scroll extends AbstractEndpoint
 {
+    protected $scrollId;
+    
     /**
      * @return $this
      */

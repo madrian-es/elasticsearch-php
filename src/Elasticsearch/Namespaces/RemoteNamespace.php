@@ -22,10 +22,14 @@ class RemoteNamespace extends AbstractNamespace
      */
     public function info(array $params = [])
     {
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var Info $endpoint */
+        /**
+ * @var Info $endpoint
+*/
         $endpoint = $endpointBuilder('Remote\Info');
         $endpoint->setParams($params);
 

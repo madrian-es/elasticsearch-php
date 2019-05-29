@@ -21,28 +21,44 @@ use GuzzleHttp\Ring\Future\FutureArrayInterface;
  */
 abstract class AbstractEndpoint
 {
-    /** @var array  */
+    /**
+     * @var array
+     */
     protected $params =[];
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     protected $index = null;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     protected $type = null;
 
-    /** @var  string|int */
+    /**
+     * @var string|int
+     */
     protected $id = null;
 
-    /** @var  string */
+    /**
+     * @var string
+     */
     protected $method = null;
 
-    /** @var string|array */
+    /**
+     * @var string|array
+     */
     protected $body = null;
 
-    /** @var array  */
+    /**
+     * @var array
+     */
     private $options = [];
 
-    /** @var  SerializerInterface */
+    /**
+     * @var SerializerInterface
+     */
     protected $serializer;
 
     /**
@@ -64,7 +80,7 @@ abstract class AbstractEndpoint
     /**
      * Set the parameters for this endpoint
      *
-     * @param string[] $params Array of parameters
+     * @param  string[] $params Array of parameters
      * @return $this
      */
     public function setParams(array $params)
@@ -137,7 +153,7 @@ abstract class AbstractEndpoint
 
     /**
      * @deprecated
-     * @return $this
+     * @return     $this
      */
     public function setType(?string $type)
     {
@@ -232,11 +248,13 @@ abstract class AbstractEndpoint
         if (count($invalid) > 0) {
             sort($invalid);
             sort($whitelist);
-            throw new UnexpectedValueException(sprintf(
-                (count($invalid) > 1 ? '"%s" are not valid parameters.' : '"%s" is not a valid parameter.').' Allowed parameters are "%s"',
-                implode('", "', $invalid),
-                implode('", "', $whitelist)
-            ));
+            throw new UnexpectedValueException(
+                sprintf(
+                    (count($invalid) > 1 ? '"%s" are not valid parameters.' : '"%s" is not a valid parameter.').' Allowed parameters are "%s"',
+                    implode('", "', $invalid),
+                    implode('", "', $whitelist)
+                )
+            );
         }
     }
 

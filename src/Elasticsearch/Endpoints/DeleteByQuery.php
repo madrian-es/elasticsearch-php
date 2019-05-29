@@ -38,6 +38,7 @@ class DeleteByQuery extends AbstractEndpoint
                 'index is required for Deletebyquery'
             );
         }
+        $index = $this->index;
         $type = $this->type ?? null;
 
         if (isset($type)) {

@@ -18,19 +18,29 @@ use Psr\Log\LoggerInterface;
  */
 class ConnectionFactory implements ConnectionFactoryInterface
 {
-    /** @var  array */
+    /**
+     * @var array
+     */
     private $connectionParams;
 
-    /** @var  SerializerInterface */
+    /**
+     * @var SerializerInterface
+     */
     private $serializer;
 
-    /** @var  LoggerInterface */
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
 
-    /** @var  LoggerInterface */
+    /**
+     * @var LoggerInterface
+     */
     private $tracer;
 
-    /** @var callable */
+    /**
+     * @var callable
+     */
     private $handler;
 
     public function __construct(callable $handler, array $connectionParams, SerializerInterface $serializer, LoggerInterface $logger, LoggerInterface $tracer)

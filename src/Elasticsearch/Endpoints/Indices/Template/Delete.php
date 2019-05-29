@@ -11,7 +11,7 @@ use Elasticsearch\Common\Exceptions;
  * Class Delete
  *
  * @category Elasticsearch
- * @package Elasticsearch\Endpoints\Indices\Template
+ * @package  Elasticsearch\Endpoints\Indices\Template
  * @author   Zachary Tong <zach@elastic.co>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co

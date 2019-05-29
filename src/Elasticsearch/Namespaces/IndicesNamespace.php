@@ -22,18 +22,24 @@ class IndicesNamespace extends AbstractNamespace
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Exists $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Exists $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Exists');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
-        $endpoint->setOptions([
+        $endpoint->setOptions(
+            [
             'client' => [
                 'verbose' => true
             ]
-        ]);
+            ]
+        );
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
@@ -45,6 +51,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      *        ['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
+     *
      * @return callable|array
      */
     public function get(array $params)
@@ -52,14 +59,18 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $feature = $this->extractArgument($params, 'feature');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Get');
         $endpoint->setIndex($index)
-                 ->setFeature($feature)
-                 ->setParams($params);
+            ->setFeature($feature)
+            ->setParams($params);
 
         return $this->performRequest($endpoint);
     }
@@ -70,16 +81,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function segments(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Segments $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Segments $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Segments');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -90,16 +106,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['name']    = (string) The name of the template (Required)
      *        ['timeout'] = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function deleteTemplate(array $params)
     {
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Template\Delete $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Template\Delete $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Template\Delete');
         $endpoint->setName($name);
         $endpoint->setParams($params);
@@ -110,16 +131,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (list) A comma-separated list of indices to delete; use `_all` or empty string to delete all indices
      *        ['timeout'] = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function delete(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Delete $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Delete $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Delete');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -148,6 +174,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['refresh']        = (boolean) Return information about refresh operations
      *        ['search']         = (boolean) Return information about search operations; use the `groups` parameter to include information for specific search groups
      *        ['store']          = (boolean) Return information about the size of the index
+     *
      * @return callable|array
      */
     public function stats(array $params = [])
@@ -156,13 +183,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Stats $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Stats $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Stats');
         $endpoint->setIndex($index)
-                 ->setMetric($metric);
+            ->setMetric($metric);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -171,6 +202,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
      *        ['body']  = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
+     *
      * @return callable|array
      */
     public function putSettings(array $params = [])
@@ -179,13 +211,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Settings\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Settings\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Settings\Put');
         $endpoint->setIndex($index)
-                 ->setBody($body);
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -196,16 +232,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function snapshotIndex(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Gateway\Snapshot $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Gateway\Snapshot $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Gateway\Snapshot');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -218,6 +259,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['target']         = (string) The name of the target index to shrink into
      *        ['timeout']        = (time) Explicit operation timeout
      *        ['master_timeout'] = (time) Specify timeout for connection to master
+     *
      * @return callable|array
      */
     public function shrink(array $params = [])
@@ -226,14 +268,18 @@ class IndicesNamespace extends AbstractNamespace
         $target = $this->extractArgument($params, 'target');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Shrink $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Shrink $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Shrink');
         $endpoint->setIndex($index)
-                 ->setTarget($target)
-                 ->setBody($body);
+            ->setTarget($target)
+            ->setBody($body);
 
         return $this->performRequest($endpoint);
     }
@@ -241,6 +287,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string for all indices
      *        ['type']  = (list) A comma-separated list of document types
+     *
      * @return callable|array
      */
     public function getMapping(array $params = [])
@@ -249,13 +296,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $type = $this->extractArgument($params, 'type');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Mapping\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Mapping\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Mapping\Get');
         $endpoint->setIndex($index)
-                 ->setType($type);
+            ->setType($type);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -266,6 +317,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['type']             = (list) A comma-separated list of document types
      *        ['field']            = (list) A comma-separated list of document fields
      *        ['include_defaults'] = (bool) specifies default mapping values should be returned
+     *
      * @return callable|array
      */
     public function getFieldMapping(array $params = [])
@@ -279,14 +331,18 @@ class IndicesNamespace extends AbstractNamespace
         }
 
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Mapping\GetField $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Mapping\GetField $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Mapping\GetField');
         $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setFields($fields);
+            ->setType($type)
+            ->setFields($fields);
 
         $endpoint->setParams($params);
 
@@ -301,16 +357,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function flush(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Flush $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Flush $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Flush');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -326,16 +387,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function flushSynced(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Flush $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Flush $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Flush');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -351,16 +417,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function refresh(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Refresh $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Refresh $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Refresh');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -373,16 +444,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['detailed']    = (bool) Whether to display detailed information about shard recovery
      *        ['active_only'] = (bool) Display only those recoveries that are currently on-going
      *        ['human']       = (bool) Whether to return time and byte values in human-readable format.
+     *
      * @return callable|array
      */
     public function recovery(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Flush $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Flush $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Recovery');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -402,19 +478,25 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Type\Exists $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Type\Exists $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Type\Exists');
         $endpoint->setIndex($index)
-                 ->setType($type);
+            ->setType($type);
         $endpoint->setParams($params);
-        $endpoint->setOptions([
+        $endpoint->setOptions(
+            [
             'client' => [
                 'verbose' => true
             ]
-        ]);
+            ]
+        );
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
@@ -424,6 +506,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['name']    = (string) The name of the alias to be created or updated
      *        ['timeout'] = (time) Explicit timestamp for the document
      *        ['body']    = (time) Explicit timestamp for the document
+     *
      * @return callable|array
      */
     public function putAlias(array $params = [])
@@ -432,14 +515,18 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Alias\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Alias\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Alias\Put');
         $endpoint->setIndex($index)
-                 ->setName($name)
-                 ->setBody($body);
+            ->setName($name)
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -451,6 +538,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['timeout'] = (time) Explicit operation timeout
      *        ['body']    = (time) Explicit operation timeout
      *        ['create']  = (bool) Whether the index template should only be added if new or can also replace an existing one
+     *
      * @return callable|array
      */
     public function putTemplate(array $params)
@@ -458,13 +546,17 @@ class IndicesNamespace extends AbstractNamespace
         $name = $this->extractArgument($params, 'name');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Template\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Template\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Template\Put');
         $endpoint->setName($name)
-                 ->setBody($body);
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -478,6 +570,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['operation_threading'] = () TODO: ?
      *        ['source']              = (string) The URL-encoded query definition (instead of using the request body)
      *        ['body']                = (string) The URL-encoded query definition (instead of using the request body)
+     *
      * @return callable|array
      */
     public function validateQuery(array $params = [])
@@ -486,14 +579,18 @@ class IndicesNamespace extends AbstractNamespace
         $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Validate\Query $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Validate\Query $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Validate\Query');
         $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setBody($body);
+            ->setType($type)
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -504,6 +601,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['index']          = (list) A comma-separated list of index names to filter aliases
      *        ['ignore_indices'] = (enum) When performed on multiple indices, allows to ignore `missing` ones
      *        ['name']           = (list) A comma-separated list of alias names to return
+     *
      * @return callable|array
      */
     public function getAlias(array $params)
@@ -511,13 +609,17 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Alias\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Alias\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Alias\Get');
         $endpoint->setIndex($index)
-                 ->setName($name);
+            ->setName($name);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -529,6 +631,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_conflicts'] = (boolean) Specify whether to ignore conflicts while updating the mapping (default: false)
      *        ['timeout']          = (time) Explicit operation timeout
      *        ['body']             = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function putMapping(array $params)
@@ -537,14 +640,18 @@ class IndicesNamespace extends AbstractNamespace
         $type = $this->extractArgument($params, 'type');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Mapping\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Mapping\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Mapping\Put');
         $endpoint->setIndex($index)
-                 ->setType($type)
-                 ->setBody($body);
+            ->setType($type)
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -553,6 +660,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` for all indices (Required)
      *        ['type']  = (string) The name of the document type to delete (Required)
+     *
      * @return callable|array
      */
     public function deleteMapping(array $params)
@@ -560,13 +668,17 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Mapping\Delete $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Mapping\Delete $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Mapping\Delete');
         $endpoint->setIndex($index)
-                 ->setType($type);
+            ->setType($type);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -574,16 +686,21 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['name'] = (string) The name of the template (Required)
+     *
      * @return callable|array
      */
     public function getTemplate(array $params)
     {
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Template\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Template\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Template\Get');
         $endpoint->setName($name);
         $endpoint->setParams($params);
@@ -598,18 +715,24 @@ class IndicesNamespace extends AbstractNamespace
     {
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Template\Exists $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Template\Exists $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Template\Exists');
         $endpoint->setName($name);
         $endpoint->setParams($params);
-        $endpoint->setOptions([
+        $endpoint->setOptions(
+            [
             'client' => [
                 'verbose' => true
             ]
-        ]);
+            ]
+        );
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
@@ -618,6 +741,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
      *        ['body']    = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function create(array $params)
@@ -626,13 +750,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Create $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Create $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Create');
         $endpoint->setIndex($index)
-                 ->setBody($body);
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -649,16 +777,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable']   = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']     = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']     = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function forceMerge(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\ForceMerge $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\ForceMerge $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\ForceMerge');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -670,6 +803,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (string) The name of the index with an alias (Required)
      *        ['name']    = (string) The name of the alias to be deleted (Required)
      *        ['timeout'] = (time) Explicit timestamp for the document
+     *
      * @return callable|array
      */
     public function deleteAlias(array $params)
@@ -677,13 +811,17 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Alias\Delete $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Alias\Delete $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Alias\Delete');
         $endpoint->setIndex($index)
-                 ->setName($name);
+            ->setName($name);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -692,16 +830,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function open(array $params)
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Open $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Open $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Open');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -723,6 +866,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['explain']      = (bool) With `true`, outputs more advanced details. (default: false)
      *        ['attributes']   = (list) A comma-separated list of token attributes to output, this parameter works only with `explain=true`
      *        ['format']       = (enum) Format of the output (["detailed", "text"])
+     *
      * @return callable|array
      */
     public function analyze(array $params = [])
@@ -731,13 +875,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Analyze $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Analyze $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Analyze');
         $endpoint->setIndex($index)
-                 ->setBody($body);
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -757,16 +905,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function clearCache(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Cache\Clear $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Cache\Clear $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Cache\Clear');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -778,6 +931,7 @@ class IndicesNamespace extends AbstractNamespace
      * $params['index']   = (list) A comma-separated list of index names to filter aliases
      *        ['timeout'] = (time) Explicit timestamp for the document
      *        ['body']    = (time) Explicit timestamp for the document
+     *
      * @return callable|array
      */
     public function updateAliases(array $params = [])
@@ -785,13 +939,17 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Aliases\Update $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Aliases\Update $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Aliases\Update');
         $endpoint->setIndex($index)
-                 ->setBody($body);
+            ->setBody($body);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -800,6 +958,7 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
      *        ['timeout'] = (time) Explicit timestamp for the document
+     *
      * @return callable|array
      */
     public function getAliases(array $params = [])
@@ -807,13 +966,17 @@ class IndicesNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Alias\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Alias\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Alias\Get');
         $endpoint->setIndex($index)
-                 ->setName($name);
+            ->setName($name);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -832,19 +995,25 @@ class IndicesNamespace extends AbstractNamespace
 
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Alias\Exists $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Alias\Exists $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Alias\Exists');
         $endpoint->setIndex($index)
-                 ->setName($name);
+            ->setName($name);
         $endpoint->setParams($params);
-        $endpoint->setOptions([
+        $endpoint->setOptions(
+            [
             'client' => [
                 'verbose' => true
             ]
-        ]);
+            ]
+        );
 
         return BooleanRequestWrapper::performRequest($endpoint, $this->transport);
     }
@@ -855,16 +1024,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['operation_threading'] = () TODO: ?
      *        ['recovery']            = (boolean) Return information about shard recovery
      *        ['snapshot']            = (boolean) TODO: ?
+     *
      * @return callable|array
      */
     public function status(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Status $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Status $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Status');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -874,6 +1048,7 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['index'] = (list) A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices
+     *
      * @return callable|array
      */
     public function getSettings(array $params = [])
@@ -882,13 +1057,17 @@ class IndicesNamespace extends AbstractNamespace
 
         $name = $this->extractArgument($params, 'name');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Settings\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Settings\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Settings\Get');
         $endpoint->setIndex($index)
-                 ->setName($name);
+            ->setName($name);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -897,16 +1076,21 @@ class IndicesNamespace extends AbstractNamespace
     /**
      * $params['index']   = (string) The name of the index (Required)
      *        ['timeout'] = (time) Explicit operation timeout
+     *
      * @return callable|array
      */
     public function close(array $params)
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Close $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Close $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Close');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -916,16 +1100,21 @@ class IndicesNamespace extends AbstractNamespace
 
     /**
      * $params['index']   = (string) The name of the index
+     *
      * @return callable|array
      */
     public function seal(array $params)
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Seal $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Seal $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Seal');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -941,16 +1130,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function upgrade(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Upgrade\Post $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Upgrade\Post $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Upgrade\Post');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -966,16 +1160,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['ignore_unavailable'] = (bool) Whether specified concrete indices should be ignored when unavailable (missing or closed)
      *        ['allow_no_indices']   = (bool) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards']   = (enum) Whether to expand wildcard expression to concrete indices that are open, closed or both.
+     *
      * @return callable|array
      */
     public function getUpgrade(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Upgrade\Get $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Upgrade\Get $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Upgrade\Get');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -990,16 +1189,21 @@ class IndicesNamespace extends AbstractNamespace
      *        ['allow_no_indices'] = (boolean) Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
      *        ['expand_wildcards'] = (boolean) Whether to expand wildcard expression to concrete indices that are open, closed or both.
      *        ['operation_threading']
+     *
      * @return callable|array
      */
     public function shardStores(array $params)
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\ShardStores $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\ShardStores $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\ShardStores');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -1012,6 +1216,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['alias']          = (string) The name of the alias to rollover
      *        ['timeout']        = (time) Explicit operation timeout
      *        ['master_timeout'] = (time) Specify timeout for connection to master
+     *
      * @return callable|array
      */
     public function rollover(array $params)
@@ -1020,10 +1225,14 @@ class IndicesNamespace extends AbstractNamespace
         $alias = $this->extractArgument($params, 'alias');
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Rollover $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Rollover $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Rollover');
         $endpoint->setNewIndex($newIndex)
             ->setAlias($alias)
@@ -1040,6 +1249,7 @@ class IndicesNamespace extends AbstractNamespace
      *        ['timeout']  = (time) Explicit operation timeout
      *        ['master_timeout']  = (time) Specify timeout for connection to master
      *        ['wait_for_active_shards']  = (string) Set the number of active shards to wait for on the shrunken index before the operation returns.
+     *
      * @return callable|array
      */
     public function split(array $params = [])
@@ -1048,14 +1258,18 @@ class IndicesNamespace extends AbstractNamespace
         $body = $this->extractArgument($params, 'body');
         $target = $this->extractArgument($params, 'target');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Indices\Split $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Indices\Split $endpoint
+*/
         $endpoint = $endpointBuilder('Indices\Split');
         $endpoint->setIndex($index)
-                 ->setBody($body)
-                 ->setTarget($target);
+            ->setBody($body)
+            ->setTarget($target);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

@@ -20,7 +20,7 @@ class RandomSelector implements SelectorInterface
     /**
      * Select a random connection from the provided array
      *
-     * @param  ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
+     * @param ConnectionInterface[] $connections an array of ConnectionInterface instances to choose from
      */
     public function select(array $connections): ConnectionInterface
     {

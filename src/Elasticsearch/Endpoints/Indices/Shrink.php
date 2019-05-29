@@ -12,10 +12,10 @@ use Elasticsearch\Common\Exceptions;
  *
  * @category Elasticsearch
  *
- * @author   Zachary Tong <zach@elastic.co>
- * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
+ * @author  Zachary Tong <zach@elastic.co>
+ * @license http://www.apache.org/licenses/LICENSE-2.0 Apache2
  *
- * @link     http://elastic.co
+ * @link http://elastic.co
  */
 class Shrink extends AbstractEndpoint
 {

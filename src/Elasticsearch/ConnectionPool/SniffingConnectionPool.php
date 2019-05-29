@@ -13,10 +13,14 @@ use Elasticsearch\Connections\ConnectionFactoryInterface;
 
 class SniffingConnectionPool extends AbstractConnectionPool implements ConnectionPoolInterface
 {
-    /** @var int  */
+    /**
+     * @var int
+     */
     private $sniffingInterval = 300;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     private $nextSniff = -1;
 
     /**
@@ -36,7 +40,9 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
 
         $size = count($this->connections);
         while ($size--) {
-            /** @var Connection $connection */
+            /**
+ * @var Connection $connection
+*/
             $connection = $this->selector->select($this->connections);
             if ($connection->isAlive() === true || $connection->ping() === true) {
                 return $connection;
@@ -64,7 +70,9 @@ class SniffingConnectionPool extends AbstractConnectionPool implements Connectio
         $total = count($this->connections);
 
         while ($total--) {
-            /** @var Connection $connection */
+            /**
+ * @var Connection $connection
+*/
             $connection = $this->selector->select($this->connections);
 
             if ($connection->isAlive() xor $force) {

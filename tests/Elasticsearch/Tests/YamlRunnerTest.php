@@ -164,7 +164,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider yamlProvider
-     * @group sync
+     * @group        sync
      */
     public function testIntegration($testProcedure, bool $skip, $setupProcedure, $teardownProcedure, string $fileName)
     {
@@ -193,7 +193,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider yamlProvider
-     * @group async
+     * @group        async
      */
     public function testAsyncIntegration($testProcedure, bool $skip, $setupProcedure, $teardownProcedure, string $fileName)
     {

@@ -49,10 +49,11 @@ class Put extends AbstractEndpoint
                 'id is required for Put'
             );
         }
+        $id = $this->id;
         $context = $this->context ?? null;
 
         if (isset($context)) {
-            return "/_scripts/{$this->id}/$context";
+            return "/_scripts/$id/$context";
         }
         return "/_scripts/$id";
     }

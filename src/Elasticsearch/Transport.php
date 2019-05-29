@@ -32,23 +32,29 @@ class Transport
      */
     private $log;
 
-    /** @var  int */
+    /**
+     * @var int
+     */
     public $retryAttempts = 0;
 
-    /** @var  Connection */
+    /**
+     * @var Connection
+     */
     public $lastConnection;
 
-    /** @var int  */
+    /**
+     * @var int
+     */
     public $retries;
 
     /**
      * Transport class is responsible for dispatching requests to the
      * underlying cluster connections
      *
-     * @param int $retries
-     * @param bool $sniffOnStart
+     * @param int                                   $retries
+     * @param bool                                  $sniffOnStart
      * @param ConnectionPool\AbstractConnectionPool $connectionPool
-     * @param \Psr\Log\LoggerInterface $log    Monolog logger object
+     * @param \Psr\Log\LoggerInterface              $log            Monolog logger object
      */
     public function __construct(int $retries, AbstractConnectionPool $connectionPool, LoggerInterface $log, bool $sniffOnStart = false)
     {
@@ -74,11 +80,11 @@ class Transport
     /**
      * Perform a request to the Cluster
      *
-     * @param string $method     HTTP method to use
-     * @param string $uri        HTTP URI to send request to
-     * @param array $params     Optional query parameters
-     * @param null $body       Optional query body
-     * @param array $options
+     * @param string $method  HTTP method to use
+     * @param string $uri     HTTP URI to send request to
+     * @param array  $params  Optional query parameters
+     * @param null   $body    Optional query body
+     * @param array  $options
      *
      * @throws Common\Exceptions\NoNodesAvailableException|\Exception
      */

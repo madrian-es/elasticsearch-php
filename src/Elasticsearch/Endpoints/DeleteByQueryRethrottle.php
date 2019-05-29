@@ -17,6 +17,8 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
  */
 class DeleteByQueryRethrottle extends AbstractEndpoint
 {
+    protected $taskId;
+    
     public function setTaskId(string $taskId): DeleteByQueryRethrottle
     {
         if (empty($taskId)) {

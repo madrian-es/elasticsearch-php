@@ -60,7 +60,7 @@ interface ConnectionInterface
     public function getLastRequestInfo(): array;
 
     /**
-     * @param null $body
+     * @param  null $body
      * @return mixed
      */
     public function performRequest(string $method, string $uri, array $params = [], $body = null, array $options = [], Transport $transport = null);

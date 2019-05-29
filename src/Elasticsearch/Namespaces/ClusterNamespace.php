@@ -25,16 +25,21 @@ class ClusterNamespace extends AbstractNamespace
      *        ['wait_for_nodes']             = (number) Wait until the specified number of nodes is available
      *        ['wait_for_relocating_shards'] = (number) Wait until the specified number of relocating shards is finished
      *        ['wait_for_status']            = (enum) Wait until cluster is in a specific state
+     *
      * @return callable|array
      */
     public function health(array $params = [])
     {
         $index = $this->extractArgument($params, 'index');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\Health $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Health $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\Health');
         $endpoint->setIndex($index);
         $endpoint->setParams($params);
@@ -47,16 +52,21 @@ class ClusterNamespace extends AbstractNamespace
      *        ['filter_metadata'] = (boolean) Don't return cluster state metadata (default: false)
      *        ['body']            = (boolean) Don't return cluster state metadata (default: false)
      *        ['explain']         = (boolean) Return an explanation of why the commands can or cannot be executed
+     *
      * @return callable|array
      */
     public function reroute(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\Reroute $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Reroute $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\Reroute');
         $endpoint->setBody($body);
         $endpoint->setParams($params);
@@ -73,6 +83,7 @@ class ClusterNamespace extends AbstractNamespace
      *        ['filter_routing_table']   = (boolean) Do not return information about shard allocation (`routing_table` and `routing_nodes`)
      *        ['local']                  = (boolean) Return local information, do not retrieve the state from master node (default: false)
      *        ['master_timeout']         = (time) Specify timeout for connection to master
+     *
      * @return callable|array
      */
     public function state(array $params = [])
@@ -80,14 +91,18 @@ class ClusterNamespace extends AbstractNamespace
         $index = $this->extractArgument($params, 'index');
         $metric = $this->extractArgument($params, 'metric');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\State $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\State $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\State');
         $endpoint->setParams($params)
-                 ->setIndex($index)
-                 ->setMetric($metric);
+            ->setIndex($index)
+            ->setMetric($metric);
 
         return $this->performRequest($endpoint);
     }
@@ -95,35 +110,45 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['flat_settings']          = (boolean) Return settings in flat format (default: false)
      *        ['human'] = (boolean) Whether to return time and byte values in human-readable format.
+     *
      * @return callable|array
      */
     public function stats(array $params = [])
     {
         $nodeID = $this->extractArgument($params, 'node_id');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\Stats $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Stats $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\Stats');
         $endpoint->setNodeID($nodeID)
-                 ->setParams($params);
+            ->setParams($params);
 
         return $this->performRequest($endpoint);
     }
 
     /**
      * $params['body'] = ()
+     *
      * @return callable|array
      */
     public function putSettings(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\Settings\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Settings\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\Settings\Put');
         $endpoint->setBody($body);
         $endpoint->setParams($params);
@@ -136,10 +161,14 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function getSettings(array $params = [])
     {
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\Settings\Put $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Settings\Put $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\Settings\Get');
         $endpoint->setParams($params);
 
@@ -149,14 +178,19 @@ class ClusterNamespace extends AbstractNamespace
     /**
      * $params['local']   = (bool) Return local information, do not retrieve the state from master node (default: false)
      *        ['master_timeout']  = (time) Specify timeout for connection to master
+     *
      * @return callable|array
      */
     public function pendingTasks(array $params = [])
     {
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\PendingTasks $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\PendingTasks $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\PendingTasks');
         $endpoint->setParams($params);
 
@@ -165,19 +199,24 @@ class ClusterNamespace extends AbstractNamespace
 
     /**
      * $params['include_yes_decisions'] = (bool) Return 'YES' decisions in explanation (default: false)
+     *
      * @return callable|array
      */
     public function allocationExplain(array $params = [])
     {
         $body = $this->extractArgument($params, 'body');
 
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\AllocationExplain $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\AllocationExplain $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\AllocationExplain');
         $endpoint->setBody($body)
-                 ->setParams($params);
+            ->setParams($params);
 
         return $this->performRequest($endpoint);
     }
@@ -187,10 +226,14 @@ class ClusterNamespace extends AbstractNamespace
      */
     public function remoteInfo(array $params = [])
     {
-        /** @var callable $endpointBuilder */
+        /**
+ * @var callable $endpointBuilder
+*/
         $endpointBuilder = $this->endpoints;
 
-        /** @var \Elasticsearch\Endpoints\Cluster\RemoteInfo $endpoint */
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\RemoteInfo $endpoint
+*/
         $endpoint = $endpointBuilder('Cluster\RemoteInfo');
 
         return $this->performRequest($endpoint);

@@ -34,7 +34,9 @@ class StaticNoPingConnectionPool extends AbstractConnectionPool implements Conne
     {
         $total = count($this->connections);
         while ($total--) {
-            /** @var Connection $connection */
+            /**
+ * @var Connection $connection
+*/
             $connection = $this->selector->select($this->connections);
             if ($connection->isAlive() === true) {
                 return $connection;
