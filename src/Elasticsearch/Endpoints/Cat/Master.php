@@ -19,21 +19,19 @@ class Master extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cat/master";
-
-        return $uri;
+        return "/_cat/master";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v'
         ];
     }
 

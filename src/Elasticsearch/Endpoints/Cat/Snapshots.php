@@ -33,24 +33,24 @@ class Snapshots extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $repository = $this->repository;
-        if (isset($this->repository) === true) {
-            return "/_cat/snapshots/$repository/";
+        $repository = $this->repository ?? null;
+        if (isset($repository)) {
+            return "/_cat/snapshots/$repository";
         }
 
-        return "/_cat/snapshots/";
+        return "/_cat/snapshots";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'local',
+            'format',
+            'ignore_unavailable',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v'
         ];
     }
 

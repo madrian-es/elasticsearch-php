@@ -19,14 +19,13 @@ class Health extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_cluster/health";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/_cluster/health/$index";
+        if (isset($index)) {
+            return "/_cluster/health/$index";
         }
 
-        return $uri;
+        return "/_cluster/health";
     }
 
     public function getParamWhitelist(): array
@@ -38,11 +37,10 @@ class Health extends AbstractEndpoint
             'timeout',
             'wait_for_active_shards',
             'wait_for_nodes',
-            'wait_for_relocating_shards',
-            'wait_for_status',
             'wait_for_events',
             'wait_for_no_relocating_shards',
             'wait_for_no_initializing_shards',
+            'wait_for_status'
         ];
     }
 

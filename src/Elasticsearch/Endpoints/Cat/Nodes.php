@@ -19,22 +19,20 @@ class Nodes extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cat/nodes";
-
-        return $uri;
+        return "/_cat/nodes";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
+            'full_id',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'full_id',
-            'format',
+            'v'
         ];
     }
 

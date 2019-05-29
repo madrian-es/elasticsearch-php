@@ -19,16 +19,14 @@ class PendingTasks extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cluster/pending_tasks";
-
-        return $uri;
+        return "/_cluster/pending_tasks";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'local',
-            'master_timeout',
+            'master_timeout'
         ];
     }
 

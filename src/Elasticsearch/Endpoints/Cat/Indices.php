@@ -20,29 +20,28 @@ class Indices extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_cat/indices";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/_cat/indices/$index";
+        if (isset($index)) {
+            return "/_cat/indices/$index";
         }
 
-        return $uri;
+        return "/_cat/indices";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'bytes',
             'local',
             'master_timeout',
             'h',
+            'health',
             'help',
             'pri',
-            'v',
-            'health',
             's',
-            'format',
+            'v'
         ];
     }
 

@@ -32,26 +32,27 @@ class Fielddata extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $fields = $this->fields;
-        $uri   = "/_cat/fielddata";
+        $fields = $this->fields ?? null;
 
-        if (isset($fields) === true) {
-            $uri = "/_cat/fielddata/$fields";
+        if (isset($fields)) {
+            return "/_cat/fielddata/$fields";
         }
 
-        return $uri;
+        return "/_cat/fielddata";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
+            'bytes',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v',
+            'fields'
         ];
     }
 

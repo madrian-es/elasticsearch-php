@@ -44,17 +44,16 @@ class State extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $metric = $this->metric;
-        $uri   = "/_cluster/state";
+        $index = $this->index ?? null;
+        $metric = $this->metric ?? null;
 
-        if (isset($metric) === true && isset($index) === true) {
-            $uri = "/_cluster/state/$metric/$index";
-        } elseif (isset($metric) === true) {
-            $uri = "/_cluster/state/$metric";
+        if (isset($metric) && isset($index)) {
+            return "/_cluster/state/$metric/$index";
         }
-
-        return $uri;
+        if (isset($metric) === true) {
+            return "/_cluster/state/$metric";
+        }
+        return "/_cluster/state";
     }
 
     public function getParamWhitelist(): array
@@ -63,10 +62,11 @@ class State extends AbstractEndpoint
             'local',
             'master_timeout',
             'flat_settings',
-            'index_templates',
-            'expand_wildcards',
+            'wait_for_metadata_version',
+            'wait_for_timeout',
             'ignore_unavailable',
-            'allow_no_indices'
+            'allow_no_indices',
+            'expand_wildcards'
         ];
     }
 

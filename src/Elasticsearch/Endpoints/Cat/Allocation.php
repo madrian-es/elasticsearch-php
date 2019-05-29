@@ -37,27 +37,26 @@ class Allocation extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $node_id = $this->node_id;
-        $uri   = "/_cat/allocation";
+        $node_id = $this->node_id ?? null;
 
-        if (isset($node_id) === true) {
-            $uri = "/_cat/allocation/$node_id";
+        if (isset($node_id)) {
+            return "/_cat/allocation/$node_id";
         }
 
-        return $uri;
+        return "/_cat/allocation";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'bytes',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v'
         ];
     }
 

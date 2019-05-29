@@ -20,9 +20,7 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cluster/settings";
-
-        return $uri;
+        return "/_cluster/settings";
     }
 
     public function getParamWhitelist(): array

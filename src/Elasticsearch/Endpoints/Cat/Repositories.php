@@ -19,21 +19,19 @@ class Repositories extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cat/repositories";
-
-        return $uri;
+        return "/_cat/repositories";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v'
         ];
     }
 

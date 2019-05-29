@@ -29,12 +29,11 @@ class Tasks extends AbstractEndpoint
             'node_id',
             'actions',
             'detailed',
-            'parent_node',
             'parent_task',
             'h',
             'help',
-            'v',
-            's'
+            's',
+            'v'
         ];
     }
 

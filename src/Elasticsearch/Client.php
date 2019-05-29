@@ -151,6 +151,36 @@ class Client
     }
 
     /**
+     * $params['body']  = (string) The ranking evaluation search definition, including
+     *        search requests, document ratings and ranking metric definition (Required)
+     *        ['index'] = (list) A comma-separated list of index names to search; use `_all` or
+     *        empty string to perform the operation on all indices
+     *        ['ignore_unavailable'] = (boolean) Whether specified concrete indices should be
+     *        ignored when unavailable (missing or closed)
+     *        ['allow_no_indices'] = (boolean) Whether to ignore if a wildcard indices expression
+     *        resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)
+     *        ['expand_wildcards'] = (enum) Whether to expand wildcard expression to concrete indices that are open,
+     *        closed or both.
+     * @return callable|array
+     */
+    public function rankEval(array $params)
+    {
+        $body = $this->extractArgument($params, 'body');
+        $index = $this->extractArgument($params, 'index');
+
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+
+        /** @var \Elasticsearch\Endpoints\RankEval $endpoint */
+        $endpoint = $endpointBuilder('RankEval');
+        $endpoint->setBody($body)
+                 ->setIndex($index);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * $params['id']               = (string) The document ID (Required)
      *        ['index']            = (string) The name of the index (Required)
      *        ['type']             = (string) The type of the document (use `_all` to fetch the first document matching the ID across all types) (Required)
@@ -309,6 +339,27 @@ class Client
         $endpoint->setIndex($index)
                 ->setType($type)
                 ->setBody($body);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * $params['task_id'] = (string) The task id to rethrottle (Required)
+     *        ['requests_per_second'] = (number) The throttle to set on this request in floating
+     *        sub-requests per second. -1 means set no throttle. (Required)
+     * @return callable|array
+     */
+    public function deleteByQueryRethrottle(array $params)
+    {
+        $taskId = $this->extractArgument($params, 'task_id');
+
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+
+        /** @var \Elasticsearch\Endpoints\DeleteByQueryRethrottle $endpoint */
+        $endpoint = $endpointBuilder('DeleteByQueryRethrottle');
+        $endpoint->setTaskId($taskId);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);
@@ -674,6 +725,26 @@ class Client
     }
 
     /**
+     * $params['task_id'] = (string) The task id to rethrottle (Required)
+     *        ['requests_per_second'] = (number) The throttle to set on this request in floating
+     *        sub-requests per second. -1 means set no throttle (Required)
+     * @return callable|array
+     */
+    public function reindexRethrottle(array $params)
+    {
+        $taskId = $this->extractArgument($params, 'task_id');
+
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+        /** @var \Elasticsearch\Endpoints\ReindexRethrottle $endpoint */
+        $endpoint = $endpointBuilder('ReindexRethrottle');
+        $endpoint->setTaskId($taskId)
+        $endpoint->Params($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * $params['id']                       = (string) The document ID (Required)
      *        ['index']                    = (string) The name of the index (Required)
      *        ['type']                     = (string) The type of the document (Required)
@@ -855,6 +926,26 @@ class Client
     }
 
     /**
+     * $params['body'] = (string) The script to execute
+     *
+     * @return callable|array
+     */
+    public function scriptsPainlessExecute(array $params = [])
+    {
+        $body = $this->extractArgument($params, 'body');
+
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+
+        /** @var \Elasticsearch\Endpoints\scriptsPainlessExecute $endpoint */
+        $endpoint = $endpointBuilder('scriptsPainlessExecute');
+        $endpoint->setBody($body);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
      * $params['scroll_id'] = (string) The scroll ID for scrolled search
      *        ['scroll']    = (duration) Specify how long a consistent view of the index should be maintained for scrolled search
      *        ['body']      = (string) The scroll ID for scrolled search
@@ -1002,6 +1093,27 @@ class Client
         $endpoint->setIndex($index)
             ->setType($type)
             ->setBody($body);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * $params['task_id'] = (string) The task id to rethrottle (Required)
+     *        ['requests_per_second'] = (number) The throttle to set on this request in floating
+     *        sub-requests per second. -1 means set no throttle (Required)
+     * @return callable|array
+     */
+    public function UpdateByQueryRethrottle(array $params = [])
+    {
+        $taskId = $this->extractArgument($params, 'task_id');
+
+        /** @var callable $endpointBuilder */
+        $endpointBuilder = $this->endpoints;
+
+        /** @var \Elasticsearch\Endpoints\UpdateByQueryRethrottle $endpoint */
+        $endpoint = $endpointBuilder('UpdateByQueryRethrottle');
+        $endpoint->setTaskId($taskId);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

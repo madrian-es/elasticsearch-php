@@ -19,17 +19,14 @@ class Help extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cat";
-
-        return $uri;
+        return "/_cat";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'help',
-            's',
-            'format',
+            's'
         ];
     }
 

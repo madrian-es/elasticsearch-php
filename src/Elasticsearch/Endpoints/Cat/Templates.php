@@ -27,11 +27,11 @@ class Templates extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->name)) {
-            return "/_cat/templates/{$this->name}";
-        } else {
-            return "/_cat/templates";
+        $name = $this->name ?? null;
+        if (isset($name)) {
+            return "/_cat/templates/$name";
         }
+        return "/_cat/templates";
     }
 
     /**
@@ -41,17 +41,12 @@ class Templates extends AbstractEndpoint
     {
         return [
             'format',
-            'node_id',
-            'actions',
-            'detailed',
-            'parent_node',
-            'parent_task',
-            'h',
-            'help',
-            'v',
-            's',
             'local',
             'master_timeout',
+            'h',
+            'help',
+            's',
+            'v'
         ];
     }
 

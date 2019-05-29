@@ -19,27 +19,26 @@ class Shards extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_cat/shards";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/_cat/shards/$index";
+        if (isset($index)) {
+            return "/_cat/shards/$index";
         }
 
-        return $uri;
+        return "/_cat/shards";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'bytes',
             'local',
             'master_timeout',
             'h',
             'help',
-            'v',
             's',
-            'format',
+            'v'
         ];
     }
 

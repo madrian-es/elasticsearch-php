@@ -25,20 +25,17 @@ class Delete extends AbstractEndpoint
     {
         if (isset($this->id) !== true) {
             throw new Exceptions\RuntimeException(
-                'id is required for put'
+                'id is required for Delete'
             );
         }
-        $id   = $this->id;
-        $uri  = "/_scripts/$id";
-
-        return $uri;
+        return "/_scripts/{$this->id}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'version',
-            'version_type'
+            'timeout',
+            'master_timeout'
         ];
     }
 

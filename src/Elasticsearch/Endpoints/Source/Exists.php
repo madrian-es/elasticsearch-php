@@ -12,11 +12,11 @@ use Elasticsearch\Common\Exceptions;
  *
  * @category Elasticsearch
  * @package  Elasticsearch\Endpoints\Source
- * @author   Zachary Tong <zach@elastic.co>
+ * @author   Enrico Zimuel <enrico.zimuel@elastic.co>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co
  */
-class Get extends AbstractEndpoint
+class Exists extends AbstractEndpoint
 {
     /**
      * @throws \Elasticsearch\Common\Exceptions\RuntimeException
@@ -25,12 +25,12 @@ class Get extends AbstractEndpoint
     {
         if (isset($this->id) !== true) {
             throw new Exceptions\RuntimeException(
-                'id is required for Get'
+                'id is required for Exists'
             );
         }
         if (isset($this->index) !== true) {
             throw new Exceptions\RuntimeException(
-                'index is required for Get'
+                'index is required for Exists'
             );
         }
 
@@ -56,12 +56,12 @@ class Get extends AbstractEndpoint
             '_source_excludes',
             '_source_includes',
             'version',
-            'version_type'
+            'version_type',
         ];
     }
 
     public function getMethod(): string
     {
-        return 'GET';
+        return 'HEAD';
     }
 }

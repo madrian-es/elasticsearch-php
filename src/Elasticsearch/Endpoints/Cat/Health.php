@@ -19,22 +19,20 @@ class Health extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $uri   = "/_cat/health";
-
-        return $uri;
+        return "/_cat/health";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'format',
             'local',
             'master_timeout',
             'h',
             'help',
-            'ts',
-            'v',
             's',
-            'format',
+            'ts',
+            'v'
         ];
     }
 

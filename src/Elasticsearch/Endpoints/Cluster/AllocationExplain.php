@@ -37,7 +37,7 @@ class AllocationExplain extends AbstractEndpoint
     {
         return [
             'include_yes_decisions',
-            'include_disk_info',
+            'include_disk_info'
         ];
     }
 

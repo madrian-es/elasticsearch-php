@@ -39,21 +39,20 @@ class Stats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $node_id = $this->nodeID;
-        $uri   = "/_cluster/stats";
+        $nodeId = $this->nodeID ?? null;
 
-        if (isset($node_id) === true) {
-            $uri = "/_cluster/stats/nodes/$node_id";
+        if (isset($nodeId)) {
+            return "/_cluster/stats/nodes/$nodeId";
         }
 
-        return $uri;
+        return "/_cluster/stats/nodes";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'flat_settings',
-            'human',
+            'timeout',
         ];
     }
 

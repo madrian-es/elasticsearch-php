@@ -31,20 +31,18 @@ class Reroute extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $uri   = "/_cluster/reroute";
-
-        return $uri;
+        return "/_cluster/reroute";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'dry_run',
-            'filter_metadata',
-            'master_timeout',
-            'timeout',
             'explain',
-            'metric'
+            'retry_failed',
+            'metric',
+            'master_timeout',
+            'timeout'
         ];
     }
 
