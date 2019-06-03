@@ -32,7 +32,7 @@ class Get extends AbstractEndpoint
      */
     private $snapshot;
 
-    public function setRepository(string $repository): Get
+    public function setRepository(?string $repository): Get
     {
         if (isset($repository) !== true) {
             return $this;
@@ -43,7 +43,7 @@ class Get extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot(string $snapshot): Get
+    public function setSnapshot(?string $snapshot): Get
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -69,15 +69,7 @@ class Get extends AbstractEndpoint
                 'snapshot is required for Get'
             );
         }
-        $repository = $this->repository;
-        $snapshot = $this->snapshot;
-        $uri   = "/_snapshot/$repository/$snapshot";
-
-        if (isset($repository) === true && isset($snapshot) === true) {
-            $uri = "/_snapshot/$repository/$snapshot";
-        }
-
-        return $uri;
+        return "/_snapshot/{$this->repository}/{$this->snapshot}";
     }
 
     public function getParamWhitelist(): array

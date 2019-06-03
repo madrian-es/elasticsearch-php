@@ -26,7 +26,7 @@ class Stats extends AbstractEndpoint
      */
     private $nodeID;
 
-    public function setNodeID(string $node_id): Stats
+    public function setNodeID(?string $node_id): Stats
     {
         if (isset($node_id) !== true) {
             return $this;

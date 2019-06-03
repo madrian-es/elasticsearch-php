@@ -34,9 +34,12 @@ class Put extends AbstractEndpoint
         return $this;
     }
 
-    public function setContext(string $context): Put
+    public function setContext(?string $context): Put
     {
-        $this->context = $context;
+        if ($context !== null) {
+            $this->context = $context;
+        }
+        return $this;
     }
 
     /**

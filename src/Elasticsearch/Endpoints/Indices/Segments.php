@@ -19,14 +19,11 @@ class Segments extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_segments";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_segments";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_segments";
         }
-
-        return $uri;
+        return "/_segments";
     }
 
     public function getParamWhitelist(): array
@@ -35,8 +32,7 @@ class Segments extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'human',
-            'operation_threading',
+            'verbose'
         ];
     }
 

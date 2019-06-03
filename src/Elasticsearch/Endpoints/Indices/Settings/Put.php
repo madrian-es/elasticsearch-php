@@ -34,25 +34,23 @@ class Put extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_settings";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_settings";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_settings";
         }
-
-        return $uri;
+        return "/_settings";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
+            'timeout',
+            'preserve_existing',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'flat_settings',
-            'preserve_existing'
+            'flat_settings'
         ];
     }
 

@@ -37,7 +37,7 @@ class Shrink extends AbstractEndpoint
         return $this;
     }
 
-    public function setTarget(string $target): Shrink
+    public function setTarget(?string $target): Shrink
     {
         if (isset($target) !== true) {
             return $this;
@@ -48,7 +48,7 @@ class Shrink extends AbstractEndpoint
     }
 
     /**
-     * @throws \Elasticsearch\Common\Exceptions\BadMethodCallException
+     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
      */
     public function getURI(): string
     {
@@ -62,14 +62,7 @@ class Shrink extends AbstractEndpoint
                 'target is required for Shrink'
             );
         }
-        $index = $this->index;
-        $target = $this->target;
-        $uri = "/$index/_shrink/$target";
-        if (isset($index) === true && isset($target) === true) {
-            $uri = "/$index/_shrink/$target";
-        }
-
-        return $uri;
+        return "/{$this->index}/_shrink/{$this->target}";
     }
 
     public function getParamWhitelist(): array
@@ -77,6 +70,7 @@ class Shrink extends AbstractEndpoint
         return [
             'timeout',
             'master_timeout',
+            'wait_for_active_shards'
         ];
     }
 

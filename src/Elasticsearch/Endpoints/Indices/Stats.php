@@ -44,19 +44,19 @@ class Stats extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $metric = $this->metric;
-        $uri   = "/_stats";
+        $index = $this->index ?? null;
+        $metric = $this->metric ?? null;
 
-        if (isset($index) === true && isset($metric) === true) {
-            $uri = "/$index/_stats/$metric";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_stats";
-        } elseif (isset($metric) === true) {
+        if (isset($index) && isset($metric)) {
+            return "/$index/_stats/$metric";
+        }
+        if (isset($index)) {
+            return "/$index/_stats";
+        }
+        if (isset($metric)) {
             $uri = "/_stats/$metric";
         }
-
-        return $uri;
+        return "/stats";
     }
 
     public function getParamWhitelist(): array
@@ -66,11 +66,12 @@ class Stats extends AbstractEndpoint
             'fielddata_fields',
             'fields',
             'groups',
-            'human',
             'level',
             'types',
-            'metric',
-            'include_segment_file_sizes'
+            'include_segment_file_sizes',
+            'include_unloaded_segments',
+            'expand_wildcards',
+            'forbid_closed_indices'
         ];
     }
 

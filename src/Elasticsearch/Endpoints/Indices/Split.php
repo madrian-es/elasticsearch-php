@@ -35,7 +35,7 @@ class Split extends AbstractEndpoint
         return $this;
     }
 
-    public function setTarget(string $target): Split
+    public function setTarget(?string $target): Split
     {
         if ($target === null) {
             return $this;
@@ -62,15 +62,12 @@ class Split extends AbstractEndpoint
             );
         }
 
-        $uri   = "/{$this->index}/_split/{$this->target}";
-
-        return $uri;
+        return "/{$this->index}/_split/{$this->target}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'copy_settings',
             'timeout',
             'master_timeout',
             'wait_for_active_shards'

@@ -1074,44 +1074,21 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         $response = curl_exec($ch);
         curl_close($ch);
 
-        $ch = curl_init($host."/_snapshot/_all");
+        $ch = curl_init($host."/_snapshot/*/*");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 
         $response = curl_exec($ch);
         curl_close($ch);
-        if (false !== $response && $response !== "{}") {
-            $response = json_decode($response, true);
-            foreach ($response as $repo => $settings) {
-                if ($settings['type'] == 'fs') {
-                    $ch = curl_init($host."/_snapshot/$repo/_all?ignore_unavailable");
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-                    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 
-                    $snapshots = json_decode(curl_exec($ch), true);
-                    curl_close($ch);
-                    foreach ($snapshots['snapshots'] as $snapshot) {
-                        $snapshotName = $snapshot['snapshot'];
-                        $ch = curl_init($host."/_snapshot/$repo/$snapshotName");
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-                        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
+        $ch = curl_init($host."/_snapshot/*");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 
-                        $response = curl_exec($ch);
-                        curl_close($ch);
-                    }
-                    $ch = curl_init($host."/_snapshot/$repo");
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-                    curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
-
-                    $response = curl_exec($ch);
-                    curl_close($ch);
-                }
-            }
-        }
+        $response = curl_exec($ch);
+        curl_close($ch);
 
         $this->rmDirRecursively('/tmp/test_repo_create_1_loc');
         $this->rmDirRecursively('/tmp/test_repo_restore_1_loc');

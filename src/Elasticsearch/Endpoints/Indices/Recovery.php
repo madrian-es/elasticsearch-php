@@ -19,22 +19,19 @@ class Recovery extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_recovery";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/$index/_recovery";
+        if (isset($index)) {
+            return "/$index/_recovery";
         }
-
-        return $uri;
+        return "/_recovery";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'detailed',
-            'active_only',
-            'human'
+            'active_only'
         ];
     }
 

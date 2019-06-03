@@ -19,9 +19,11 @@ class UpdateByQueryRethrottle extends AbstractEndpoint
 {
     protected $taskId;
 
-    public function setTaskId(string $taskId): UpdateByQueryRethrottle
+    public function setTaskId(?string $taskId): UpdateByQueryRethrottle
     {
-        $this->taskId = $taskId;
+        if ($taskId !== null) {
+            $this->taskId = $taskId;
+        }
         return $this;
     }
 

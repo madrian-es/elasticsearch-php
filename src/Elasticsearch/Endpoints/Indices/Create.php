@@ -43,24 +43,16 @@ class Create extends AbstractEndpoint
                 'index is required for Create'
             );
         }
-        $index = $this->index;
-        $uri   = "/$index";
-
-        if (isset($index) === true) {
-            $uri = "/$index";
-        }
-
-        return $uri;
+        return "/{$this->index}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'timeout',
-            'master_timeout',
-            'update_all_types',
+            'include_type_name',
             'wait_for_active_shards',
-            'include_type_name'
+            'timeout',
+            'master_timeout'
         ];
     }
 

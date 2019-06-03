@@ -31,8 +31,9 @@ class Simulate extends AbstractEndpoint
 
     public function getURI(): string
     {
-        if (isset($this->id) === true) {
-            return "/_ingest/pipeline/{$this->id}/_simulate";
+        $id = $this->id ?? null;
+        if (isset($id)) {
+            return "/_ingest/pipeline/$id/_simulate";
         }
         return "/_ingest/pipeline/_simulate";
     }

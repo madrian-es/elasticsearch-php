@@ -18,15 +18,12 @@ use Elasticsearch\Common\Exceptions\RuntimeException;
 class DeleteByQueryRethrottle extends AbstractEndpoint
 {
     protected $taskId;
-    
-    public function setTaskId(string $taskId): DeleteByQueryRethrottle
+
+    public function setTaskId(?string $taskId): DeleteByQueryRethrottle
     {
-        if (empty($taskId)) {
-            throw new RuntimeException(
-                'the task_id cannot be empty'
-            );
+        if ($taskId !== null) {
+            $this->taskId = $taskId;
         }
-        $this->taskId = $taskId;
         return $this;
     }
     /**

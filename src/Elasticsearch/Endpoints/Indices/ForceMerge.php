@@ -19,14 +19,12 @@ class ForceMerge extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_forcemerge";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/$index/_forcemerge";
+        if (isset($index)) {
+            return "/$index/_forcemerge";
         }
-
-        return $uri;
+        return "/_forcemerge";
     }
 
     public function getParamWhitelist(): array
@@ -37,9 +35,7 @@ class ForceMerge extends AbstractEndpoint
             'allow_no_indices',
             'expand_wildcards',
             'max_num_segments',
-            'only_expunge_deletes',
-            'operation_threading',
-            'wait_for_merge',
+            'only_expunge_deletes'
         ];
     }
 

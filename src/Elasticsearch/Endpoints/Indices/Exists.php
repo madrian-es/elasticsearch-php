@@ -28,23 +28,18 @@ class Exists extends AbstractEndpoint
                 'index is required for Exists'
             );
         }
-        $index = $this->index;
-        $uri   = "/$index";
-
-        if (isset($index) === true) {
-            $uri = "/$index";
-        }
-
-        return $uri;
+        return "/{$this->index}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'local',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local',
+            'flat_settings',
+            'include_defaults'
         ];
     }
 

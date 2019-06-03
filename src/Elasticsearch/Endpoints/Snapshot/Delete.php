@@ -32,7 +32,7 @@ class Delete extends AbstractEndpoint
      */
     private $snapshot;
 
-    public function setRepository(string $repository): Delete
+    public function setRepository(?string $repository): Delete
     {
         if (isset($repository) !== true) {
             return $this;
@@ -43,7 +43,7 @@ class Delete extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot(string $snapshot): Delete
+    public function setSnapshot(?string $snapshot): Delete
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -69,21 +69,13 @@ class Delete extends AbstractEndpoint
                 'snapshot is required for Delete'
             );
         }
-        $repository = $this->repository;
-        $snapshot = $this->snapshot;
-        $uri   = "/_snapshot/$repository/$snapshot";
-
-        if (isset($repository) === true && isset($snapshot) === true) {
-            $uri = "/_snapshot/$repository/$snapshot";
-        }
-
-        return $uri;
+        return "/_snapshot/{$this->repository}/{$this->snapshot}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'master_timeout',
+            'master_timeout'
         ];
     }
 

@@ -8,31 +8,32 @@ use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Common\Exceptions;
 
 /**
- * Class Seal
+ * Class FlushSynced
  *
  * @category Elasticsearch
  * @package  Elasticsearch\Endpoints\Indices
- * @author   Zachary Tong <zach@elastic.co>
+ * @author   Enrico Zimuel <enrico.zimuel@elastic.co>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co
  */
-class Seal extends AbstractEndpoint
+class FlushSynced extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_seal";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_seal";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_flush/synced";
         }
-
-        return $uri;
+        return "/_flush/synced";
     }
 
     public function getParamWhitelist(): array
     {
-        return [];
+        return [
+            'ignore_unavailable',
+            'allow_no_indices',
+            'expand_wildcards'
+        ];
     }
 
     public function getMethod(): string

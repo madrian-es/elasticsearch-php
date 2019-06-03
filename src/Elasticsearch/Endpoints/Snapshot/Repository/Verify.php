@@ -25,7 +25,7 @@ class Verify extends AbstractEndpoint
      */
     private $repository;
 
-    public function setRepository(string $repository): Verify
+    public function setRepository(?string $repository): Verify
     {
         if (isset($repository) !== true) {
             return $this;
@@ -41,23 +41,20 @@ class Verify extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        $repository = $this->repository;
         if (isset($this->repository) !== true) {
             throw new Exceptions\RuntimeException(
                 'repository is required for Verify'
             );
         }
 
-        $uri   = "/_snapshot/$repository/_verify";
-
-        return $uri;
+        return "/_snapshot/{$this->repository}/_verify";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
-            'local',
+            'timeout'
         ];
     }
 

@@ -26,24 +26,19 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_upgrade";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_upgrade";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_upgrade";
         }
-
-        return $uri;
+        return "/_upgrade";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'wait_for_completion',
-            'only_ancient_segments',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards',
+            'expand_wildcards'
         ];
     }
 

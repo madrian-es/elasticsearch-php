@@ -20,9 +20,12 @@ class ThreadPool extends AbstractEndpoint
 {
     protected $threadPoolPatterns;
 
-    public function setThreadPoolPatterns(string $threadPoolPatterns)
+    public function setThreadPoolPatterns(?string $threadPoolPatterns): ThreadPool
     {
-        $this->threadPoolPatterns = $threadPoolPatterns;
+        if ($threadPoolPatterns !== null) {
+            $this->threadPoolPatterns = $threadPoolPatterns;
+        }
+        return $this;
     }
 
     public function getURI(): string

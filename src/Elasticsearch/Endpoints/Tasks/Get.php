@@ -31,19 +31,25 @@ class Get extends AbstractEndpoint
         return $this;
     }
 
+    /**
+     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     */
     public function getURI(): string
     {
-        if (isset($this->taskId) === true) {
-            return "/_tasks/{$this->taskId}";
+        if (isset($this->taskId) !== true) {
+            throw new Exceptions\RuntimeException(
+                'task_id is required for Get'
+            );
         }
 
-        return "/_tasks";
+        return "/_tasks/{$this->taskId}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'wait_for_completion'
+            'wait_for_completion',
+            'timeout'
         ];
     }
 

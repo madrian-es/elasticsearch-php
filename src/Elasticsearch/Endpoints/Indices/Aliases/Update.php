@@ -34,9 +34,7 @@ class Update extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $uri   = "/_aliases";
-
-        return $uri;
+        return "/_aliases";
     }
 
     public function getParamWhitelist(): array

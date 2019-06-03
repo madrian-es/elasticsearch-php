@@ -32,7 +32,7 @@ class Status extends AbstractEndpoint
      */
     private $snapshot;
 
-    public function setRepository(string $repository): Status
+    public function setRepository(?string $repository): Status
     {
         if (isset($repository) !== true) {
             return $this;
@@ -43,7 +43,7 @@ class Status extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot(string $snapshot): Status
+    public function setSnapshot(?string $snapshot): Status
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -59,23 +59,16 @@ class Status extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        if (isset($this->snapshot) === true && isset($this->repository) !== true) {
-            throw new Exceptions\RuntimeException(
-                'Repository param must be provided if snapshot param is set'
-            );
+        $repository = $this->repository ?? null;
+        $snapshot   = $this->snapshot ?? null;
+
+        if (isset($snapshot) && isset($repository)) {
+            return "/_snapshot/$repository/$snapshot/_status";
         }
-
-        $repository = $this->repository;
-        $snapshot   = $this->snapshot;
-        $uri        = "/_snapshot/_status";
-
-        if (isset($repository) === true && isset($snapshot) === true) {
-            $uri = "/_snapshot/$repository/$snapshot/_status";
-        } elseif (isset($repository) === true) {
-            $uri = "/_snapshot/$repository/_status";
+        if (isset($repository)) {
+            return "/_snapshot/$repository/_status";
         }
-
-        return $uri;
+        return "/_snapshot/_status";
     }
 
     public function getParamWhitelist(): array

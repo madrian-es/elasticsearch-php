@@ -25,9 +25,6 @@ class Put extends AbstractEndpoint
      */
     private $name;
 
-    /**
-     * @throws \Elasticsearch\Common\Exceptions\InvalidArgumentException
-     */
     public function setBody($body): Put
     {
         if (isset($body) !== true) {
@@ -60,24 +57,19 @@ class Put extends AbstractEndpoint
                 'name is required for Put'
             );
         }
-
         if (isset($this->index) !== true) {
             throw new Exceptions\RuntimeException(
                 'index is required for Put'
             );
         }
-        $index = $this->index;
-        $name = $this->name;
-        $uri = "/$index/_alias/$name";
-
-        return $uri;
+        return "/{$this->index}/_alias/{$this->name}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'timeout',
-            'master_timeout',
+            'master_timeout'
         ];
     }
 

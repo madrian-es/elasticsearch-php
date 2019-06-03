@@ -24,7 +24,7 @@ class ClearScroll extends AbstractEndpoint
      */
     private $scrollId;
 
-    public function setScrollId(string $scrollId): ClearScroll
+    public function setScrollId(?string $scrollId): ClearScroll
     {
         if (isset($scrollId) !== true) {
             return $this;
@@ -41,7 +41,7 @@ class ClearScroll extends AbstractEndpoint
         if (isset($scrollId)) {
             return "/_search/scroll/$scrollId";
         }
-        return "/_search/scroll/";
+        return "/_search/scroll";
     }
 
     public function setBody($body): ClearScroll

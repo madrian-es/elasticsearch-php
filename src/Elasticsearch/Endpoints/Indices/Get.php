@@ -30,30 +30,7 @@ class Get extends AbstractEndpoint
                 'index is required for Get'
             );
         }
-        $index   = $this->index;
-        $feature = $this->feature;
-        $uri     = "/$index";
-
-        if (isset($feature) === true) {
-            $uri = "/$index/$feature";
-        }
-
-        return $uri;
-    }
-
-    public function setFeature($feature): Get
-    {
-        if (isset($feature) !== true) {
-            return $this;
-        }
-
-        if (is_array($feature) === true) {
-            $feature = implode(",", $feature);
-        }
-
-        $this->feature = $feature;
-
-        return $this;
+        return "/{$this->index}";
     }
 
     /**
@@ -62,12 +39,14 @@ class Get extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'local',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'human',
-            'include_type_name'
+            'flat_settings',
+            'include_defaults',
+            'master_timeout'
         ];
     }
 

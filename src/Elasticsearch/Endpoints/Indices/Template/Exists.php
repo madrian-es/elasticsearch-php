@@ -46,14 +46,7 @@ class Exists extends AbstractEndpoint
                 'name is required for Exists'
             );
         }
-        $name = $this->name;
-        $uri   = "/_template/$name";
-
-        if (isset($name) === true) {
-            $uri = "/_template/$name";
-        }
-
-        return $uri;
+        return "/_template/{$this->name}";
     }
 
     /**
@@ -62,8 +55,9 @@ class Exists extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'local',
-            'master_timeout'
+            'flat_settings',
+            'master_timeout',
+            'local'
         ];
     }
 

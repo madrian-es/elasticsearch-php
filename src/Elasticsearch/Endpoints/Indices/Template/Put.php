@@ -60,25 +60,18 @@ class Put extends AbstractEndpoint
                 'name is required for Put'
             );
         }
-        $name = $this->name;
-        $uri   = "/_template/$name";
-
-        if (isset($name) === true) {
-            $uri = "/_template/$name";
-        }
-
-        return $uri;
+        return "/_template/{$this->name}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'order',
+            'create',
             'timeout',
             'master_timeout',
-            'flat_settings',
-            'create',
-            'include_type_name'
+            'flat_settings'
         ];
     }
 

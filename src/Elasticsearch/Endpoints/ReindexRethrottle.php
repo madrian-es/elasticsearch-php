@@ -19,9 +19,12 @@ class ReindexRethrottle extends AbstractEndpoint
 {
     protected $taskId;
 
-    public function setTaskId(string $taskId): ReindexRethrottle
+    public function setTaskId(?string $taskId): ReindexRethrottle
     {
-        $this->taskId = $taskId;
+        if ($taskId !== null) {
+            $this->taskId = $taskId;
+        }
+        return $this;
     }
 
     public function getParamWhitelist(): array

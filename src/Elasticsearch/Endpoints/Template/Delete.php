@@ -28,7 +28,7 @@ class Delete extends AbstractEndpoint
                 'id is required for Delete'
             );
         }
-        $templateId   = $this->id;
+        $templateId = $this->id;
         $uri  = "/_search/template/$templateId";
 
         return $uri;

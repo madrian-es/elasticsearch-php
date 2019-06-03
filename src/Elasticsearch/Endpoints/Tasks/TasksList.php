@@ -8,7 +8,7 @@ use Elasticsearch\Common\Exceptions;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 
 /**
- * Class TasksLists
+ * Class List
  *
  * @category Elasticsearch
  * @package  Elasticsearch\Endpoints\Tasks
@@ -30,14 +30,13 @@ class TasksList extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
-            'node_id',
+            'nodes',
             'actions',
             'detailed',
-            'parent_node',
-            'parent_task',
+            'parent_task_id',
             'wait_for_completion',
             'group_by',
-            'task_id'
+            'timeout'
         ];
     }
 

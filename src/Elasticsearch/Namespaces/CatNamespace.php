@@ -403,7 +403,7 @@ class CatNamespace extends AbstractNamespace
      */
     public function threadPool(array $params = [])
     {
-        $index = $this->extractArgument($params, 'index');
+        $threadPoolPatterns = $this->extractArgument($params, 'thread_pool_patterns');
 
         /**
  * @var callable $endpointBuilder
@@ -414,7 +414,7 @@ class CatNamespace extends AbstractNamespace
  * @var \Elasticsearch\Endpoints\Cat\ThreadPool $endpoint
 */
         $endpoint = $endpointBuilder('Cat\ThreadPool');
-        $endpoint->setIndex($index);
+        $endpoint->setThreadPoolPatterns($threadPoolPatterns);
         $endpoint->setParams($params);
 
         return $this->performRequest($endpoint);

@@ -60,6 +60,33 @@ class NodesNamespace extends AbstractNamespace
     /**
      * $params['node_id']       = (list) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
      *        ['metric']        = (list) A comma-separated list of metrics you wish returned. Leave empty to return all.
+     *        ['timeout']       = (time) Explicit operation timeout
+     *
+     * @return callable|array
+     */
+    public function usage(array $params = [])
+    {
+        $nodeID = $this->extractArgument($params, 'node_id');
+        $metric = $this->extractArgument($params, 'metric');
+
+        /**
+ * @var callable $endpointBuilder
+*/
+        $endpointBuilder = $this->endpoints;
+
+        /**
+ * @var \Elasticsearch\Endpoints\Cluster\Nodes\Usage $endpoint
+*/
+        $endpoint = $endpointBuilder('Cluster\Nodes\Usage');
+        $endpoint->setNodeID($nodeID)->setMetric($metric);
+        $endpoint->setParams($params);
+
+        return $this->performRequest($endpoint);
+    }
+
+    /**
+     * $params['node_id']       = (list) A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes
+     *        ['metric']        = (list) A comma-separated list of metrics you wish returned. Leave empty to return all.
      *        ['flat_settings'] = (boolean) Return settings in flat format (default: false)
      *        ['human']         = (boolean) Whether to return time and byte values in human-readable format.
      *

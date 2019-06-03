@@ -87,6 +87,7 @@ abstract class AbstractEndpoint
     {
         $this->checkUserParams($params);
         $params = $this->convertCustom($params);
+        $this->extractOptions($params);
         $this->params = $this->convertArraysToStrings($params);
 
         return $this;
@@ -100,23 +101,6 @@ abstract class AbstractEndpoint
     public function getOptions(): array
     {
         return $this->options;
-    }
-
-    public function setOptions(array $options)
-    {
-        $this->options = $options;
-
-        $ignore = isset($this->options['client']['ignore']) ? $this->options['client']['ignore'] : null;
-        if (isset($ignore) === true) {
-            if (is_string($ignore)) {
-                $this->options['client']['ignore'] = explode(",", $ignore);
-            } elseif (is_array($ignore)) {
-                $this->options['client']['ignore'] = $ignore;
-            } else {
-                $this->options['client']['ignore'] = [$ignore];
-            }
-        }
-        return $this;
     }
 
     public function getIndex(): ?string
@@ -255,6 +239,28 @@ abstract class AbstractEndpoint
                     implode('", "', $whitelist)
                 )
             );
+        }
+    }
+
+    /**
+     * @param array $params       Note: this is passed by-reference!
+     */
+    private function extractOptions(&$params)
+    {
+        // Extract out client options, then start transforming
+        if (isset($params['client']) === true) {
+            $this->options['client'] = $params['client'];
+            unset($params['client']);
+        }
+        $ignore = isset($this->options['client']['ignore']) ? $this->options['client']['ignore'] : null;
+        if (isset($ignore) === true) {
+            if (is_string($ignore)) {
+                $this->options['client']['ignore'] = explode(",", $ignore);
+            } elseif (is_array($ignore)) {
+                $this->options['client']['ignore'] = $ignore;
+            } else {
+                $this->options['client']['ignore'] = [$ignore];
+            }
         }
     }
 

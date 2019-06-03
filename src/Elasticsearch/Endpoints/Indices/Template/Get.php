@@ -41,14 +41,12 @@ class Get extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        $name = $this->name;
-        $uri   = "/_template";
+        $name = $this->name ?? null;
 
-        if (isset($name) === true) {
+        if (isset($name)) {
             $uri = "/_template/$name";
         }
-
-        return $uri;
+        return "/_template";
     }
 
     /**
@@ -57,10 +55,10 @@ class Get extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'flat_settings',
-            'local',
             'master_timeout',
-            'include_type_name'
+            'local'
         ];
     }
 

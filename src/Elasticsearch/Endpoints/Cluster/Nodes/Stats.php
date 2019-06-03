@@ -48,6 +48,9 @@ class Stats extends AbstractNodesEndpoint
         return $this;
     }
 
+    /**
+     * @param string|string[] $indexMetric
+     */
     public function setIndexMetric($indexMetric): Stats
     {
         if (isset($indexMetric) !== true) {
@@ -65,24 +68,26 @@ class Stats extends AbstractNodesEndpoint
 
     public function getURI(): string
     {
-        $metric = $this->metric;
-        $index_metric = $this->indexMetric;
-        $node_id = $this->nodeID;
-        $uri   = "/_nodes/stats";
+        $metric = $this->metric ?? null;
+        $indexMetric = $this->indexMetric ?? null;
+        $nodeId = $this->nodeID ?? null;
 
-        if (isset($node_id) === true && isset($metric) === true && isset($index_metric) === true) {
-            $uri = "/_nodes/$node_id/stats/$metric/$index_metric";
-        } elseif (isset($metric) === true && isset($index_metric) === true) {
-            $uri = "/_nodes/stats/$metric/$index_metric";
-        } elseif (isset($node_id) === true && isset($metric) === true) {
-            $uri = "/_nodes/$node_id/stats/$metric";
-        } elseif (isset($metric) === true) {
-            $uri = "/_nodes/stats/$metric";
-        } elseif (isset($node_id) === true) {
-            $uri = "/_nodes/$node_id/stats";
+        if (isset($nodeId) && isset($metric) && isset($indexMetric)) {
+            return "/_nodes/$nodeId/stats/$metric/$indexMetric";
         }
-
-        return $uri;
+        if (isset($metric) && isset($indexMetric)) {
+            return "/_nodes/stats/$metric/$indexMetric";
+        }
+        if (isset($nodeId) && isset($metric)) {
+            return "/_nodes/$nodeId/stats/$metric";
+        }
+        if (isset($metric)) {
+            return "/_nodes/stats/$metric";
+        }
+        if (isset($nodeId)) {
+            return "/_nodes/$nodeId/stats";
+        }
+        return "/_nodes/stats";
     }
 
     public function getParamWhitelist(): array
@@ -92,10 +97,10 @@ class Stats extends AbstractNodesEndpoint
             'fielddata_fields',
             'fields',
             'groups',
-            'human',
             'level',
             'types',
-            'include_segment_file_sizes',
+            'timeout',
+            'include_segment_file_sizes'
         ];
     }
 

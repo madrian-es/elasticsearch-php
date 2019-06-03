@@ -21,14 +21,12 @@ class ShardStores extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_shard_stores";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/$index/_shard_stores";
+        if (isset($index)) {
+            return "/$index/_shard_stores";
         }
-
-        return $uri;
+        return "/_shard_stores";
     }
 
     public function getParamWhitelist(): array
@@ -37,8 +35,7 @@ class ShardStores extends AbstractEndpoint
             'status',
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards',
-            'operation_threading'
+            'expand_wildcards'
         ];
     }
 

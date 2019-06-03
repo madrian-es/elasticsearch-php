@@ -19,6 +19,9 @@ class Index extends AbstractEndpoint
 {
     public function setBody($body): Index
     {
+        if (isset($body) !== true) {
+            return $this;
+        }
         $this->body = $body;
         return $this;
     }

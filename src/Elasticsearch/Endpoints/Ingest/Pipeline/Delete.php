@@ -28,10 +28,7 @@ class Delete extends AbstractEndpoint
                 'id is required for DeletePipeline'
             );
         }
-        $id = $this->id;
-        $uri = "/_ingest/pipeline/$id";
-
-        return $uri;
+        return "/_ingest/pipeline/{$this->id}";
     }
 
     public function getParamWhitelist(): array

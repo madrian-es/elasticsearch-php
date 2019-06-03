@@ -18,14 +18,15 @@ use Elasticsearch\Common\Exceptions;
 class Scroll extends AbstractEndpoint
 {
     protected $scrollId;
-    
+
     /**
      * @return $this
      */
-    public function setScrollId(string $scrollId): Scroll
+    public function setScrollId(?string $scrollId): Scroll
     {
-        $this->scrollId = $scrollId;
-
+        if ($scrollId !== null) {
+            $this->scrollId = $scrollId;
+        }
         return $this;
     }
 

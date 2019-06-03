@@ -21,7 +21,7 @@ class Rollover extends AbstractEndpoint
     private $alias;
     private $newIndex;
 
-    public function setAlias(string $alias): Rollover
+    public function setAlias(?string $alias): Rollover
     {
         if ($alias === null) {
             return $this;
@@ -31,7 +31,7 @@ class Rollover extends AbstractEndpoint
         return $this;
     }
 
-    public function setNewIndex(string $newIndex): Rollover
+    public function setNewIndex(?string $newIndex): Rollover
     {
         if ($newIndex === null) {
             return $this;
@@ -59,23 +59,22 @@ class Rollover extends AbstractEndpoint
                 'alias name is required for Rollover'
             );
         }
-
-        $uri = "/{$this->alias}/_rollover";
-
-        if (isset($this->newIndex) === true) {
-            $uri .= "/{$this->newIndex}";
+        $alias = $this->alias;
+        $newIndex = $this->newIndex ?? null;
+        if (isset($newIndex)) {
+            return "/$alias/_rollover/$newIndex";
         }
-
-        return $uri;
+        return "/$alias/_rollover";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'timeout',
+            'dry_run',
             'master_timeout',
-            'wait_for_active_shards',
-            'include_type_name'
+            'wait_for_active_shards'
         ];
     }
 

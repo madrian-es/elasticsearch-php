@@ -39,20 +39,20 @@ class Cancel extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        if (isset($this->id) === true) {
-            return "/_tasks/{$this->taskId}/_cancel";
-        }
+        $taskId = $this->taskId ?? null;
 
+        if (isset($taskId)) {
+            return "/_tasks/$taskId/_cancel";
+        }
         return "/_tasks/_cancel";
     }
 
     public function getParamWhitelist(): array
     {
         return [
-            'node_id',
+            'nodes',
             'actions',
-            'parent_node',
-            'parent_task',
+            'parent_task_id'
         ];
     }
 

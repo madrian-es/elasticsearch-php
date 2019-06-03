@@ -4,8 +4,8 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints\Indices\Template;
 
-use Elasticsearch\Endpoints\AbstractEndpoint;
 use Elasticsearch\Common\Exceptions;
+use Elasticsearch\Endpoints\AbstractEndpoint;
 
 /**
  * Class Delete
@@ -47,14 +47,7 @@ class Delete extends AbstractEndpoint
                 'name is required for Delete'
             );
         }
-        $name = $this->name;
-        $uri   = "/_template/$name";
-
-        if (isset($name) === true) {
-            $uri = "/_template/$name";
-        }
-
-        return $uri;
+        return "/_template/{$this->name}";
     }
 
     /**
@@ -64,7 +57,7 @@ class Delete extends AbstractEndpoint
     {
         return [
             'timeout',
-            'master_timeout',
+            'master_timeout'
         ];
     }
 

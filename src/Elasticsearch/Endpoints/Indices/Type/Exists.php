@@ -33,9 +33,7 @@ class Exists extends AbstractEndpoint
                 'type is required for Exists'
             );
         }
-        $uri   = "/{$this->index}/_mapping/{$this->type}";
-
-        return $uri;
+        return "/{$this->index}/_mapping/{$this->type}";
     }
 
     public function getParamWhitelist(): array
@@ -44,7 +42,7 @@ class Exists extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local',
+            'local'
         ];
     }
 

@@ -34,23 +34,33 @@ class Query extends AbstractEndpoint
 
     public function getURI(): string
     {
-        return $this->getOptionalURI('_validate/query');
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
+
+        if (isset($index) && isset($type)) {
+            return "/$index/$type/_validate/query";
+        }
+        if (isset($index)) {
+            return "/$index/_validate/query";
+        }
+        return "/_validate/query";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'explain',
-            'ignore_indices',
-            'operation_threading',
-            'source',
+            'ignore_unavailable',
+            'allow_no_indices',
+            'expand_wildcards',
             'q',
-            'df',
-            'default_operator',
             'analyzer',
             'analyze_wildcard',
+            'default_operator',
+            'df',
             'lenient',
-            'lowercase_expanded_terms'
+            'rewrite',
+            'all_shards'
         ];
     }
 

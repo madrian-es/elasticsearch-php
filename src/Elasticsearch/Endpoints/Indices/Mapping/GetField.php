@@ -51,20 +51,30 @@ class GetField extends AbstractEndpoint
                 'fields is required for Get Field Mapping'
             );
         }
-        $uri = $this->getOptionalURI('_mapping/field');
-
-        return $uri.'/'.$this->fields;
+        $fields = $this->fields;
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
+        if (isset($index) && isset($type)) {
+            return "$index/_mapping/$type/field/$fields";
+        }
+        if (isset($type)) {
+            return "/_mapping/$type/field/$fields";
+        }
+        if (isset($index)) {
+            return "/$index/_mapping/field/$fields";
+        }
+        return "/_mapping/field/$fields";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'include_defaults',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local',
-            'include_type_name'
+            'local'
         ];
     }
 

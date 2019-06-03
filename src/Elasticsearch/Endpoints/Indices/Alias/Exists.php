@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Elasticsearch\Endpoints\Indices\Alias;
 
+use Elasticsearch\Common\Exceptions;
 use Elasticsearch\Endpoints\AbstractEndpoint;
 
 /**
@@ -35,21 +36,23 @@ class Exists extends AbstractEndpoint
         return $this;
     }
 
+    /**
+     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     */
     public function getURI(): string
     {
-        $index = $this->index;
-        $name = $this->name;
-        $uri   = "/_alias/$name";
-
-        if (isset($index) === true && isset($name) === true) {
-            $uri = "/$index/_alias/$name";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_alias";
-        } elseif (isset($name) === true) {
-            $uri = "/_alias/$name";
+        if (isset($this->name) !== true) {
+            throw new Exceptions\RuntimeException(
+                'name is required for Delete'
+            );
         }
+        $name = $this->name;
+        $index = $this->index ?? null;
 
-        return $uri;
+        if (isset($index)) {
+            return "/$index/_alias/$name";
+        }
+        return "/_alias/$name";
     }
 
     public function getParamWhitelist(): array
@@ -58,7 +61,7 @@ class Exists extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'local',
+            'local'
         ];
     }
 

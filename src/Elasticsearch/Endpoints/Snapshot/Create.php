@@ -47,7 +47,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository(string $repository): Create
+    public function setRepository(?string $repository): Create
     {
         if (isset($repository) !== true) {
             return $this;
@@ -58,7 +58,7 @@ class Create extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot(string $snapshot): Create
+    public function setSnapshot(?string $snapshot): Create
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -84,22 +84,14 @@ class Create extends AbstractEndpoint
                 'snapshot is required for Create'
             );
         }
-        $repository = $this->repository;
-        $snapshot = $this->snapshot;
-        $uri   = "/_snapshot/$repository/$snapshot";
-
-        if (isset($repository) === true && isset($snapshot) === true) {
-            $uri = "/_snapshot/$repository/$snapshot";
-        }
-
-        return $uri;
+        return "/_snapshot/{$this->repository}/{$this->snapshot}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
-            'wait_for_completion',
+            'wait_for_completion'
         ];
     }
 

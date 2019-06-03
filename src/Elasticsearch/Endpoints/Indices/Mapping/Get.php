@@ -19,30 +19,22 @@ class Get extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $type = $this->type;
-        $uri   = "/_mapping";
-
-        if (isset($index) === true && isset($type) === true) {
-            $uri = "/$index/_mapping/$type";
-        } elseif (isset($type) === true) {
-            $uri = "/_mapping/$type";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_mapping";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_mapping";
         }
-
-        return $uri;
+        return "/_mapping";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'include_type_name',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'wildcard_expansion',
-            'local',
-            'include_type_name'
+            'master_timeout',
+            'local'
         ];
     }
 

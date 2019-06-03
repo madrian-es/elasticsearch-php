@@ -28,14 +28,7 @@ class Open extends AbstractEndpoint
                 'index is required for Open'
             );
         }
-        $index = $this->index;
-        $uri   = "/$index/_open";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_open";
-        }
-
-        return $uri;
+        return "/{$this->index}/_open";
     }
 
     public function getParamWhitelist(): array
@@ -46,7 +39,7 @@ class Open extends AbstractEndpoint
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
-            'wait_for_active_shards',
+            'wait_for_active_shards'
         ];
     }
 

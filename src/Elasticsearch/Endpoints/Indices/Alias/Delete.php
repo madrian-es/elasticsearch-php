@@ -51,22 +51,14 @@ class Delete extends AbstractEndpoint
                 'name is required for Delete'
             );
         }
-        $index = $this->index;
-        $name = $this->name;
-        $uri   = "/$index/_alias/$name";
-
-        if (isset($index) === true && isset($name) === true) {
-            $uri = "/$index/_alias/$name";
-        }
-
-        return $uri;
+        return "/{$this->index}/_alias/{$this->name}";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'timeout',
-            'master_timeout',
+            'master_timeout'
         ];
     }
 

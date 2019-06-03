@@ -19,14 +19,11 @@ class Clear extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_cache/clear";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_cache/clear";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_cache/clear";
         }
-
-        return $uri;
+        return "/_cache/clear";
     }
 
     public function getParamWhitelist(): array
@@ -35,14 +32,10 @@ class Clear extends AbstractEndpoint
             'fielddata',
             'fields',
             'query',
-            'filter_keys',
-            'id',
-            'id_cache',
-            'index',
-            'recycler',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',
+            'index',
             'request'
         ];
     }

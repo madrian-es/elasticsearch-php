@@ -37,24 +37,25 @@ class Get extends AbstractEndpoint
 
     public function getURI(): string
     {
-        $index = $this->index;
-        $name = $this->name;
-        $uri   = "/_settings";
+        $index = $this->index ?? null;
+        $name = $this->name ?? null;
 
-        if (isset($index) === true && isset($name) === true) {
-            $uri = "/$index/_settings/$name";
-        } elseif (isset($name) === true) {
-            $uri = "/_settings/$name";
-        } elseif (isset($index) === true) {
-            $uri = "/$index/_settings";
+        if (isset($index) && isset($name)) {
+            return "/$index/_settings/$name";
         }
-
-        return $uri;
+        if (isset($index)) {
+            return "/$index/_settings";
+        }
+        if (isset($name)) {
+            return "/_settings/$name";
+        }
+        return "/_settings";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'master_timeout',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards',

@@ -43,7 +43,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    public function setRepository(string $repository): Restore
+    public function setRepository(?string $repository): Restore
     {
         if (isset($repository) !== true) {
             return $this;
@@ -54,7 +54,7 @@ class Restore extends AbstractEndpoint
         return $this;
     }
 
-    public function setSnapshot(string $snapshot): Restore
+    public function setSnapshot(?string $snapshot): Restore
     {
         if (isset($snapshot) !== true) {
             return $this;
@@ -80,22 +80,14 @@ class Restore extends AbstractEndpoint
                 'snapshot is required for Restore'
             );
         }
-        $repository = $this->repository;
-        $snapshot = $this->snapshot;
-        $uri   = "/_snapshot/$repository/$snapshot/_restore";
-
-        if (isset($repository) === true && isset($snapshot) === true) {
-            $uri = "/_snapshot/$repository/$snapshot/_restore";
-        }
-
-        return $uri;
+        return "/_snapshot/{$this->repository}/{$this->snapshot}/_restore";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'master_timeout',
-            'wait_for_completion',
+            'wait_for_completion'
         ];
     }
 

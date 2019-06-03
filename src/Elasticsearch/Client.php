@@ -539,12 +539,8 @@ class Client
         $index = $this->extractArgument($params, 'index');
         $type = $this->extractArgument($params, 'type');
 
-        //manually make this verbose so we can check status code
-        $clientOptions = [
-            'client' => [
-                'verbose' => true
-            ]
-        ];
+        // manually make this verbose so we can check status code
+        $params['client']['verbose'] = true;
 
         /**
  * @var callable $endpointBuilder
@@ -557,8 +553,7 @@ class Client
         $endpoint = $endpointBuilder('Exists');
         $endpoint->setID($id)
             ->setIndex($index)
-            ->setType($type)
-            ->setOptions($clientOptions);
+            ->setType($type);
 
         $endpoint->setParams($params);
 
@@ -1042,7 +1037,6 @@ class Client
 */
         $endpoint = $endpointBuilder('Scroll');
         $endpoint->setScrollId($scrollID)
-            ->setBody($body)
             ->setParams($params);
 
         return $this->performRequest($endpoint);

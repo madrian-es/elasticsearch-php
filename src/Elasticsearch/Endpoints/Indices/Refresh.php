@@ -19,14 +19,12 @@ class Refresh extends AbstractEndpoint
 {
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_refresh";
+        $index = $this->index ?? null;
 
-        if (isset($index) === true) {
-            $uri = "/$index/_refresh";
+        if (isset($index)) {
+            return "/$index/_refresh";
         }
-
-        return $uri;
+        return "/_refresh";
     }
 
     public function getParamWhitelist(): array
@@ -34,9 +32,7 @@ class Refresh extends AbstractEndpoint
         return [
             'ignore_unavailable',
             'allow_no_indices',
-            'expand_wildcards',
-            'force',
-            'operation_threading',
+            'expand_wildcards'
         ];
     }
 

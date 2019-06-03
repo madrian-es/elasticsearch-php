@@ -2,36 +2,39 @@
 
 declare(strict_types = 1);
 
-namespace Elasticsearch\Endpoints\Indices\Gateway;
+namespace Elasticsearch\Endpoints\Indices;
 
 use Elasticsearch\Endpoints\AbstractEndpoint;
+use Elasticsearch\Common\Exceptions;
 
 /**
- * Class Snapshot
+ * Class Flush
  *
  * @category Elasticsearch
- * @package  Elasticsearch\Endpoints\Indices\Gateway
- * @author   Zachary Tong <zach@elastic.co>
+ * @package  Elasticsearch\Endpoints\Indices
+ * @author   Enrico Zimuel <enrico.zimuel@elastic.co>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache2
  * @link     http://elastic.co
  */
-class Snapshot extends AbstractEndpoint
+class Flush extends AbstractEndpoint
 {
+    /**
+     * @throws \Elasticsearch\Common\Exceptions\RuntimeException
+     */
     public function getURI(): string
     {
-        $index = $this->index;
-        $uri   = "/_gateway/snapshot";
-
-        if (isset($index) === true) {
-            $uri = "/$index/_gateway/snapshot";
+        $index = $this->index ?? null;
+        if (isset($index)) {
+            return "/$index/_flush";
         }
-
-        return $uri;
+        return "/_flush";
     }
 
     public function getParamWhitelist(): array
     {
         return [
+            'force',
+            'wait_if_ongoing',
             'ignore_unavailable',
             'allow_no_indices',
             'expand_wildcards'

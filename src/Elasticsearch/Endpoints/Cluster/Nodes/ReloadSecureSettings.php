@@ -17,19 +17,18 @@ class ReloadSecureSettings extends AbstractNodesEndpoint
 {
     public function getURI(): string
     {
-        $nodeId = $this->nodeID;
-        $uri   = "/_nodes/reload_secure_settings";
-
-        if (isset($nodeId) === true) {
-            $uri = "/_nodes/$nodeId/reload_secure_settings";
+        $nodeId = $this->nodeID ?? null;
+        if (isset($nodeId)) {
+            return "/_nodes/$nodeId/reload_secure_settings";
         }
-
-        return $uri;
+        return "/_nodes/reload_secure_settings";
     }
 
     public function getParamWhitelist(): array
     {
-        return [];
+        return [
+            'timeout'
+        ];
     }
 
     public function getMethod(): string
