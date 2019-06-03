@@ -602,7 +602,7 @@ class Connection implements ConnectionInterface
 
     private function process5xxError(array $request, array $response, array $ignore): ?ElasticsearchException
     {
-        $statusCode = $response['status'];
+        $statusCode = (int) $response['status'];
         $responseBody = $response['body'];
 
         /**
@@ -667,20 +667,22 @@ class Connection implements ConnectionInterface
                     $cause = $error['error']['reason'];
                     $type = $error['error']['type'];
                 }
+                // added json_encode to convert into a string
+                $original = new $errorClass(json_encode($response['body']), $response['status']);
 
-                $original = new $errorClass($response['body'], $response['status']);
-
-                return new $errorClass("$type: $cause", $response['status'], $original);
+                return new $errorClass("$type: $cause", (int) $response['status'], $original);
             } elseif (isset($error['error']) === true) {
                 // <2.0 semi-structured exceptions
-                $original = new $errorClass($response['body'], $response['status']);
+                // added json_encode to convert into a string
+                $original = new $errorClass(json_encode($response['body']), $response['status']);
 
-                return new $errorClass($error['error'], $response['status'], $original);
+                return new $errorClass($error['error'], (int) $response['status'], $original);
             }
 
             // <2.0 "i just blew up" nonstructured exception
             // $error is an array but we don't know the format, reuse the response body instead
-            return new $errorClass($response['body'], $response['status']);
+            // added json_encode to convert into a string
+            return new $errorClass(json_encode($response['body']), (int) $response['status']);
         }
 
         // if responseBody is not string, we convert it so it can be used as Exception message

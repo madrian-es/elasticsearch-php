@@ -85,9 +85,9 @@ abstract class AbstractEndpoint
      */
     public function setParams(array $params)
     {
+        $this->extractOptions($params);
         $this->checkUserParams($params);
         $params = $this->convertCustom($params);
-        $this->extractOptions($params);
         $this->params = $this->convertArraysToStrings($params);
 
         return $this;
