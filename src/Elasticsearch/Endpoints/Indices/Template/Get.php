@@ -44,7 +44,7 @@ class Get extends AbstractEndpoint
         $name = $this->name ?? null;
 
         if (isset($name)) {
-            $uri = "/_template/$name";
+            return "/_template/$name";
         }
         return "/_template";
     }

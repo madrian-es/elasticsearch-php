@@ -28,10 +28,7 @@ class Delete extends AbstractEndpoint
                 'id is required for Delete'
             );
         }
-        $templateId = $this->id;
-        $uri  = "/_search/template/$templateId";
-
-        return $uri;
+        return "/_search/template/{$this->id}";
     }
 
     public function getParamWhitelist(): array

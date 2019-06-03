@@ -54,9 +54,9 @@ class Stats extends AbstractEndpoint
             return "/$index/_stats";
         }
         if (isset($metric)) {
-            $uri = "/_stats/$metric";
+            return "/_stats/$metric";
         }
-        return "/stats";
+        return "/_stats";
     }
 
     public function getParamWhitelist(): array

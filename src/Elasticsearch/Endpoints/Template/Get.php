@@ -28,10 +28,7 @@ class Get extends AbstractEndpoint
                 'id is required for Get'
             );
         }
-        $templateId = $this->id;
-        $uri  = "/_search/template/$templateId";
-
-        return $uri;
+        return "/_search/template/{$this->id}";
     }
 
     public function getParamWhitelist(): array

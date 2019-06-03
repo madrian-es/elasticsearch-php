@@ -49,7 +49,7 @@ class Update extends AbstractEndpoint
         $type = $this->type ?? null;
 
         if (isset($type)) {
-            $uri = "/$index/$type/$id/_update";
+            return "/$index/$type/$id/_update";
         }
         return "/$index/_update/$id";
     }
