@@ -55,7 +55,7 @@ class GetField extends AbstractEndpoint
         $index = $this->index ?? null;
         $type = $this->type ?? null;
         if (isset($index) && isset($type)) {
-            return "$index/_mapping/$type/field/$fields";
+            return "/$index/_mapping/$type/field/$fields";
         }
         if (isset($type)) {
             return "/_mapping/$type/field/$fields";

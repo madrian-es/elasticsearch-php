@@ -38,7 +38,7 @@ class UpdateByQueryRethrottle extends AbstractEndpoint
                 'task_id is required for UpdateByQueryRethrottle'
             );
         }
-        return "_update_by_query/{$this->taskId}/_rethrottle";
+        return "/_update_by_query/{$this->taskId}/_rethrottle";
     }
 
 
