@@ -68,6 +68,7 @@ class Shrink extends AbstractEndpoint
     public function getParamWhitelist(): array
     {
         return [
+            'copy_settings',
             'timeout',
             'master_timeout',
             'wait_for_active_shards'

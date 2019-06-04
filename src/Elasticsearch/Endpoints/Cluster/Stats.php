@@ -45,14 +45,14 @@ class Stats extends AbstractEndpoint
             return "/_cluster/stats/nodes/$nodeId";
         }
 
-        return "/_cluster/stats/nodes";
+        return "/_cluster/stats";
     }
 
     public function getParamWhitelist(): array
     {
         return [
             'flat_settings',
-            'timeout',
+            'timeout'
         ];
     }
 

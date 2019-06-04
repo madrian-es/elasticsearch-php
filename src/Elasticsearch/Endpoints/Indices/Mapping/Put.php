@@ -37,13 +37,21 @@ class Put extends AbstractEndpoint
      */
     public function getURI(): string
     {
-        if (isset($this->index) !== true) {
-            throw new Exceptions\RuntimeException(
-                'index is required for Exists'
-            );
-        }
+        $index = $this->index ?? null;
+        $type = $this->type ?? null;
 
-        return "/{$this->index}/_mapping";
+        if (isset($index) && isset($type)) {
+            return "/$index/_mapping/$type";
+        }
+        if (isset($index)) {
+            return "/$index/_mapping";
+        }
+        if (isset($type)) {
+            return "/_mapping/$type";
+        }
+        throw new Exceptions\RuntimeException(
+            'Type or Index is required for Put'
+        );
     }
 
     public function getParamWhitelist(): array

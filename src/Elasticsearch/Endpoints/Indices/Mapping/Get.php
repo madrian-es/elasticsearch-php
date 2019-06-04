@@ -20,8 +20,15 @@ class Get extends AbstractEndpoint
     public function getURI(): string
     {
         $index = $this->index ?? null;
+        $type = $this->type ?? null;
+        if (isset($index) && isset($type)) {
+            return "/$index/_mapping/$type";
+        }
         if (isset($index)) {
             return "/$index/_mapping";
+        }
+        if (isset($type)) {
+            return "/_mapping/$type";
         }
         return "/_mapping";
     }

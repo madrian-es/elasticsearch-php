@@ -43,7 +43,7 @@ class Exists extends AbstractEndpoint
     {
         if (isset($this->name) !== true) {
             throw new Exceptions\RuntimeException(
-                'name is required for Delete'
+                'name is required for Exists'
             );
         }
         $name = $this->name;
