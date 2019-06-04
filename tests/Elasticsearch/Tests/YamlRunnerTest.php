@@ -600,13 +600,7 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         $msg = "Failed to match in test \"$testName\". Expected ["
             .var_export($expected, true)."] does not match [".var_export($match, true)."]\n".var_export($lastOperationResult, true);
 
-        if ($expected instanceof \stdClass) {
-            // Avoid stdClass / array mismatch
-            $expected = json_decode(json_encode($expected), true);
-            $match = json_decode(json_encode($match), true);
-
-            $this->assertEquals($expected, $match, $msg);
-        } elseif (is_string($expected) && preg_match('#^/.+?/$#s', $expected)) {
+        if (is_string($expected) && preg_match('#^/.+?/$#s', $expected)) {
             $this->assertRegExp($this->formatRegex($expected), $match, $msg);
         } else {
             $this->assertEquals($expected, $match, $msg);
