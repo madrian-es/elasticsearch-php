@@ -278,7 +278,7 @@ class Client
     /**
      * $params['id']           = (string) The document ID (Required)
      *        ['index']        = (string) The name of the index (Required)
-     *        ['type']         = (string) The type of the document (Required)
+     *        ['type']         = (string) The type of the document
      *        ['consistency']  = (enum) Specific write consistency setting for the operation
      *        ['parent']       = (string) ID of parent document
      *        ['refresh']      = (boolean) Refresh the index after performing the operation
@@ -296,7 +296,6 @@ class Client
         $type = $this->extractArgument($params, 'type');
 
         $this->verifyNotNullOrEmpty("id", $id);
-        $this->verifyNotNullOrEmpty("type", $type);
         $this->verifyNotNullOrEmpty("index", $index);
 
         /**
@@ -1037,6 +1036,7 @@ class Client
 */
         $endpoint = $endpointBuilder('Scroll');
         $endpoint->setScrollId($scrollID)
+            ->setBody($body)
             ->setParams($params);
 
         return $this->performRequest($endpoint);

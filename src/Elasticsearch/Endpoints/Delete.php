@@ -34,8 +34,9 @@ class Delete extends AbstractEndpoint
         }
         $id = $this->id;
         $index = $this->index;
+        $type = $this->type ?? '_doc';
 
-        return "/$index/_doc/$id";
+        return "/$index/$type/$id";
     }
 
     public function getParamWhitelist(): array

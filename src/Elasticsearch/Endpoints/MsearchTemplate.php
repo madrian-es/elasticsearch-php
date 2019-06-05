@@ -87,6 +87,6 @@ class MsearchTemplate extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'GET';
+        return 'POST';
     }
 }

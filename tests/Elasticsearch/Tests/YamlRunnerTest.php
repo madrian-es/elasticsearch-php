@@ -1071,14 +1071,6 @@ class YamlRunnerTest extends \PHPUnit\Framework\TestCase
         $response = curl_exec($ch);
         curl_close($ch);
 
-        // $ch = curl_init($host."/_analyzer/*");
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-        // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
-        //
-        // $response = curl_exec($ch);
-        // curl_close($ch);
-
         $ch = curl_init($host."/_snapshot/*/*");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");

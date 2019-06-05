@@ -31,7 +31,7 @@ class ScriptsPainlessExecute extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'POST';
+        return isset($this->body) ? 'POST' : 'GET';
     }
 
     public function setBody($body): ScriptsPainlessExecute

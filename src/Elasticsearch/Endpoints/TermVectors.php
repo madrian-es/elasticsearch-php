@@ -75,6 +75,6 @@ class TermVectors extends AbstractEndpoint
 
     public function getMethod(): string
     {
-        return 'POST';
+        return isset($this->body) ? 'POST' : 'GET';
     }
 }
